@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.research_software.citation.cff.model;
+package org.research_software.citation.cff.model.objects;
 
 /**
  * // TODO Add description
@@ -9,6 +9,6 @@ package org.research_software.citation.cff.model;
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
-public interface ISoftwareCitation {
+public class Reference {
 
 }

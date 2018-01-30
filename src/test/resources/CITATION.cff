@@ -1,0 +1,99 @@
+cff-version: 1.0.3
+
+message: If you use this software, please cite it as below.
+
+abstract: "This is an awesome piece of research software!"
+
+authors:
+  # A person
+  - family-names: Real Person
+    given-names: One Truly
+    name-particle: van der
+    name-suffix: IV
+    affiliation: Excellent University, Niceplace, Arcadia
+    address: 22 Acacia Avenue
+    city: Citationburgh
+    region: Renfrewshire
+    post-code: C13 7X7
+    country: GB
+    orcid: https://orcid.org/0000-0001-2345-6789
+    email: project@entity.com
+    tel: +44(0)141-323 4567
+    fax: +44(0)141-323 45678
+    website: https://www.entity-project-team.io
+  # An entity
+  - name: Entity Project Team Conference entity
+    address: 22 Acacia Avenue
+    city: Citationburgh
+    region: Renfrewshire
+    post-code: C13 7X7
+    country: GB
+    orcid: https://orcid.org/0000-0001-2345-6789
+    email: project@entity.com
+    tel: +44(0)141-323 4567
+    fax: +44(0)141-323 45678
+    website: https://www.entity-project-team.io
+    date-start: 2017-01-01
+    date-end: 2017-01-31
+    location: The team garage
+
+commit: 156a04c74a8a79d40c5d705cddf9d36735feab4d
+
+contact:
+    # A person
+  - family-names: Real Person
+    given-names: One Truly
+    name-particle: van der
+    name-suffix: IV
+    affiliation: Excellent University, Niceplace, Arcadia
+    address: 22 Acacia Avenue
+    city: Citationburgh
+    region: Renfrewshire
+    post-code: C13 7X7
+    country: GB
+    orcid: https://orcid.org/0000-0001-2345-6789
+    email: project@entity.com
+    tel: +44(0)141-323 4567
+    fax: +44(0)141-323 45678
+    website: https://www.entity-project-team.io
+  # An entity
+  - name: Entity Project Team Conference entity
+    address: 22 Acacia Avenue
+    city: Citationburgh
+    region: Renfrewshire
+    post-code: C13 7X7
+    country: GB
+    orcid: https://orcid.org/0000-0001-2345-6789
+    email: project@entity.com
+    tel: +44(0)141-323 4567
+    fax: +44(0)141-323 45678
+    website: https://www.entity-project-team.io
+    date-start: 2017-01-01
+    date-end: 2017-01-31
+    location: The team garage
+
+date-released: 2017-12-11
+
+doi: 10.5281/zenodo.1003150
+
+keywords:
+  - One
+  - Two
+  - Three
+  - "4"
+
+license: CC-BY-SA-4.0
+
+license-url: https://spdx.org/licenses/CC-BY-SA-4.0.html#licenseText
+
+repository: https://www.example.com/foo/?bar=baz&inga=42&quux
+
+repository-code: http://foo.com/blah_(wikipedia)_blah#cite-1
+
+repository-artifact: http://उदाहरण.परीक्षा
+
+title: Citation File Format 1.0.0
+
+url: http://userid:password@example.com:8080/
+
+version: 1.0.0
