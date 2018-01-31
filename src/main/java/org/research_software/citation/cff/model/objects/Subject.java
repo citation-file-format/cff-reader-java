@@ -1,10 +1,9 @@
 package org.research_software.citation.cff.model.objects;
 
-import java.net.MalformedURLException;
+import java.net.MalformedURLException; 
 import java.net.URL;
 
-import org.research_software.citation.cff.model.DefinedValues;
-import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.CFFModelException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

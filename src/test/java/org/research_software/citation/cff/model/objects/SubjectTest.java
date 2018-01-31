@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.CFFModelException;
 
 /**
  * // TODO Add description

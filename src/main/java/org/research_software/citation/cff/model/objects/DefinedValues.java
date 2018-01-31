@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.research_software.citation.cff.model;
+package org.research_software.citation.cff.model.objects;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,7 +13,9 @@ import java.util.Set;
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
-public final class DefinedValues {
+final class DefinedValues {
+	
+	private DefinedValues() {}
 
 	/**
 	 * 
@@ -68,6 +70,9 @@ public final class DefinedValues {
 			"website"
 			));
 	
+	/**
+	 * 
+	 */
 	public final static Set<String> LANGUAGES = new HashSet<>(Arrays.asList(
 			"aaa",
 			"aab",
@@ -8104,6 +8109,9 @@ public final class DefinedValues {
 			"zu"
 			));
 
+	/**
+	 * 
+	 */
 	public static final Set<String> REFERENCE_STATUS = new HashSet<>(Arrays.asList(
 			"in-preparation",
 			"abstract",
@@ -8113,5 +8121,8 @@ public final class DefinedValues {
 			"preprint"
 			));
 
+	/**
+	 * 
+	 */
 	public static final String ORCID_URL_PATTERN = "https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{4}";
 }

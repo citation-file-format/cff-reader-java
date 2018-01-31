@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.research_software.citation.cff.model.exceptions;
+package org.research_software.citation.cff.exceptions;
 
 /**
  * // TODO Add description

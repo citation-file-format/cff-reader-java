@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 
+import org.research_software.citation.cff.exceptions.CFFReaderException;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
-import org.research_software.citation.cff.model.exceptions.CFFReaderException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;

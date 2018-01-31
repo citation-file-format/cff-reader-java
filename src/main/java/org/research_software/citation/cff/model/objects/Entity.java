@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.CFFModelException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

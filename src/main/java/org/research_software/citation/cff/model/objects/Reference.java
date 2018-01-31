@@ -10,8 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.research_software.citation.cff.model.DefinedValues;
-import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.CFFModelException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
