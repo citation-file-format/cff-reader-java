@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
@@ -239,6 +240,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 		catch (DateTimeParseException e) {
 			throw new DateTimeParseException("DateTimeParseException in field 'date-released'!", e.getParsedString(), e.getErrorIndex(), e);
+		}
+		catch (NullPointerException e) {
+			throw new CFFModelException("'date-released' is null!");
 		}
 	}
 

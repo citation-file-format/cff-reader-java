@@ -1,5 +1,9 @@
 package org.research_software.citation.cff.model.objects;
 
+import java.net.MalformedURLException;
+
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,6 +41,8 @@ public final class Person extends Subject {
 	 * @param tel 
 	 * @param fax 
 	 * @param website 
+	 * @throws CFFModelException 
+	 * @throws MalformedURLException 
 	 */
 	public Person(
 			@JsonProperty("family-names") String familyNames,
@@ -53,9 +59,15 @@ public final class Person extends Subject {
 			@JsonProperty("email") String email,
 			@JsonProperty("tel") String tel,
 			@JsonProperty("fax") String fax,
-			@JsonProperty("website") String website) {
+			@JsonProperty("website") String website) throws MalformedURLException, CFFModelException {
 		super(address, city, region, postCode, country, orcid, email, tel, fax, website);
+		if (familyNames == null) {
+			throw new NullPointerException("'family-names' is a required key in persons and must be present and not null!");
+		}
 		this.familyNames = familyNames;
+		if (givenNames == null) {
+			throw new NullPointerException("'given-names' is a required key in persons and must be present and not null!");
+		}
 		this.givenNames = givenNames;
 		this.nameParticle = nameParticle;
 		this.nameSuffix = nameSuffix;

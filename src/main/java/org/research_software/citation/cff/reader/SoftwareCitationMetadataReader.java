@@ -31,8 +31,9 @@ public interface SoftwareCitationMetadataReader {
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
+	 * @throws CFFReaderException 
 	 */
-	public SoftwareCitationMetadata readFromFile(File cffFile) throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException;
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException, CFFReaderException;
 	
 	/**
 	 * // TODO Add description

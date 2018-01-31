@@ -5,10 +5,14 @@ package org.research_software.citation.cff.model.objects;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.research_software.citation.cff.model.DefinedValues;
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -149,7 +153,7 @@ public final class Reference {
 	 * @param issueDate
 	 * @param editorsSeries
 	 * @param abbreviation
-	 * @param abstractString 
+	 * @param abstractString
 	 * @param database
 	 * @param medium
 	 * @param section
@@ -162,87 +166,56 @@ public final class Reference {
 	 * @param filename
 	 * @param notes
 	 * @param doi
-	 * @throws MalformedURLException 
-	 * @throws NullPointerException 
-	 * @throws DateTimeParseException 
+	 * @throws MalformedURLException
+	 * @throws NullPointerException
+	 * @throws CFFModelException
 	 */
-	public Reference(
-			@JsonProperty("type") String type,
-			@JsonProperty("title") String title,
-			@JsonProperty("abbreviation") String abbreviation,
-			@JsonProperty("abstract") String abstractString,
+	public Reference(@JsonProperty("type") String type, @JsonProperty("title") String title,
+			@JsonProperty("abbreviation") String abbreviation, @JsonProperty("abstract") String abstractString,
 			@JsonProperty("collection-doi") String collectionDoi,
 			@JsonProperty("collection-title") String collectionTitle,
-			@JsonProperty("collection-type") String collectionType,
-			@JsonProperty("commit") String commit,
-			@JsonProperty("copyright") String copyright,
-			@JsonProperty("data-type") String dataType,
-			@JsonProperty("database") String database,
-			@JsonProperty("date-accessed") String dateAccessed,
-			@JsonProperty("date-downloaded") String dateDownloaded,
-			@JsonProperty("date-released") String dateReleased,
-			@JsonProperty("date-published") String datePublished,
-			@JsonProperty("department") String department,
-			@JsonProperty("doi") String doi,
-			@JsonProperty("edition") String edition,
-			@JsonProperty("end") Integer end,
-			@JsonProperty("entry") String entry,
-			@JsonProperty("filename") String filename,
-			@JsonProperty("format") String format,
-			@JsonProperty("isbn") String isbn,
-			@JsonProperty("issn") String issn,
-			@JsonProperty("issue") String issue,
-			@JsonProperty("issue-date") String issueDate,
-			@JsonProperty("issue-title") String issueTitle,
-			@JsonProperty("journal") String journal,
-			@JsonProperty("keywords") List<String> keywords,
-			@JsonProperty("languages") List<String> languages,
-			@JsonProperty("license") String license,
-			@JsonProperty("license-url") String licenseUrl,
-			@JsonProperty("loc-start") Integer locStart,
-			@JsonProperty("loc-end") Integer locEnd,
-			@JsonProperty("medium") String medium,
-			@JsonProperty("month") Integer month,
-			@JsonProperty("nihmsid") String nihmsid,
-			@JsonProperty("notes") String notes,
-			@JsonProperty("number") String number,
-			@JsonProperty("number-volumes") Integer numberVolumes,
-			@JsonProperty("pages") Integer pages,
-			@JsonProperty("patent-states") List<String> patentStates,
-			@JsonProperty("pmcid") String pmcid,
-			@JsonProperty("repository") String repository,
+			@JsonProperty("collection-type") String collectionType, @JsonProperty("commit") String commit,
+			@JsonProperty("copyright") String copyright, @JsonProperty("data-type") String dataType,
+			@JsonProperty("database") String database, @JsonProperty("date-accessed") String dateAccessed,
+			@JsonProperty("date-downloaded") String dateDownloaded, @JsonProperty("date-released") String dateReleased,
+			@JsonProperty("date-published") String datePublished, @JsonProperty("department") String department,
+			@JsonProperty("doi") String doi, @JsonProperty("edition") String edition, @JsonProperty("end") Integer end,
+			@JsonProperty("entry") String entry, @JsonProperty("filename") String filename,
+			@JsonProperty("format") String format, @JsonProperty("isbn") String isbn, @JsonProperty("issn") String issn,
+			@JsonProperty("issue") String issue, @JsonProperty("issue-date") String issueDate,
+			@JsonProperty("issue-title") String issueTitle, @JsonProperty("journal") String journal,
+			@JsonProperty("keywords") List<String> keywords, @JsonProperty("languages") List<String> languages,
+			@JsonProperty("license") String license, @JsonProperty("license-url") String licenseUrl,
+			@JsonProperty("loc-start") Integer locStart, @JsonProperty("loc-end") Integer locEnd,
+			@JsonProperty("medium") String medium, @JsonProperty("month") Integer month,
+			@JsonProperty("nihmsid") String nihmsid, @JsonProperty("notes") String notes,
+			@JsonProperty("number") String number, @JsonProperty("number-volumes") Integer numberVolumes,
+			@JsonProperty("pages") Integer pages, @JsonProperty("patent-states") List<String> patentStates,
+			@JsonProperty("pmcid") String pmcid, @JsonProperty("repository") String repository,
 			@JsonProperty("repository-code") String repositoryCode,
-			@JsonProperty("repository-artifact") String repositoryArtifact,
-			@JsonProperty("scope") String scope,
-			@JsonProperty("section") String section,
-			@JsonProperty("status") String status,
-			@JsonProperty("start") Integer start,
-			@JsonProperty("thesis-type") String thesisType,
-			@JsonProperty("url") String url,
-			@JsonProperty("version") String version,
-			@JsonProperty("volume") Integer volume,
-			@JsonProperty("volume-title") String volumeTitle,
-			@JsonProperty("year") Integer year,
-			@JsonProperty("year-original") Integer yearOriginal,
-			@JsonProperty("conference") Entity conference,
-			@JsonProperty("authors") List<Subject> authors,
-			@JsonProperty("contact") List<Subject> contact,
-			@JsonProperty("database-provider") Entity databaseProvider,
-			@JsonProperty("editors") List<Subject> editors,
-			@JsonProperty("editors-series") List<Subject> editorsSeries,
-			@JsonProperty("institution") Entity institution,
-			@JsonProperty("location") Entity location,
-			@JsonProperty("publisher") Entity publisher,
-			@JsonProperty("recipients") List<Subject> recipients,
-			@JsonProperty("senders") List<Subject> senders,
-			@JsonProperty("translators") List<Subject> translators) throws MalformedURLException, NullPointerException, DateTimeParseException {
+			@JsonProperty("repository-artifact") String repositoryArtifact, @JsonProperty("scope") String scope,
+			@JsonProperty("section") String section, @JsonProperty("status") String status,
+			@JsonProperty("start") Integer start, @JsonProperty("thesis-type") String thesisType,
+			@JsonProperty("url") String url, @JsonProperty("version") String version,
+			@JsonProperty("volume") Integer volume, @JsonProperty("volume-title") String volumeTitle,
+			@JsonProperty("year") Integer year, @JsonProperty("year-original") Integer yearOriginal,
+			@JsonProperty("conference") Entity conference, @JsonProperty("authors") List<Subject> authors,
+			@JsonProperty("contact") List<Subject> contact, @JsonProperty("database-provider") Entity databaseProvider,
+			@JsonProperty("editors") List<Subject> editors, @JsonProperty("editors-series") List<Subject> editorsSeries,
+			@JsonProperty("institution") Entity institution, @JsonProperty("location") Entity location,
+			@JsonProperty("publisher") Entity publisher, @JsonProperty("recipients") List<Subject> recipients,
+			@JsonProperty("senders") List<Subject> senders, @JsonProperty("translators") List<Subject> translators)
+			throws MalformedURLException, NullPointerException, CFFModelException {
 		super();
 		if (type == null) {
-			throw new NullPointerException("'type' is a required key and must be present and not null!");
+			throw new NullPointerException("'type' is a required key in references and must be present and not null!");
+		}
+		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {
+			throw new CFFModelException("The reference type '" + type + "' is not defined.");
 		}
 		this.type = type;
 		if (title == null) {
-			throw new NullPointerException("'title' is a required key and must be present and not null!");
+			throw new NullPointerException("'title' is a required key in references and must be present and not null!");
 		}
 		this.title = title;
 		this.abbreviation = abbreviation;
@@ -272,7 +245,7 @@ public final class Reference {
 		this.issueTitle = issueTitle;
 		this.journal = journal;
 		this.keywords = keywords;
-		this.languages = languages;
+		setLanguages(languages);
 		this.license = license;
 		setLicenseUrl(licenseUrl);
 		this.locStart = locStart;
@@ -291,7 +264,7 @@ public final class Reference {
 		setRepositoryArtifact(repositoryArtifact);
 		this.scope = scope;
 		this.section = section;
-		this.status = status;
+		setStatus(status);
 		this.start = start;
 		this.thesisType = thesisType;
 		setUrl(url);
@@ -302,7 +275,7 @@ public final class Reference {
 		this.yearOriginal = yearOriginal;
 		this.conference = conference;
 		if (authors == null) {
-			throw new NullPointerException("'authors' is a required key and must be present and not null!");
+			throw new NullPointerException("'authors' is a required key in references and must be present and not null!");
 		}
 		this.authors = authors;
 		this.contact = contact;
@@ -433,12 +406,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-accessed")
-	private void setDateAccessed(String dateAccessed) throws DateTimeParseException {
-		try {
-			this.dateAccessed = LocalDate.parse(dateAccessed);
-		}
-		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-accessed'!", e.getParsedString(), e.getErrorIndex(), e);
+	private void setDateAccessed(String dateAccessed) throws CFFModelException {
+		if (dateAccessed != null) {
+			try {
+				this.dateAccessed = LocalDate.parse(dateAccessed);
+			}
+			catch (DateTimeException e) {
+				throw new CFFModelException("DateTimeException in field 'date-accessed': " + e.getMessage());
+			}
 		}
 	}
 
@@ -448,12 +423,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-downloaded")
-	private void setDateDownloaded(String dateDownloaded) throws DateTimeParseException{
-		try {
-			this.dateDownloaded = LocalDate.parse(dateDownloaded);
-		}
-		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-downloaded'!", e.getParsedString(), e.getErrorIndex(), e);
+	private void setDateDownloaded(String dateDownloaded) throws CFFModelException {
+		if (dateDownloaded != null) {
+			try {
+				this.dateDownloaded = LocalDate.parse(dateDownloaded);
+			}
+			catch (DateTimeException e) {
+				throw new CFFModelException("DateTimeException in field 'date-downloaded': " + e.getMessage());
+			}
 		}
 	}
 
@@ -463,12 +440,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-released")
-	private void setDateReleased(String dateReleased) throws DateTimeParseException {
-		try {
-			this.dateReleased = LocalDate.parse(dateReleased);
-		}
-		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-released'!", e.getParsedString(), e.getErrorIndex(), e);
+	private void setDateReleased(String dateReleased) throws CFFModelException {
+		if (dateReleased != null) {
+			try {
+				this.dateReleased = LocalDate.parse(dateReleased);
+			}
+			catch (DateTimeException e) {
+				throw new CFFModelException("DateTimeException in field 'date-released': " + e.getMessage());
+			}
 		}
 	}
 
@@ -478,12 +457,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-published")
-	private void setDatePublished(String datePublished) throws DateTimeParseException {
-		try {
-			this.datePublished = LocalDate.parse(datePublished);
-		}
-		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-published'!", e.getParsedString(), e.getErrorIndex(), e);
+	private void setDatePublished(String datePublished) throws CFFModelException {
+		if (datePublished != null) {
+			try {
+				this.datePublished = LocalDate.parse(datePublished);
+			}
+			catch (DateTimeException e) {
+				throw new CFFModelException("DateTimeException in field 'date-published': " + e.getMessage());
+			}
 		}
 	}
 
@@ -633,7 +614,15 @@ public final class Reference {
 	}
 
 	@JsonProperty("languages")
-	private void setLanguages(List<String> languages) {
+	private void setLanguages(List<String> languages) throws CFFModelException {
+		if (languages != null) {
+			for (String language : languages) {
+				if (!DefinedValues.LANGUAGES.contains(language)) {
+					throw new CFFModelException(
+							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
+				}
+			}
+		}
 		this.languages = languages;
 	}
 
@@ -654,11 +643,14 @@ public final class Reference {
 
 	@JsonProperty("license-url")
 	private void setLicenseUrl(String licenseUrl) throws MalformedURLException {
-		try {
-			this.licenseUrl = new URL(licenseUrl);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType() + "' contains an invalid URL in field 'license-url': " + e.getMessage());
+		if (licenseUrl != null) {
+			try {
+				this.licenseUrl = new URL(licenseUrl);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'license-url': " + e.getMessage());
+			}
 		}
 	}
 
@@ -779,11 +771,14 @@ public final class Reference {
 
 	@JsonProperty("repository")
 	private void setRepository(String repository) throws MalformedURLException {
-		try {
-			this.repository = new URL(repository);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType() + "' contains an invalid URL in field 'repository': " + e.getMessage());
+		if (repository != null) {
+			try {
+				this.repository = new URL(repository);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository': " + e.getMessage());
+			}
 		}
 	}
 
@@ -794,11 +789,14 @@ public final class Reference {
 
 	@JsonProperty("repository-code")
 	private void setRepositoryCode(String repositoryCode) throws MalformedURLException {
-		try {
-			this.repositoryCode = new URL(repositoryCode);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType() + "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+		if (repositoryCode != null) {
+			try {
+				this.repositoryCode = new URL(repositoryCode);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+			}
 		}
 	}
 
@@ -809,12 +807,14 @@ public final class Reference {
 
 	@JsonProperty("repository-artifact")
 	private void setRepositoryArtifact(String repositoryArtifact) throws MalformedURLException {
-		try {
-			this.repositoryArtifact = new URL(repositoryArtifact);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType() + "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
-
+		if (repositoryArtifact != null) {
+			try {
+				this.repositoryArtifact = new URL(repositoryArtifact);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
+			}
 		}
 	}
 
@@ -844,7 +844,10 @@ public final class Reference {
 	}
 
 	@JsonProperty("status")
-	private void setStatus(String status) {
+	private void setStatus(String status) throws CFFModelException {
+		if (!DefinedValues.REFERENCE_STATUS.contains(status)) {
+			throw new CFFModelException("The status '" + status + "' is not defined.");
+		}
 		this.status = status;
 	}
 
@@ -879,7 +882,8 @@ public final class Reference {
 			this.url = new URL(url);
 		}
 		catch (MalformedURLException e) {
-			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType() + "' contains an invalid URL in field 'url': " + e.getMessage());
+			throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
+					+ "' contains an invalid URL in field 'url': " + e.getMessage());
 		}
 	}
 

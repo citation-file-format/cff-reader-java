@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
@@ -35,7 +36,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 public class SoftwareCitationMetadataPojoReaderTest {
 
 	private static final String CITATION_FILE_PATH = "CITATION.cff";
-	private static final String CITATION_FILE_PATH_WITH_PRECEDING_BACKSLASH = "/" + CITATION_FILE_PATH;
+	private static final String CITATION_FILE_PATH_WITH_PRECEDING_SLASH = "/" + CITATION_FILE_PATH;
 	private SoftwareCitationMetadataPojoReader fixture = null;
 
 	/**
@@ -65,9 +66,10 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * @throws JsonMappingException
 	 * @throws JsonParseException
 	 * @throws MalformedURLException
+	 * @throws CFFReaderException 
 	 */
 	@Test
-	public final void testReadFromFile() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException {
+	public final void testReadFromFile() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException, CFFReaderException {
 		File cffFile = new File(getClass().getClassLoader().getResource(CITATION_FILE_PATH).getFile());
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromFile(cffFile);
@@ -85,12 +87,26 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 */
 	@Test
 	public final void testReadFromStream() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException {
-		InputStream stream = this.getClass().getResourceAsStream(CITATION_FILE_PATH_WITH_PRECEDING_BACKSLASH);
+		InputStream stream = this.getClass().getResourceAsStream(CITATION_FILE_PATH_WITH_PRECEDING_SLASH);
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromStream(stream);
 		test(citation);
 	}
-
+	
+	/**
+	 * // TODO Add description
+	 * 
+	 * @throws IOException
+	 * @throws NullPointerException
+	 * @throws CFFReaderException
+	 */
+	@Test(expected = CFFReaderException.class)
+	public final void testBadCFFFileName() throws IOException, NullPointerException, CFFReaderException  {
+		File file = new File("CITATION.xff");
+		file.createNewFile();
+		getFixture().readFromFile(file);
+	}
+	
 	private void test(SoftwareCitationMetadata citation) throws MalformedURLException {
 		assertNotNull(citation);
 
@@ -209,24 +225,24 @@ public class SoftwareCitationMetadataPojoReaderTest {
 
 	}
 
-	private void testEntity(Entity entityAuthor) {
+	private void testEntity(Entity entityAuthor) throws MalformedURLException {
 		assertThat(entityAuthor.getName(), is("Entity Project Team Conference entity"));
 		assertThat(entityAuthor.getAddress(), is("22 Acacia Avenue"));
 		assertThat(entityAuthor.getCity(), is("Citationburgh"));
 		assertThat(entityAuthor.getRegion(), is("Renfrewshire"));
 		assertThat(entityAuthor.getPostCode(), is("C13 7X7"));
 		assertThat(entityAuthor.getCountry(), is("GB"));
-		assertThat(entityAuthor.getOrcid(), is("https://orcid.org/0000-0001-2345-6789"));
+		assertThat(entityAuthor.getOrcid(), is(new URL("https://orcid.org/0000-0001-2345-6789")));
 		assertThat(entityAuthor.getEmail(), is("project@entity.com"));
 		assertThat(entityAuthor.getTel(), is("+44(0)141-323 4567"));
 		assertThat(entityAuthor.getFax(), is("+44(0)141-323 45678"));
-		assertThat(entityAuthor.getWebsite(), is("https://www.entity-project-team.io"));
-		assertThat(entityAuthor.getDateStart(), is("2017-01-01"));
-		assertThat(entityAuthor.getDateEnd(), is("2017-01-31"));
+		assertThat(entityAuthor.getWebsite(), is(new URL("https://www.entity-project-team.io")));
+		assertThat(entityAuthor.getDateStart(), is(LocalDate.parse("2017-01-01")));
+		assertThat(entityAuthor.getDateEnd(), is(LocalDate.parse("2017-01-31")));
 		assertThat(entityAuthor.getLocation(), is("The team garage"));
 	}
 
-	private void testPerson(Person person) {
+	private void testPerson(Person person) throws MalformedURLException {
 		assertThat(person.getAddress(), is("22 Acacia Avenue"));
 		assertThat(person.getAffiliation(), is("Excellent University, Niceplace, Arcadia"));
 		assertThat(person.getCity(), is("Citationburgh"));
@@ -237,11 +253,11 @@ public class SoftwareCitationMetadataPojoReaderTest {
 		assertThat(person.getGivenNames(), is("One Truly"));
 		assertThat(person.getNameParticle(), is("van der"));
 		assertThat(person.getNameSuffix(), is("IV"));
-		assertThat(person.getOrcid(), is("https://orcid.org/0000-0001-2345-6789"));
+		assertThat(person.getOrcid(), is(new URL("https://orcid.org/0000-0001-2345-6789")));
 		assertThat(person.getPostCode(), is("C13 7X7"));
 		assertThat(person.getRegion(), is("Renfrewshire"));
 		assertThat(person.getTel(), is("+44(0)141-323 4567"));
-		assertThat(person.getWebsite(), is("https://www.entity-project-team.io"));
+		assertThat(person.getWebsite(), is(new URL("https://www.entity-project-team.io")));
 	}
 
 	/**

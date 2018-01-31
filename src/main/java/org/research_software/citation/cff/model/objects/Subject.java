@@ -1,5 +1,11 @@
 package org.research_software.citation.cff.model.objects;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.research_software.citation.cff.model.DefinedValues;
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -25,11 +31,11 @@ public abstract class Subject {
 	private String region;
 	private String postCode;
 	private String country;
-	private String orcid;
+	private URL orcid;
 	private String email;
 	private String tel;
 	private String fax;
-	private String website;
+	private URL website;
 
 	/**
 	 *
@@ -43,6 +49,8 @@ public abstract class Subject {
 	 * @param postCode
 	 * @param country
 	 * @param city
+	 * @throws CFFModelException 
+	 * @throws MalformedURLException 
 	 */
 	public Subject(
 			@JsonProperty("address") String address,
@@ -54,17 +62,17 @@ public abstract class Subject {
 			@JsonProperty("email") String email,
 			@JsonProperty("tel") String tel,
 			@JsonProperty("fax") String fax,
-			@JsonProperty("website") String website) {
+			@JsonProperty("website") String website) throws MalformedURLException, CFFModelException {
 		this.address = address;
 		this.city = city;
 		this.region = region;
 		this.postCode = postCode;
 		this.country = country;
-		this.orcid = orcid;
+		setOrcid(orcid);
 		this.email = email;
 		this.tel = tel;
 		this.fax = fax;
-		this.website = website;
+		setWebsite(website);
 	}
 
 	@JsonProperty("address")
@@ -118,13 +126,21 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("orcid")
-	public String getOrcid() {
+	public URL getOrcid() {
 		return orcid;
 	}
 
 	@JsonProperty("orcid")
-	private void setOrcid(String orcid) {
-		this.orcid = orcid;
+	private void setOrcid(String orcid) throws MalformedURLException, CFFModelException {
+		if (!orcid.matches(DefinedValues.ORCID_URL_PATTERN)) {
+			throw new CFFModelException("ORCID id " + orcid + " is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!");
+		}
+		try {
+			this.orcid = new URL(orcid);
+		}
+		catch (MalformedURLException e) {
+			throw new MalformedURLException("The ORCID URL '" + orcid + "' is not valid: " + e.getMessage());
+		}
 	}
 
 	@JsonProperty("email")
@@ -158,13 +174,18 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("website")
-	public String getWebsite() {
+	public URL getWebsite() {
 		return website;
 	}
 
 	@JsonProperty("website")
-	private void setWebsite(String website) {
-		this.website = website;
+	private void setWebsite(String website) throws MalformedURLException {
+		try {
+			this.website = new URL(website);
+		}
+		catch (MalformedURLException e) {
+			throw new MalformedURLException("The website URL '" + orcid + "' is not valid: " + e.getMessage());
+		}
 	}
 
 }

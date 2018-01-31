@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.time.DateTimeException;
 
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
+import org.research_software.citation.cff.model.exceptions.CFFModelException;
 import org.research_software.citation.cff.model.objects.Subject;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -25,17 +27,24 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
  */
 public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetadataReader {
 
+	private static final String CFF_FILE_NAME = "CITATION.cff";
+
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
 	 */
 	public SoftwareCitationMetadata readFromFile(File cffFile)
-			throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException {
+			throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException, CFFReaderException {
+		if (!cffFile.getName().equals(CFF_FILE_NAME)) {
+			throw new CFFReaderException("File name of CFF file must be '" + CFF_FILE_NAME + "' (is '" + cffFile.getName() + "')!");
+		}
 		SoftwareCitationMetadata citation = null;
 		try {
 			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);
 		}
 		catch (JsonMappingException e) {
-			if (e.getCause() instanceof NullPointerException) {
+			if (e.getCause() instanceof NullPointerException 
+					|| e.getCause() instanceof CFFModelException
+					|| e.getCause() instanceof DateTimeException) {
 				try {
 					throw e.getCause();
 				}
@@ -61,7 +70,9 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);
 		}
 		catch (JsonMappingException e) {
-			if (e.getCause() instanceof NullPointerException) {
+			if (e.getCause() instanceof NullPointerException 
+					|| e.getCause() instanceof CFFModelException
+					|| e.getCause() instanceof DateTimeException) {
 				try {
 					throw e.getCause();
 				}
