@@ -11,6 +11,7 @@ import java.time.DateTimeException;
 
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
 import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.model.exceptions.CFFReaderException;
 import org.research_software.citation.cff.model.objects.Subject;
 
 import com.fasterxml.jackson.core.JsonParseException;

@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
+	private static final Object CFF_VERSION = "1.0.3";
 	private String cffVersion;
 	private String message;
 	private String abstractString; // "abstract" is a reserved term
@@ -69,32 +70,35 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 * @param licenseUrl
 	 * @param cffVersion
 	 * @param abstractString
-	 * @throws MalformedURLException 
+	 * @throws MalformedURLException
 	 * @throws NullPointerException
 	 * @throws DateTimeParseException
 	 */
-	public SoftwareCitationMetadataPojo (
-			@JsonProperty("cff-version") String cffVersion,
+	public SoftwareCitationMetadataPojo(@JsonProperty("cff-version") String cffVersion,
 			@JsonProperty("message") String message,
-			@JsonProperty("abstract") String abstractString,
-			@JsonProperty(value="authors", required=true) List<Subject> authors,
+			@JsonProperty(value = "authors", required = true) List<Subject> authors,
+			@JsonProperty("date-released") String dateReleased, 
+			@JsonProperty("title") String title,
+			@JsonProperty("version") String version, 
+			@JsonProperty("abstract") String abstractString, 
 			@JsonProperty("commit") String commit,
-			@JsonProperty("contact") List<Subject> contact,
-			@JsonProperty("date-released") String dateReleased,
+			@JsonProperty("contact") List<Subject> contact, 
 			@JsonProperty("doi") String doi,
-			@JsonProperty("keywords") List<String> keywords,
+			@JsonProperty("keywords") List<String> keywords, 
 			@JsonProperty("license") String license,
-			@JsonProperty("license-url") String licenseUrl,
+			@JsonProperty("license-url") String licenseUrl, 
 			@JsonProperty("repository") String repository,
 			@JsonProperty("repository-code") String repositoryCode,
-			@JsonProperty("repository-artifact") String repositoryArtifact,
-			@JsonProperty("title") String title,
+			@JsonProperty("repository-artifact") String repositoryArtifact, 
 			@JsonProperty("url") String url,
-			@JsonProperty("version") String version,
-			@JsonProperty("references") List<Reference> references) throws MalformedURLException, DateTimeParseException, NullPointerException {
+			@JsonProperty("references") List<Reference> references)
+			throws MalformedURLException, DateTimeParseException, NullPointerException {
 		super();
 		if (cffVersion == null) {
 			throw new NullPointerException("'cff-version' is a required key and must be present and not null!");
+		}
+		else if (!cffVersion.equals(CFF_VERSION)) {
+			throw new CFFModelException("'cff-version' must be " + CFF_VERSION + "!");
 		}
 		this.cffVersion = cffVersion;
 		if (message == null) {
@@ -165,17 +169,23 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	public List<Subject> getAuthors() {
 		return authors;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getPersonAuthors()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#
+	 * getPersonAuthors()
 	 */
 	@Override
 	public List<Person> getPersonAuthors() {
 		return filterPersons(getAuthors());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getEntityAuthors()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#
+	 * getEntityAuthors()
 	 */
 	@Override
 	public List<Entity> getEntityAuthors() {
@@ -201,17 +211,23 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	public List<Subject> getContacts() {
 		return contact;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getPersonContacts()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#
+	 * getPersonContacts()
 	 */
 	@Override
 	public List<Person> getPersonContacts() {
 		return filterPersons(getContacts());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getEntityContacts()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#
+	 * getEntityContacts()
 	 */
 	@Override
 	public List<Entity> getEntityContacts() {
@@ -239,7 +255,8 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 			this.dateReleased = LocalDate.parse(dateReleased);
 		}
 		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-released'!", e.getParsedString(), e.getErrorIndex(), e);
+			throw new DateTimeParseException("DateTimeParseException in field 'date-released'!", e.getParsedString(),
+					e.getErrorIndex(), e);
 		}
 		catch (NullPointerException e) {
 			throw new CFFModelException("'date-released' is null!");
@@ -283,11 +300,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
 	@JsonProperty("license-url")
 	private void setLicenseUrl(String licenseUrl) throws MalformedURLException {
-		try {
-			this.licenseUrl = new URL(licenseUrl);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The citation metadata for '" + getTitle() + "' contains an invalid URL in field 'license-url': " + e.getMessage());
+		if (licenseUrl != null) {
+			try {
+				this.licenseUrl = new URL(licenseUrl);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'license-url': " + e.getMessage());
+			}
 		}
 	}
 
@@ -298,11 +318,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
 	@JsonProperty("repository")
 	private void setRepository(String repository) throws MalformedURLException {
-		try {
-			this.repository = new URL(repository);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The citation metadata for '" + getTitle() + "' contains an invalid URL in field 'repository': " + e.getMessage());
+		if (repository != null) {
+			try {
+				this.repository = new URL(repository);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository': " + e.getMessage());
+			}
 		}
 	}
 
@@ -313,11 +336,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
 	@JsonProperty("repository-code")
 	private void setRepositoryCode(String repositoryCode) throws MalformedURLException {
-		try {
-			this.repositoryCode = new URL(repositoryCode);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The citation metadata for '" + getTitle() + "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+		if (repositoryCode != null) {
+			try {
+				this.repositoryCode = new URL(repositoryCode);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+			}
 		}
 	}
 
@@ -328,12 +354,15 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
 	@JsonProperty("repository-artifact")
 	private void setRepositoryArtifact(String repositoryArtifact) throws MalformedURLException {
-		try {
-			this.repositoryArtifact = new URL(repositoryArtifact);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The citation metadata for '" + getTitle() + "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
+		if (repositoryArtifact != null) {
+			try {
+				this.repositoryArtifact = new URL(repositoryArtifact);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
 
+			}
 		}
 	}
 
@@ -354,11 +383,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
 	@JsonProperty("url")
 	private void setUrl(String url) throws MalformedURLException {
-		try {
-			this.url = new URL(url);
-		}
-		catch (MalformedURLException e) {
-			throw new MalformedURLException("The citation metadata for '" + getTitle() + "' contains an invalid URL in field 'url': " + e.getMessage());
+		if (url != null) {
+			try {
+				this.url = new URL(url);
+			}
+			catch (MalformedURLException e) {
+				throw new MalformedURLException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'url': " + e.getMessage());
+			}
 		}
 	}
 
@@ -381,7 +413,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	public void setReferences(List<Reference> references) {
 		this.references = references;
 	}
-	
+
 	/*
 	 * HELPER METHODS
 	 */

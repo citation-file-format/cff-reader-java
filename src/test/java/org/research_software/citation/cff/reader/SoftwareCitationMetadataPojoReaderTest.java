@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
 import org.research_software.citation.cff.model.exceptions.CFFModelException;
+import org.research_software.citation.cff.model.exceptions.CFFReaderException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
@@ -103,8 +104,19 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	@Test(expected = CFFReaderException.class)
 	public final void testBadCFFFileName() throws IOException, NullPointerException, CFFReaderException  {
 		File file = new File("CITATION.xff");
-		file.createNewFile();
 		getFixture().readFromFile(file);
+	}
+	
+	@Test
+	public final void testBadCFFFileNameMessage() {
+		File file = new File("CITATION.xff");
+		try {
+			getFixture().readFromFile(file);
+		}
+		catch (NullPointerException | IOException | CFFReaderException e) {
+			assertThat(e, instanceOf(CFFReaderException.class));
+			assertThat(e.getMessage(), is("File name of CFF file must be 'CITATION.cff' (is 'CITATION.xff')!"));
+		}
 	}
 	
 	private void test(SoftwareCitationMetadata citation) throws MalformedURLException {

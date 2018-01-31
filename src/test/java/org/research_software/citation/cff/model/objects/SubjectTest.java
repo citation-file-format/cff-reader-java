@@ -59,5 +59,11 @@ public class SubjectTest {
 			assertThat(e.getMessage(), is("ORCID id BAD ORCID is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!"));
 		}
 	}
+	
+	@Test
+	public final void testOnlyRequiredValues() throws CFFModelException, MalformedURLException {
+		new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null);
+		new Entity("N", null, null, null, null, null, null, null, null, null, null, null, null, null);
+	}
 
 }

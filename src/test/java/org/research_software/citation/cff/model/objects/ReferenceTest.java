@@ -66,7 +66,9 @@ public class ReferenceTest {
 		catch (CFFModelException | MalformedURLException | NullPointerException e) {
 			assertThat(e, instanceOf(CFFModelException.class));
 			assertThat(e.getMessage(), is("The reference type 'singularity' is not defined."));
+			return;
 		}
+		fail();
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class ReferenceTest {
 	 */
 	@Test(expected = CFFModelException.class)
 	public final void testReferenceBadLanguage() throws CFFModelException, MalformedURLException, NullPointerException {
-		new Reference("book", "title", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new ArrayList<String>(Arrays.asList("BAD LANGUAGE!")), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new ArrayList<String>(Arrays.asList("BAD LANGUAGE!")), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	}
 
 	/**
@@ -88,12 +90,14 @@ public class ReferenceTest {
 	@Test
 	public final void testReferenceBadLanguageMessage() {
 		try {
-			new Reference("book", "title", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new ArrayList<String>(Arrays.asList("BAD LANGUAGE!")), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+			new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new ArrayList<String>(Arrays.asList("BAD LANGUAGE!")), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 		}
 		catch (CFFModelException | MalformedURLException | NullPointerException e) {
 			assertThat(e, instanceOf(CFFModelException.class));
 			assertThat(e.getMessage(), is("The language 'BAD LANGUAGE!' is not a valid ISO 639-1 or 639-3 code."));
+			return;
 		}
+		fail();
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class ReferenceTest {
 	 */
 	@Test(expected = CFFModelException.class)
 	public final void testReferenceBadStatus() throws CFFModelException, MalformedURLException, NullPointerException {
-		new Reference("book", "title", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+			new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "BAD STATUS!", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	}
 
 	/**
@@ -115,12 +119,20 @@ public class ReferenceTest {
 	@Test
 	public final void testReferenceBadStatusMessage() {
 		try {
-			new Reference("book", "title", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "BAD STATUS!", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+			new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "BAD STATUS!", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 		}
 		catch (CFFModelException | MalformedURLException | NullPointerException e) {
 			assertThat(e, instanceOf(CFFModelException.class));
 			assertThat(e.getMessage(), is("The status 'BAD STATUS!' is not defined."));
+			return;
 		}
+		fail();
 	}
+	
+	@Test
+	public final void testOnlyRequiredValues() throws CFFModelException, MalformedURLException {
+		new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+	}
+
 
 }
