@@ -14,23 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Person extends Subject {
 
-	@JsonProperty("family-names")
 	private String familyNames;
-	@JsonProperty("given-names")
 	private String givenNames;
-	@JsonProperty("name-particle")
 	private String nameParticle;
-	@JsonProperty("name-suffix")
 	private String nameSuffix;
-	@JsonProperty("affiliation")
 	private String affiliation;
-
-	/**
-	 * No args constructor for use in serialization
-	 *
-	 */
-	public Person() {
-	}
 
 	/**
 	 *
@@ -50,8 +38,22 @@ public final class Person extends Subject {
 	 * @param fax 
 	 * @param website 
 	 */
-	public Person(String familyNames, String givenNames, String nameParticle, String nameSuffix, String affiliation, String address, String city, String region, String postCode, String country, String orcid,
-			String email, String tel, String fax, String website) {
+	public Person(
+			@JsonProperty("family-names") String familyNames,
+			@JsonProperty("given-names") String givenNames,
+			@JsonProperty("name-particle") String nameParticle,
+			@JsonProperty("name-suffix") String nameSuffix,
+			@JsonProperty("affiliation") String affiliation,
+			@JsonProperty("address") String address,
+			@JsonProperty("city") String city,
+			@JsonProperty("region") String region,
+			@JsonProperty("post-code") String postCode,
+			@JsonProperty("country") String country,
+			@JsonProperty("orcid") String orcid,
+			@JsonProperty("email") String email,
+			@JsonProperty("tel") String tel,
+			@JsonProperty("fax") String fax,
+			@JsonProperty("website") String website) {
 		super(address, city, region, postCode, country, orcid, email, tel, fax, website);
 		this.familyNames = familyNames;
 		this.givenNames = givenNames;
@@ -66,7 +68,7 @@ public final class Person extends Subject {
 	}
 
 	@JsonProperty("family-names")
-	public void setFamilyNames(String familyNames) {
+	private void setFamilyNames(String familyNames) {
 		this.familyNames = familyNames;
 	}
 
@@ -76,7 +78,7 @@ public final class Person extends Subject {
 	}
 
 	@JsonProperty("given-names")
-	public void setGivenNames(String givenNames) {
+	private void setGivenNames(String givenNames) {
 		this.givenNames = givenNames;
 	}
 
@@ -86,7 +88,7 @@ public final class Person extends Subject {
 	}
 
 	@JsonProperty("name-particle")
-	public void setNameParticle(String nameParticle) {
+	private void setNameParticle(String nameParticle) {
 		this.nameParticle = nameParticle;
 	}
 
@@ -96,7 +98,7 @@ public final class Person extends Subject {
 	}
 
 	@JsonProperty("name-suffix")
-	public void setNameSuffix(String nameSuffix) {
+	private void setNameSuffix(String nameSuffix) {
 		this.nameSuffix = nameSuffix;
 	}
 
@@ -106,7 +108,7 @@ public final class Person extends Subject {
 	}
 
 	@JsonProperty("affiliation")
-	public void setAffiliation(String affiliation) {
+	private void setAffiliation(String affiliation) {
 		this.affiliation = affiliation;
 	}
 

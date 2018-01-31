@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
-public class SubjectDeserializer extends StdDeserializer<Subject> {
+class SubjectDeserializer extends StdDeserializer<Subject> {
 
 	/**
 	 * 

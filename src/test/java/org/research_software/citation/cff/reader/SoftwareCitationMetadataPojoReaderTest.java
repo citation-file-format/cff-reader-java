@@ -7,9 +7,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,7 +21,10 @@ import org.junit.Test;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
-import org.research_software.citation.cff.model.objects.Subject;
+import org.research_software.citation.cff.model.objects.Reference;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * // TODO Add description
@@ -27,7 +34,8 @@ import org.research_software.citation.cff.model.objects.Subject;
  */
 public class SoftwareCitationMetadataPojoReaderTest {
 
-	private static final String CITATION_FILE_PATH_WITH_PRECEDING_BACKSLASH = "/CITATION.cff";
+	private static final String CITATION_FILE_PATH = "CITATION.cff";
+	private static final String CITATION_FILE_PATH_WITH_PRECEDING_BACKSLASH = "/" + CITATION_FILE_PATH;
 	private SoftwareCitationMetadataPojoReader fixture = null;
 
 	/**
@@ -49,37 +57,45 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	public void tearDown() throws Exception {
 	}
 
-	// /**
-	// * Test method for {@link
-	// org.research_software.citation.cff.reader.SoftwareCitationMetadataPojoReader#readFromFile(java.io.File)}.
-	// */
-	// @Test
-	// public final void testReadFromFile() {
-	// fail("Not yet implemented"); // TODO
-	// }
+	/**
+	 * Test method for
+	 * {@link org.research_software.citation.cff.reader.SoftwareCitationMetadataPojoReader#readFromFile(java.io.File)}.
+	 * @throws NullPointerException 
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonParseException
+	 * @throws MalformedURLException
+	 */
+	@Test
+	public final void testReadFromFile() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException {
+		File cffFile = new File(getClass().getClassLoader().getResource(CITATION_FILE_PATH).getFile());
+		SoftwareCitationMetadata citation = null;
+		citation = getFixture().readFromFile(cffFile);
+		test(citation);
+	}
 
 	/**
 	 * Test method for
 	 * {@link org.research_software.citation.cff.reader.SoftwareCitationMetadataPojoReader#readFromStream(java.io.InputStream)}.
+	 * @throws IOException 
+	 * @throws MalformedURLException 
+	 * @throws NullPointerException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 */
 	@Test
-	public final void testReadFromStream() {
+	public final void testReadFromStream() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException {
 		InputStream stream = this.getClass().getResourceAsStream(CITATION_FILE_PATH_WITH_PRECEDING_BACKSLASH);
 		SoftwareCitationMetadata citation = null;
-		try {
-			citation = getFixture().readFromStream(stream);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		citation = getFixture().readFromStream(stream);
 		test(citation);
 	}
 
-	private void test(SoftwareCitationMetadata citation) {
+	private void test(SoftwareCitationMetadata citation) throws MalformedURLException {
 		assertNotNull(citation);
-		
+
 		// Test basic values
-		
+
 		assertThat(citation.getCffVersion(), is("1.0.3"));
 		assertThat(citation.getMessage(), is("If you use this software, please cite it as below."));
 		assertThat(citation.getAbstract(), is("This is an awesome piece of research software!"));
@@ -88,44 +104,144 @@ public class SoftwareCitationMetadataPojoReaderTest {
 		assertThat(citation.getDoi(), is("10.5281/zenodo.1003150"));
 		assertThat(citation.getKeywords(), containsInAnyOrder("One", "Two", "Three", "4"));
 		assertThat(citation.getLicense(), is("CC-BY-SA-4.0"));
-		assertThat(citation.getLicenseUrl(), is("https://spdx.org/licenses/CC-BY-SA-4.0.html#licenseText"));
-		assertThat(citation.getRepository(), is("https://www.example.com/foo/?bar=baz&inga=42&quux"));
-		assertThat(citation.getRepositoryCode(), is("http://foo.com/blah_(wikipedia)_blah#cite-1"));
-		assertThat(citation.getRepositoryArtifact(), is("http://उदाहरण.परीक्षा"));
+		assertThat(citation.getLicenseUrl(), is(new URL("https://spdx.org/licenses/CC-BY-SA-4.0.html#licenseText")));
+		assertThat(citation.getRepository(), is(new URL("https://www.example.com/foo/?bar=baz&inga=42&quux")));
+		assertThat(citation.getRepositoryCode(), is(new URL("http://foo.com/blah_(wikipedia)_blah#cite-1")));
+		assertThat(citation.getRepositoryArtifact(), is(new URL("http://उदाहरण.परीक्षा")));
 		assertThat(citation.getTitle(), is("Citation File Format 1.0.0"));
-		assertThat(citation.getUrl(), is("http://userid:password@example.com:8080/"));
+		assertThat(citation.getUrl(), is(new URL("http://userid:password@example.com:8080/")));
 		assertThat(citation.getVersion(), is("1.0.0"));
-		
+
 		// Test authors
 		assertThat(citation.getAuthors().size(), is(2));
 		assertThat(citation.getPersonAuthors().size(), is(1));
 		assertThat(citation.getEntityAuthors().size(), is(1));
 		assertTrue(citation.getAuthors().containsAll(citation.getPersonAuthors()));
 		assertTrue(citation.getAuthors().containsAll(citation.getEntityAuthors()));
-		
+
 		// Test person author
 		Person personAuthor = citation.getPersonAuthors().get(0);
-		assertThat(personAuthor.getAddress(), is("22 Acacia Avenue"));
-		assertThat(personAuthor.getAffiliation(), is("Excellent University, Niceplace, Arcadia"));
-		assertThat(personAuthor.getCity(), is("Citationburgh"));
-		assertThat(personAuthor.getCountry(), is("GB"));
-		assertThat(personAuthor.getEmail(), is("project@entity.com"));
-		assertThat(personAuthor.getFamilyNames(), is("Real Person"));
-		assertThat(personAuthor.getFax(), is("+44(0)141-323 45678"));
-		assertThat(personAuthor.getGivenNames(), is("One Truly"));
-		assertThat(personAuthor.getNameParticle(), is("van der"));
-		assertThat(personAuthor.getNameSuffix(), is("IV"));
-		assertThat(personAuthor.getOrcid(), is("https://orcid.org/0000-0001-2345-6789"));
-		assertThat(personAuthor.getPostCode(), is("C13 7X7"));
-		assertThat(personAuthor.getRegion(), is("Renfrewshire"));
-		assertThat(personAuthor.getTel(), is("+44(0)141-323 4567"));
-		assertThat(personAuthor.getWebsite(), is("https://www.entity-project-team.io"));
-		
+		testPerson(personAuthor);
+
+		// Test entity author
+		Entity entityAuthor = citation.getEntityAuthors().get(0);
+		testEntity(entityAuthor);
+
 		// Test contact
 		assertThat(citation.getContacts().size(), is(2));
 		assertThat(citation.getPersonContacts().size(), is(1));
 		assertThat(citation.getEntityContacts().size(), is(1));
-		
+		assertTrue(citation.getContacts().containsAll(citation.getPersonContacts()));
+		assertTrue(citation.getContacts().containsAll(citation.getEntityContacts()));
+
+		// Test person contact
+		Person personContact = citation.getPersonContacts().get(0);
+		testPerson(personContact);
+
+		// Test entity contat
+		Entity entityContact = citation.getEntityContacts().get(0);
+		testEntity(entityContact);
+
+		// Test references
+		assertThat(citation.getReferences().size(), is(1));
+		Reference reference = citation.getReferences().get(0);
+		assertThat(reference.getType(), is("book"));
+		assertThat(reference.getTitle(), is("Book Title"));
+		assertThat(reference.getAbbreviation(), is("Abbr"));
+		assertThat(reference.getAbstract(), is("Description of the book."));
+		assertThat(reference.getCollectionDoi(), is("10.5281/zenodo.1003150"));
+		assertThat(reference.getCollectionTitle(), is("Collection Title"));
+		assertThat(reference.getCollectionType(), is("Collection Type"));
+		assertThat(reference.getCommit(), is("156a04c74a8a79d40c5d705cddf9d36735feab4d"));
+		assertThat(reference.getCopyright(), is("2017 Stephan Druskat"));
+		assertThat(reference.getDataType(), is("Data Type"));
+		assertThat(reference.getDatabase(), is("Database"));
+		assertThat(reference.getDateAccessed(), is(LocalDate.parse("2017-10-31")));
+		assertThat(reference.getDateDownloaded(), is(LocalDate.parse("2017-10-31")));
+		assertThat(reference.getDateReleased(), is(LocalDate.parse("2017-10-31")));
+		assertThat(reference.getDatePublished(), is(LocalDate.parse("2017-10-31")));
+		assertThat(reference.getDepartment(), is("Department"));
+		assertThat(reference.getDoi(), is("10.5281/zenodo.1003150"));
+		assertThat(reference.getEdition(), is("2nd edition"));
+		assertThat(reference.getEnd(), is(123));
+		assertThat(reference.getEntry(), is("Chapter 9"));
+		assertThat(reference.getFilename(), is("book.zip"));
+		assertThat(reference.getFormat(), is("Printed book"));
+		assertThat(reference.getIsbn(), is("978-1-89183-044-0"));
+		assertThat(reference.getIssn(), is("1234-543X"));
+		assertThat(reference.getIssue(), is("123"));
+		assertThat(reference.getIssueDate(), is("December"));
+		assertThat(reference.getIssueTitle(), is("Special Issue on Software Citation"));
+		assertThat(reference.getJournal(), is("PeerJ"));
+		assertThat(reference.getKeywords(), is(Arrays.asList(new String[] { "Software", "Citation" })));
+		assertThat(reference.getLanguages(), is(Arrays.asList(new String[] { "aaa", "zu" })));
+		assertThat(reference.getLicense(), is("Apache-2.0"));
+		assertThat(reference.getLicenseUrl(), is(new URL("https://spdx.org/licenses/Apache-2.0.html#licenseText")));
+		assertThat(reference.getLocStart(), is(14));
+		assertThat(reference.getLocEnd(), is(54));
+		assertThat(reference.getMedium(), is("hardcover book"));
+		assertThat(reference.getMonth(), is(03));
+		assertThat(reference.getNihmsid(), is("Don't know what format a NIHMSID is in"));
+		assertThat(reference.getNotes(),
+				is("A field for general notes about the reference, usable in other formats such as BibTeX."));
+		assertThat(reference.getNumber(),
+				is("A general-purpose field for accession numbers, cf. the specifications for examples."));
+		assertThat(reference.getNumberVolumes(), is(7));
+		assertThat(reference.getPages(), is(765));
+		assertThat(reference.getPatentStates(), is(Arrays
+				.asList(new String[] { "Germany", "ROI", "but also for example US states, such as:", "IL", "RI" })));
+		assertThat(reference.getPmcid(), is("PMC1234567"));
+		assertThat(reference.getRepository(), is(new URL("http://code.google.com/events/#&product=browser")));
+		assertThat(reference.getRepositoryCode(), is(new URL("http://142.42.1.1:8080/")));
+		assertThat(reference.getRepositoryArtifact(), is(new URL("http://مثال.إختبار")));
+		assertThat(reference.getScope(), is(
+				"Cite this book if you want to reference the general concepts implemented in Citation File Format 1.0.0."));
+		assertThat(reference.getSection(), is("Chapter 2 - \"Reference keys\""));
+		assertThat(reference.getStatus(), is("advance-online"));
+		assertThat(reference.getStart(), is(123));
+		assertThat(reference.getThesisType(), is("Doctoral dissertation"));
+		assertThat(reference.getUrl(), is(new URL("http://j.mp")));
+		assertThat(reference.getVersion(), is("0.0.1423-BETA"));
+		assertThat(reference.getVolume(), is(2));
+		assertThat(reference.getVolumeTitle(), is("Advances in Software Citation"));
+		assertThat(reference.getYear(), is(2017));
+		assertThat(reference.getYearOriginal(), is(2012));
+
+	}
+
+	private void testEntity(Entity entityAuthor) {
+		assertThat(entityAuthor.getName(), is("Entity Project Team Conference entity"));
+		assertThat(entityAuthor.getAddress(), is("22 Acacia Avenue"));
+		assertThat(entityAuthor.getCity(), is("Citationburgh"));
+		assertThat(entityAuthor.getRegion(), is("Renfrewshire"));
+		assertThat(entityAuthor.getPostCode(), is("C13 7X7"));
+		assertThat(entityAuthor.getCountry(), is("GB"));
+		assertThat(entityAuthor.getOrcid(), is("https://orcid.org/0000-0001-2345-6789"));
+		assertThat(entityAuthor.getEmail(), is("project@entity.com"));
+		assertThat(entityAuthor.getTel(), is("+44(0)141-323 4567"));
+		assertThat(entityAuthor.getFax(), is("+44(0)141-323 45678"));
+		assertThat(entityAuthor.getWebsite(), is("https://www.entity-project-team.io"));
+		assertThat(entityAuthor.getDateStart(), is("2017-01-01"));
+		assertThat(entityAuthor.getDateEnd(), is("2017-01-31"));
+		assertThat(entityAuthor.getLocation(), is("The team garage"));
+	}
+
+	private void testPerson(Person person) {
+		assertThat(person.getAddress(), is("22 Acacia Avenue"));
+		assertThat(person.getAffiliation(), is("Excellent University, Niceplace, Arcadia"));
+		assertThat(person.getCity(), is("Citationburgh"));
+		assertThat(person.getCountry(), is("GB"));
+		assertThat(person.getEmail(), is("project@entity.com"));
+		assertThat(person.getFamilyNames(), is("Real Person"));
+		assertThat(person.getFax(), is("+44(0)141-323 45678"));
+		assertThat(person.getGivenNames(), is("One Truly"));
+		assertThat(person.getNameParticle(), is("van der"));
+		assertThat(person.getNameSuffix(), is("IV"));
+		assertThat(person.getOrcid(), is("https://orcid.org/0000-0001-2345-6789"));
+		assertThat(person.getPostCode(), is("C13 7X7"));
+		assertThat(person.getRegion(), is("Renfrewshire"));
+		assertThat(person.getTel(), is("+44(0)141-323 4567"));
+		assertThat(person.getWebsite(), is("https://www.entity-project-team.io"));
 	}
 
 	/**

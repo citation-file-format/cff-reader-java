@@ -20,33 +20,16 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class Subject {
 
-	@JsonProperty("address")
 	private String address;
-	@JsonProperty("city")
 	private String city;
-	@JsonProperty("region")
 	private String region;
-	@JsonProperty("post-code")
 	private String postCode;
-	@JsonProperty("country")
 	private String country;
-	@JsonProperty("orcid")
 	private String orcid;
-	@JsonProperty("email")
 	private String email;
-	@JsonProperty("tel")
 	private String tel;
-	@JsonProperty("fax")
 	private String fax;
-	@JsonProperty("website")
 	private String website;
-
-	/**
-	 * No args constructor for use in serialization
-	 *
-	 */
-	public Subject() {
-	}
 
 	/**
 	 *
@@ -61,9 +44,17 @@ public abstract class Subject {
 	 * @param country
 	 * @param city
 	 */
-	public Subject(String address, String city, String region, String postCode, String country, String orcid,
-			String email, String tel, String fax, String website) {
-		super();
+	public Subject(
+			@JsonProperty("address") String address,
+			@JsonProperty("city") String city,
+			@JsonProperty("region") String region,
+			@JsonProperty("post-code") String postCode,
+			@JsonProperty("country") String country,
+			@JsonProperty("orcid") String orcid,
+			@JsonProperty("email") String email,
+			@JsonProperty("tel") String tel,
+			@JsonProperty("fax") String fax,
+			@JsonProperty("website") String website) {
 		this.address = address;
 		this.city = city;
 		this.region = region;
@@ -82,7 +73,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("address")
-	public void setAddress(String address) {
+	private void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -92,7 +83,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("city")
-	public void setCity(String city) {
+	private void setCity(String city) {
 		this.city = city;
 	}
 
@@ -102,7 +93,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("region")
-	public void setRegion(String region) {
+	private void setRegion(String region) {
 		this.region = region;
 	}
 
@@ -112,7 +103,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("post-code")
-	public void setPostCode(String postCode) {
+	private void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 
@@ -122,7 +113,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("country")
-	public void setCountry(String country) {
+	private void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -132,7 +123,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("orcid")
-	public void setOrcid(String orcid) {
+	private void setOrcid(String orcid) {
 		this.orcid = orcid;
 	}
 
@@ -142,7 +133,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("email")
-	public void setEmail(String email) {
+	private void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -152,7 +143,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("tel")
-	public void setTel(String tel) {
+	private void setTel(String tel) {
 		this.tel = tel;
 	}
 
@@ -162,7 +153,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("fax")
-	public void setFax(String fax) {
+	private void setFax(String fax) {
 		this.fax = fax;
 	}
 
@@ -172,7 +163,7 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("website")
-	public void setWebsite(String website) {
+	private void setWebsite(String website) {
 		this.website = website;
 	}
 

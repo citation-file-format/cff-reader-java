@@ -3,6 +3,7 @@
  */
 package org.research_software.citation.cff.model;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
 import org.research_software.citation.cff.model.objects.Subject;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * // TODO Add description
@@ -19,6 +22,7 @@ import org.research_software.citation.cff.model.objects.Subject;
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
+@JsonDeserialize(as = SoftwareCitationMetadataPojo.class)
 public interface SoftwareCitationMetadata {
 	
 	/* ######################################
@@ -101,35 +105,35 @@ public interface SoftwareCitationMetadata {
 	 * 
 	 * @return
 	 */
-	public String getLicenseUrl();
+	public URL getLicenseUrl();
 	
 	/**
 	 * // TODO Add description
 	 * 
 	 * @return
 	 */
-	public String getRepository();
+	public URL getRepository();
 	
 	/**
 	 * // TODO Add description
 	 * 
 	 * @return
 	 */
-	public String getRepositoryCode();
+	public URL getRepositoryCode();
 
 	/**
 	 * // TODO Add description
 	 * 
 	 * @return
 	 */
-	public String getRepositoryArtifact();
+	public URL getRepositoryArtifact();
 	
 	/**
 	 * // TODO Add description
 	 * 
 	 * @return
 	 */
-	public String getUrl();
+	public URL getUrl();
 	
 	/* ######################################
 	 * Object keys

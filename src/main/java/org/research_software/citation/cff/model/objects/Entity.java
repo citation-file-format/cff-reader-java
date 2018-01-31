@@ -14,21 +14,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Entity extends Subject {
 
-	@JsonProperty("name")
 	private String name;
-	@JsonProperty("date-start")
 	private String dateStart;
-	@JsonProperty("date-end")
 	private String dateEnd;
-	@JsonProperty("location")
 	private String location;
-
-	/**
-	 * No args constructor for use in serialization
-	 *
-	 */
-	public Entity() {
-	}
 
 	/**
 	 *
@@ -36,9 +25,32 @@ public final class Entity extends Subject {
 	 * @param name
 	 * @param dateEnd
 	 * @param dateStart
+	 * @param address 
+	 * @param city 
+	 * @param region 
+	 * @param postCode 
+	 * @param country 
+	 * @param orcid 
+	 * @param email 
+	 * @param tel 
+	 * @param fax 
+	 * @param website 
 	 */
-	public Entity(String name, String dateStart, String dateEnd, String location, String address, String city, String region, String postCode, String country, String orcid,
-			String email, String tel, String fax, String website) {
+	public Entity(
+			@JsonProperty("name") String name, 
+			@JsonProperty("date-start") String dateStart, 
+			@JsonProperty("date-end") String dateEnd, 
+			@JsonProperty("location") String location, 
+			@JsonProperty("address") String address,
+			@JsonProperty("city") String city,
+			@JsonProperty("region") String region,
+			@JsonProperty("post-code") String postCode,
+			@JsonProperty("country") String country,
+			@JsonProperty("orcid") String orcid,
+			@JsonProperty("email") String email,
+			@JsonProperty("tel") String tel,
+			@JsonProperty("fax") String fax,
+			@JsonProperty("website") String website) {
 		super(address, city, region, postCode, country, orcid, email, tel, fax, website);
 		this.name = name;
 		this.dateStart = dateStart;
@@ -52,7 +64,7 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("name")
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -62,7 +74,7 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("date-start")
-	public void setDateStart(String dateStart) {
+	private void setDateStart(String dateStart) {
 		this.dateStart = dateStart;
 	}
 
@@ -72,7 +84,7 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("date-end")
-	public void setDateEnd(String dateEnd) {
+	private void setDateEnd(String dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
@@ -82,7 +94,7 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("location")
-	public void setLocation(String location) {
+	private void setLocation(String location) {
 		this.location = location;
 	}
 

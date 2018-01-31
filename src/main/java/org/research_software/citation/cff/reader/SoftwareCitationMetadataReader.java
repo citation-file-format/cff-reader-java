@@ -6,6 +6,7 @@ package org.research_software.citation.cff.reader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
 
@@ -25,21 +26,25 @@ public interface SoftwareCitationMetadataReader {
 	 * 
 	 * @param cffFile
 	 * @return
+	 * @throws MalformedURLException 
+	 * @throws NullPointerException 
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public SoftwareCitationMetadata readFromFile(File cffFile) throws JsonParseException, JsonMappingException, IOException;
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException;
 	
 	/**
 	 * // TODO Add description
 	 * 
 	 * @param cffInputStream
 	 * @return
+	 * @throws MalformedURLException 
+	 * @throws NullPointerException 
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws JsonParseException, JsonMappingException, IOException;
+	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException;
 
 }
