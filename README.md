@@ -2,4 +2,4 @@
 
 # cff-reader-java
 
-A Java reader for [CITATION.cff](http://citation-file-format.github.io/) files which provides a POJO model for inspection and re-use.
+A Java reader for [CITATION.cff](https://citation-file-format.github.io/) files which provides a POJO model for inspection and re-use.
