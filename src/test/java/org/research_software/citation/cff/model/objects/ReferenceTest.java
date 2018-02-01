@@ -103,6 +103,24 @@ public class ReferenceTest {
 	/**
 	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
 	 * @throws NullPointerException 
+	 * @throws CFFModelException 
+	 */
+	@Test
+	public final void testReferenceBadNonAlphabeticalLanguageMessage() {
+		try {
+			new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new ArrayList<String>(Arrays.asList("ö")), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		}
+		catch (CFFModelException | MalformedURLException | NullPointerException e) {
+			assertThat(e, instanceOf(CFFModelException.class));
+			assertThat(e.getMessage(), is("The language 'ö' is not a valid ISO 639-1 or 639-3 code."));
+			return;
+		}
+		fail();
+	}
+
+	/**
+	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * @throws NullPointerException 
 	 * @throws MalformedURLException 
 	 * @throws CFFModelException 
 	 */
@@ -129,6 +147,12 @@ public class ReferenceTest {
 		fail();
 	}
 	
+	/**
+	 * // TODO Add description
+	 * 
+	 * @throws CFFModelException
+	 * @throws MalformedURLException
+	 */
 	@Test
 	public final void testOnlyRequiredValues() throws CFFModelException, MalformedURLException {
 		new Reference("book", "title", new ArrayList<Subject>(Arrays.asList(new Person("FN", "GN", null, null, null, null, null, null, null, null, null, null, null, null, null))), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);

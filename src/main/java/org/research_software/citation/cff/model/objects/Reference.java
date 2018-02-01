@@ -658,10 +658,6 @@ public final class Reference {
 					throw new CFFModelException(
 							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
 				}
-//				if (!DefinedValues.LANGUAGES.contains(language)) {
-//					throw new CFFModelException(
-//							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
-//				}
 			}
 		}
 		this.languages = languages;

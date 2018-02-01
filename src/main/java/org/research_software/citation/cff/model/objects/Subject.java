@@ -57,7 +57,7 @@ public abstract class Subject {
 		this.city = city;
 		this.region = region;
 		this.postCode = postCode;
-		this.country = country;
+		setCountry(country);
 		setOrcid(orcid);
 		this.email = email;
 		this.tel = tel;
@@ -112,6 +112,11 @@ public abstract class Subject {
 
 	@JsonProperty("country")
 	private void setCountry(String country) {
+		if (country != null) {
+			if (!DefinedValues.COUNTRY.contains(country)) {
+				throw new CFFModelException("'country' value '" + country + "' is not a valid ISO 3166-1 alpha-2 code.");
+			}
+		}
 		this.country = country;
 	}
 

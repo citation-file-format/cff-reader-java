@@ -57,7 +57,32 @@ public class SubjectTest {
 		catch (CFFModelException | MalformedURLException e) {
 			assertThat(e, instanceOf(CFFModelException.class));
 			assertThat(e.getMessage(), is("ORCID id BAD ORCID is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!"));
+			return;
 		}
+		fail();
+	}
+	
+	/**
+	 * Test method for {@link org.research_software.citation.cff.model.objects.Subject#Subject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * @throws MalformedURLException 
+	 * @throws CFFModelException 
+	 */
+	@Test(expected = CFFModelException.class)
+	public final void testBadCountry() throws CFFModelException, MalformedURLException {
+		new Person(null, null, null, null, null, null, null, null, null, "NOMANSLAND", null, null, null, null, null);
+	}
+	
+	@Test
+	public final void testBadCountryMessage() {
+		try {
+			new Person(null, null, null, null, null, null, null, null, null, "NOMANSLAND", null, null, null, null, null);
+		}
+		catch (CFFModelException | MalformedURLException e) {
+			assertThat(e, instanceOf(CFFModelException.class));
+			assertThat(e.getMessage(), is("'country' value 'NOMANSLAND' is not a valid ISO 3166-1 alpha-2 code."));
+			return;
+		}
+		fail();
 	}
 	
 	@Test
