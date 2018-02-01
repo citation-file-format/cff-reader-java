@@ -651,10 +651,17 @@ public final class Reference {
 	private void setLanguages(List<String> languages) throws CFFModelException {
 		if (languages != null) {
 			for (String language : languages) {
-				if (!DefinedValues.LANGUAGES.contains(language)) {
+				if (language.length() > 3 || language.length() <= 1) {
+					throw new CFFModelException("The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
+				}
+				if (!DefinedValues.isLanguageValid(language)) {
 					throw new CFFModelException(
 							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
 				}
+//				if (!DefinedValues.LANGUAGES.contains(language)) {
+//					throw new CFFModelException(
+//							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
+//				}
 			}
 		}
 		this.languages = languages;
