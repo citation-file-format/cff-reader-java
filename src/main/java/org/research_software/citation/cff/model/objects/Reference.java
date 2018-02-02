@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.research_software.citation.cff.model.objects;
 
 import java.net.MalformedURLException;
@@ -16,11 +13,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * // TODO Add description
- *
+ * Model element representing an additional reference to the software.
+ * 
+ * @see <https://citation-file-format.github.io/1.0.3/specifications/#/references-optional>
+ * 
+ * @version Citation File Format Version 1.0.3
+ * 
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
+@SuppressWarnings("javadoc")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Reference {
 
@@ -95,79 +97,81 @@ public final class Reference {
 	private List<Subject> translators;
 
 	/**
+	 * Constructor for databinding.
 	 *
-	 * @param dateDownloaded
-	 * @param edition
-	 * @param nihmsid
-	 * @param location
-	 * @param databaseProvider
-	 * @param dateAccessed
-	 * @param editors
-	 * @param type
-	 * @param authors
-	 * @param languages
-	 * @param translators
-	 * @param commit
-	 * @param year
-	 * @param collectionTitle
-	 * @param conference
-	 * @param senders
-	 * @param keywords
-	 * @param status
-	 * @param datePublished
-	 * @param number
-	 * @param format
-	 * @param copyright
-	 * @param url
-	 * @param locStart
-	 * @param collectionDoi
-	 * @param repositoryCode
-	 * @param start
-	 * @param month
-	 * @param locEnd
-	 * @param patentStates
-	 * @param licenseUrl
-	 * @param collectionType
-	 * @param scope
-	 * @param issn
-	 * @param department
-	 * @param issue
-	 * @param contact
-	 * @param volumeTitle
-	 * @param thesisType
-	 * @param publisher
-	 * @param version
-	 * @param journal
-	 * @param title
-	 * @param repository
-	 * @param isbn
-	 * @param license
-	 * @param end
-	 * @param institution
-	 * @param repositoryArtifact
-	 * @param dateReleased
-	 * @param recipients
-	 * @param numberVolumes
-	 * @param pages
-	 * @param issueDate
-	 * @param editorsSeries
-	 * @param abbreviation
-	 * @param abstractString
-	 * @param database
-	 * @param medium
-	 * @param section
-	 * @param issueTitle
-	 * @param pmcid
-	 * @param dataType
-	 * @param yearOriginal
-	 * @param entry
-	 * @param volume
-	 * @param filename
-	 * @param notes
-	 * @param doi
-	 * @throws MalformedURLException
-	 * @throws NullPointerException
-	 * @throws CFFModelException
+	 * @param dateDownloaded The date the reference has been downloaded
+	 * @param edition The edition of the reference
+	 * @param nihmsid The NIHMSID of the reference
+	 * @param location The location of the reference (e.g., for art)
+	 * @param databaseProvider The database provider providing the reference
+	 * @param dateAccessed The date the reference has been accessed
+	 * @param editors The editors of the reference
+	 * @param type The reference type
+	 * @param authors The authors of the reference
+	 * @param languages The languages the reference is composed in
+	 * @param translators The translators of the reference
+	 * @param commit The commit hash for the version of the reference
+	 * @param year The year the reference has been published
+	 * @param collectionTitle The title of the collection containing the reference
+	 * @param conference The conference of which the reference is part
+	 * @param senders The senders of the reference (e.g., for personal communications)
+	 * @param keywords The keywords pertaining to the reference
+	 * @param status The publication status of the reference
+	 * @param datePublished The date the reference has been published
+	 * @param number The accession number of the work (multi-purpose for different reference types)
+	 * @param format The format of the reference
+	 * @param copyright The copyright information pertaining to the reference
+	 * @param url The URL of the reference
+	 * @param locStart The line number in the source code file where the reference starts
+	 * @param collectionDoi The DOI of the collection containing the reference
+	 * @param repositoryCode The URL of the code repository for the reference
+	 * @param start The page number where the reference starts
+	 * @param month The month in which the reference has been published
+	 * @param locEnd The line number in the source code file where the reference ends
+	 * @param patentStates The states for which a patent is granted
+	 * @param licenseUrl The URL pointing to the license text if the license is not included in the [SPDX License list](https://spdx.org/licenses/)
+	 * @param collectionType The type of the collection containing the reference
+	 * @param scope A string describing the scope of the reference in relation to the software
+	 * @param issn The ISSN of the reference
+	 * @param department The department where the reference has been produced
+	 * @param issue The issue of a periodical in which the reference has been published
+	 * @param contact The contacts for the reference
+	 * @param volumeTitle The title of the volume in which the reference has been published
+	 * @param thesisType The type of the reference, if it is a thesis
+	 * @param publisher The publisher which has published the reference
+	 * @param version The version of the reference
+	 * @param journal The name of the journal in which the reference has been published 
+	 * @param title The title of the reference
+	 * @param repository The URL of the repository for the reference
+	 * @param isbn The ISBN of the reference
+	 * @param license The SPDX license short identifier for the license under which the reference has been published
+	 * @param end The page number where the reference ends
+	 * @param institution The institution where the reference has been produced or published
+	 * @param repositoryArtifact The URL of the artifact repository for the reference
+	 * @param dateReleased The date on which the reference has been released
+	 * @param recipients The recipients of the reference (e.g., for personal communications)
+	 * @param numberVolumes The number of volumes making up the collection in which the reference has been published
+	 * @param pages The total number of pages of the reference
+	 * @param issueDate The publication date of the issue of a periodical in which the reference has been published
+	 * @param editorsSeries The editors of the series in which the reference has been published
+	 * @param abbreviation The abbreviation for the reference
+	 * @param abstractString An abstract or description for the reference
+	 * @param database The database which provides the reference
+	 * @param medium The medium of the reference
+	 * @param section The section of a work which is the reference (e.g., for book sections)
+	 * @param issueTitle The title of the issue of a periodical in which the reference has been published
+	 * @param pmcid The PMCID of the reference
+	 * @param dataType The data type of the reference (e.g., for data sets)
+	 * @param yearOriginal The year in which the reference has originally been published
+	 * @param entry An entry in a collection which constitutes the reference
+	 * @param volume The volume of a periodical in which the reference has been published
+	 * @param filename The filename of the reference
+	 * @param notes Notes pertaining to the reference
+	 * @param doi The DOI of the reference
+	 * 
+	 * @throws MalformedURLException on malformed URLs according to Java specs
+	 * @throws NullPointerException on missing required values
+	 * @throws CFFModelException on invalid model values
 	 */
 	public Reference(@JsonProperty("type") String type,
 			@JsonProperty("title") String title,
@@ -324,6 +328,11 @@ public final class Reference {
 		this.translators = translators;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("type")
 	public String getType() {
 		return type;
@@ -334,6 +343,11 @@ public final class Reference {
 		this.type = type;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("title")
 	public String getTitle() {
 		return title;
@@ -344,6 +358,11 @@ public final class Reference {
 		this.title = title;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("abbreviation")
 	public String getAbbreviation() {
 		return abbreviation;
@@ -354,6 +373,11 @@ public final class Reference {
 		this.abbreviation = abbreviation;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("abstract")
 	public String getAbstract() {
 		return abstractString;
@@ -364,6 +388,11 @@ public final class Reference {
 		this.abstractString = _abstract;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("collection-doi")
 	public String getCollectionDoi() {
 		return collectionDoi;
@@ -374,6 +403,11 @@ public final class Reference {
 		this.collectionDoi = collectionDoi;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("collection-title")
 	public String getCollectionTitle() {
 		return collectionTitle;
@@ -384,6 +418,11 @@ public final class Reference {
 		this.collectionTitle = collectionTitle;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("collection-type")
 	public String getCollectionType() {
 		return collectionType;
@@ -394,6 +433,11 @@ public final class Reference {
 		this.collectionType = collectionType;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("commit")
 	public String getCommit() {
 		return commit;
@@ -404,6 +448,11 @@ public final class Reference {
 		this.commit = commit;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("copyright")
 	public String getCopyright() {
 		return copyright;
@@ -414,6 +463,11 @@ public final class Reference {
 		this.copyright = copyright;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("data-type")
 	public String getDataType() {
 		return dataType;
@@ -424,6 +478,11 @@ public final class Reference {
 		this.dataType = dataType;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("database")
 	public String getDatabase() {
 		return database;
@@ -434,6 +493,11 @@ public final class Reference {
 		this.database = database;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("date-accessed")
 	public LocalDate getDateAccessed() {
 		return dateAccessed;
@@ -451,6 +515,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("date-downloaded")
 	public LocalDate getDateDownloaded() {
 		return dateDownloaded;
@@ -468,6 +537,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("date-released")
 	public LocalDate getDateReleased() {
 		return dateReleased;
@@ -485,6 +559,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("date-published")
 	public LocalDate getDatePublished() {
 		return datePublished;
@@ -502,6 +581,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("department")
 	public String getDepartment() {
 		return department;
@@ -512,6 +596,11 @@ public final class Reference {
 		this.department = department;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("doi")
 	public String getDoi() {
 		return doi;
@@ -522,6 +611,11 @@ public final class Reference {
 		this.doi = doi;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("edition")
 	public String getEdition() {
 		return edition;
@@ -532,6 +626,11 @@ public final class Reference {
 		this.edition = edition;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("end")
 	public Integer getEnd() {
 		return end;
@@ -542,6 +641,11 @@ public final class Reference {
 		this.end = end;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("entry")
 	public String getEntry() {
 		return entry;
@@ -552,6 +656,11 @@ public final class Reference {
 		this.entry = entry;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("filename")
 	public String getFilename() {
 		return filename;
@@ -562,6 +671,11 @@ public final class Reference {
 		this.filename = filename;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("format")
 	public String getFormat() {
 		return format;
@@ -572,6 +686,11 @@ public final class Reference {
 		this.format = format;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("isbn")
 	public String getIsbn() {
 		return isbn;
@@ -582,6 +701,11 @@ public final class Reference {
 		this.isbn = isbn;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("issn")
 	public String getIssn() {
 		return issn;
@@ -592,6 +716,11 @@ public final class Reference {
 		this.issn = issn;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("issue")
 	public String getIssue() {
 		return issue;
@@ -602,6 +731,11 @@ public final class Reference {
 		this.issue = issue;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("issue-date")
 	public String getIssueDate() {
 		return issueDate;
@@ -612,6 +746,11 @@ public final class Reference {
 		this.issueDate = issueDate;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("issue-title")
 	public String getIssueTitle() {
 		return issueTitle;
@@ -622,6 +761,11 @@ public final class Reference {
 		this.issueTitle = issueTitle;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("journal")
 	public String getJournal() {
 		return journal;
@@ -632,6 +776,11 @@ public final class Reference {
 		this.journal = journal;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("keywords")
 	public List<String> getKeywords() {
 		return keywords;
@@ -642,6 +791,11 @@ public final class Reference {
 		this.keywords = keywords;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("languages")
 	public List<String> getLanguages() {
 		return languages;
@@ -663,6 +817,11 @@ public final class Reference {
 		this.languages = languages;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("license")
 	public String getLicense() {
 		return license;
@@ -673,6 +832,11 @@ public final class Reference {
 		this.license = license;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("license-url")
 	public URL getLicenseUrl() {
 		return licenseUrl;
@@ -691,6 +855,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("loc-start")
 	public Integer getLocStart() {
 		return locStart;
@@ -701,6 +870,11 @@ public final class Reference {
 		this.locStart = locStart;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("loc-end")
 	public Integer getLocEnd() {
 		return locEnd;
@@ -711,6 +885,11 @@ public final class Reference {
 		this.locEnd = locEnd;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("medium")
 	public String getMedium() {
 		return medium;
@@ -721,6 +900,11 @@ public final class Reference {
 		this.medium = medium;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("month")
 	public Integer getMonth() {
 		return month;
@@ -731,6 +915,11 @@ public final class Reference {
 		this.month = month;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("nihmsid")
 	public String getNihmsid() {
 		return nihmsid;
@@ -741,6 +930,11 @@ public final class Reference {
 		this.nihmsid = nihmsid;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("notes")
 	public String getNotes() {
 		return notes;
@@ -751,6 +945,11 @@ public final class Reference {
 		this.notes = notes;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("number")
 	public String getNumber() {
 		return number;
@@ -761,6 +960,11 @@ public final class Reference {
 		this.number = number;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("number-volumes")
 	public Integer getNumberVolumes() {
 		return numberVolumes;
@@ -771,6 +975,11 @@ public final class Reference {
 		this.numberVolumes = numberVolumes;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("pages")
 	public Integer getPages() {
 		return pages;
@@ -781,6 +990,11 @@ public final class Reference {
 		this.pages = pages;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("patent-states")
 	public List<String> getPatentStates() {
 		return patentStates;
@@ -791,6 +1005,11 @@ public final class Reference {
 		this.patentStates = patentStates;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("pmcid")
 	public String getPmcid() {
 		return pmcid;
@@ -801,6 +1020,11 @@ public final class Reference {
 		this.pmcid = pmcid;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("repository")
 	public URL getRepository() {
 		return repository;
@@ -819,6 +1043,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("repository-code")
 	public URL getRepositoryCode() {
 		return repositoryCode;
@@ -837,6 +1066,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("repository-artifact")
 	public URL getRepositoryArtifact() {
 		return repositoryArtifact;
@@ -855,6 +1089,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("scope")
 	public String getScope() {
 		return scope;
@@ -865,6 +1104,11 @@ public final class Reference {
 		this.scope = scope;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("section")
 	public String getSection() {
 		return section;
@@ -875,6 +1119,11 @@ public final class Reference {
 		this.section = section;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("status")
 	public String getStatus() {
 		return status;
@@ -890,6 +1139,11 @@ public final class Reference {
 		this.status = status;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("start")
 	public Integer getStart() {
 		return start;
@@ -900,6 +1154,11 @@ public final class Reference {
 		this.start = start;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("thesis-type")
 	public String getThesisType() {
 		return thesisType;
@@ -910,6 +1169,11 @@ public final class Reference {
 		this.thesisType = thesisType;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("url")
 	public URL getUrl() {
 		return url;
@@ -928,6 +1192,11 @@ public final class Reference {
 		}
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("version")
 	public String getVersion() {
 		return version;
@@ -938,6 +1207,11 @@ public final class Reference {
 		this.version = version;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("volume")
 	public Integer getVolume() {
 		return volume;
@@ -948,6 +1222,11 @@ public final class Reference {
 		this.volume = volume;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("volume-title")
 	public String getVolumeTitle() {
 		return volumeTitle;
@@ -958,6 +1237,11 @@ public final class Reference {
 		this.volumeTitle = volumeTitle;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("year")
 	public Integer getYear() {
 		return year;
@@ -968,6 +1252,11 @@ public final class Reference {
 		this.year = year;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("year-original")
 	public Integer getYearOriginal() {
 		return yearOriginal;
@@ -978,6 +1267,11 @@ public final class Reference {
 		this.yearOriginal = yearOriginal;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("conference")
 	public Entity getConference() {
 		return conference;
@@ -988,6 +1282,11 @@ public final class Reference {
 		this.conference = conference;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("authors")
 	public List<Subject> getAuthors() {
 		return authors;
@@ -998,14 +1297,25 @@ public final class Reference {
 		this.authors = authors;
 	}
 	
+	/**
+	 * @return A filtered list of authors, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonAuthors() {
 		return filterPersons(getAuthors());
 	}
 	
+	/**
+	 * @return A filtered list of authors, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityAuthors() {
 		return filterEntities(getAuthors());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("contact")
 	public List<Subject> getContact() {
 		return contact;
@@ -1016,14 +1326,25 @@ public final class Reference {
 		this.contact = contact;
 	}
 
+	/**
+	 * @return A filtered list of contacts, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonContacts() {
 		return filterPersons(getContact());
 	}
 	
+	/**
+	 * @return A filtered list of contacts, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityContacts() {
 		return filterEntities(getContact());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("database-provider")
 	public Entity getDatabaseProvider() {
 		return databaseProvider;
@@ -1034,6 +1355,11 @@ public final class Reference {
 		this.databaseProvider = databaseProvider;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("editors")
 	public List<Subject> getEditors() {
 		return editors;
@@ -1044,14 +1370,25 @@ public final class Reference {
 		this.editors = editors;
 	}
 
+	/**
+	 * @return A filtered list of editors, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonEditors() {
 		return filterPersons(getEditors());
 	}
 	
+	/**
+	 * @return A filtered list of editors, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityEditors() {
 		return filterEntities(getEditors());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("editors-series")
 	public List<Subject> getEditorsSeries() {
 		return editorsSeries;
@@ -1062,14 +1399,25 @@ public final class Reference {
 		this.editorsSeries = editorsSeries;
 	}
 
+	/**
+	 * @return A filtered list of series editors, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonEditorsSeries() {
 		return filterPersons(getEditorsSeries());
 	}
 	
+	/**
+	 * @return A filtered list of series editors, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityEditorsSeries() {
 		return filterEntities(getEditorsSeries());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("institution")
 	public Entity getInstitution() {
 		return institution;
@@ -1080,6 +1428,11 @@ public final class Reference {
 		this.institution = institution;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("location")
 	public Entity getLocation() {
 		return location;
@@ -1090,6 +1443,11 @@ public final class Reference {
 		this.location = location;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("publisher")
 	public Entity getPublisher() {
 		return publisher;
@@ -1100,6 +1458,11 @@ public final class Reference {
 		this.publisher = publisher;
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("recipients")
 	public List<Subject> getRecipients() {
 		return recipients;
@@ -1110,14 +1473,25 @@ public final class Reference {
 		this.recipients = recipients;
 	}
 
+	/**
+	 * @return A filtered list of recipients, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonRecipients() {
 		return filterPersons(getRecipients());
 	}
 	
+	/**
+	 * @return A filtered list of recipients, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityRecipients() {
 		return filterEntities(getRecipients());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("senders")
 	public List<Subject> getSenders() {
 		return senders;
@@ -1128,14 +1502,25 @@ public final class Reference {
 		this.senders = senders;
 	}
 
+	/**
+	 * @return A filtered list of senders, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonSenders() {
 		return filterPersons(getSenders());
 	}
 	
+	/**
+	 * @return A filtered list of senders, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntitySenders() {
 		return filterEntities(getSenders());
 	}
 
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
 	@JsonProperty("translators")
 	public List<Subject> getTranslators() {
 		return translators;
@@ -1146,10 +1531,16 @@ public final class Reference {
 		this.translators = translators;
 	}
 
+	/**
+	 * @return A filtered list of translators, containing only those of type {@link Person}.
+	 */
 	public List<Person> getPersonTranslators() {
 		return filterPersons(getTranslators());
 	}
 	
+	/**
+	 * @return A filtered list of translators, containing only those of type {@link Entity}.
+	 */
 	public List<Entity> getEntityTranslators() {
 		return filterEntities(getTranslators());
 	}
