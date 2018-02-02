@@ -17,7 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
- * // TODO Add description
+ * A custom deserializer for {@link Subject} objects, which
+ * can either be of type {@link Person} or of type {@link Entity}.
+ * 
+ * The deserializer decides this based on the presence of the
+ * field `name`, which is present in {@link Entity} objects but
+ * not in {@link Person} objects.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
@@ -25,7 +30,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 class SubjectDeserializer extends StdDeserializer<Subject> {
 
 	/**
-	 * 
+	 * The default serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +42,9 @@ class SubjectDeserializer extends StdDeserializer<Subject> {
 		super(vc);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.fasterxml.jackson.databind.JsonDeserializer#deserialize(com.fasterxml.jackson.core.JsonParser, com.fasterxml.jackson.databind.DeserializationContext)
+	 */
 	@Override
 	public Subject deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
