@@ -26,6 +26,34 @@ SoftwareCitationMetadata citationMetadata = reader.readFromFile(cffFile);
 InputStream cffInputStream = ...;
 citationMetadata = reader.readFromStream(cffInputStream);
 
+// Inspect/re-use
+citationMetadata.getTitle();
+citationMetadata.getVersion();
+...
+for (author : citationMetadata.getPersonAuthors()) {
+	author.getFamilyNames();
+	author.getGivenNames();
+	...
+}
+for (author : citationMetadata.getEntityAuthors()) {
+	author.getName();
+	...
+}
+for (reference : citationMetadata.getReferences()) {
+	reference.getType();
+	reference.getTitle();
+	...
+	for (author : reference.getPersonAuthors()) {
+	author.getFamilyNames();
+	author.getGivenNames();
+	...
+	}
+	for (author : reference.getEntityAuthors()) {
+		author.getName();
+		...
+	}
+}
+
 ```
 
 ## Exceptions
@@ -47,15 +75,20 @@ expecting a date.
 
 ### Maven
 
-The API is provided via Maven Central.
+The API is provided via the usual Sonatype Snapshot Repository (OSSRH) and Maven 
+Central.
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.research-software.citation</groupId>
         <artifactId>cff-reader-java</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
 
 ```
+
+## Build
+
+Build the project locally with `mvn {clean} install`.
