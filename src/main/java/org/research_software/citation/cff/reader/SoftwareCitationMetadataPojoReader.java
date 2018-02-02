@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
- * // TODO Add description
+ * An POJO-basd implementation of {@link SoftwareCitationMetadataReader}.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
@@ -89,6 +89,14 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 		return citation;
 	}
 
+	/**
+	 * Construct the mapper to use for reading the file or stream.
+	 * 
+	 * Attaches a custom deserializer of type {@link SubjectDeserializer} to
+	 * the mapper.
+	 * 
+	 * @return The constructed mapper
+	 */
 	private ObjectMapper getMapper() {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
