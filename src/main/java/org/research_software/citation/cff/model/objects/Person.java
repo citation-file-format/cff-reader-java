@@ -1,3 +1,20 @@
+/**
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ */
 package org.research_software.citation.cff.model.objects;
 
 import java.net.MalformedURLException;
@@ -8,7 +25,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * // TODO Add description
+ * Model element representing a person.
+ * 
+ * @see <https://citation-file-format.github.io/1.0.3/specifications/#/person-objects>
  * 
  * @version Citation File Format Version 1.0.3
  *
@@ -25,24 +44,26 @@ public final class Person extends Subject {
 	private String affiliation;
 
 	/**
-	 *
-	 * @param nameSuffix
-	 * @param familyNames
-	 * @param nameParticle
-	 * @param givenNames
-	 * @param affiliation
-	 * @param address 
-	 * @param city 
-	 * @param region 
-	 * @param postCode 
-	 * @param country 
-	 * @param orcid 
-	 * @param email 
-	 * @param tel 
-	 * @param fax 
-	 * @param website 
-	 * @throws CFFModelException 
-	 * @throws MalformedURLException 
+	 * Constructor for databinding.
+	 * 
+	 * @param nameSuffix The suffix of the person's name
+	 * @param familyNames The person's family names
+	 * @param nameParticle The particle of the person's name
+	 * @param givenNames The person's given names
+	 * @param affiliation The person's affiliation 
+	 * @param address The person's address  
+	 * @param city The person's address city
+	 * @param region The person's address region
+	 * @param postCode The person's address post code ("zip code")
+	 * @param country The person's address country
+	 * @param orcid The person's ORCID iD
+	 * @param email The person's email address
+	 * @param tel The person's telephone number
+	 * @param fax The person's telefax number
+	 * @param website The person's website
+	 * 
+	 * @throws CFFModelException on invalid model values
+	 * @throws MalformedURLException on malformed URLs according to Java specs
 	 */
 	public Person(
 			@JsonProperty("family-names") String familyNames,
@@ -74,6 +95,9 @@ public final class Person extends Subject {
 		this.affiliation = affiliation;
 	}
 
+	/**
+	 * @return The person's family names
+	 */
 	@JsonProperty("family-names")
 	public String getFamilyNames() {
 		return familyNames;
@@ -84,6 +108,9 @@ public final class Person extends Subject {
 		this.familyNames = familyNames;
 	}
 
+	/**
+	 * @return The person's given names
+	 */
 	@JsonProperty("given-names")
 	public String getGivenNames() {
 		return givenNames;
@@ -94,6 +121,9 @@ public final class Person extends Subject {
 		this.givenNames = givenNames;
 	}
 
+	/**
+	 * @return The particle of the person's name
+	 */
 	@JsonProperty("name-particle")
 	public String getNameParticle() {
 		return nameParticle;
@@ -104,6 +134,9 @@ public final class Person extends Subject {
 		this.nameParticle = nameParticle;
 	}
 
+	/**
+	 * @return The person's name suffix
+	 */
 	@JsonProperty("name-suffix")
 	public String getNameSuffix() {
 		return nameSuffix;
@@ -114,6 +147,9 @@ public final class Person extends Subject {
 		this.nameSuffix = nameSuffix;
 	}
 
+	/**
+	 * @return The person's affiliation
+	 */
 	@JsonProperty("affiliation")
 	public String getAffiliation() {
 		return affiliation;
