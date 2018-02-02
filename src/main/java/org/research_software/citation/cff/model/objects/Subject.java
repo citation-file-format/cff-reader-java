@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 /**
- * // TODO Add description
+ * An abstract super class for {@link Person} and {@link Entity},
+ * providing databinding for shared keys.
  * 
  * @version Citation File Format Version 1.0.3
  *
@@ -34,19 +35,21 @@ public abstract class Subject {
 	private URL website;
 
 	/**
+	 * Constructor for databinding
 	 *
-	 * @param region
-	 * @param fax
-	 * @param orcid
-	 * @param website
-	 * @param email
-	 * @param address
-	 * @param tel
-	 * @param postCode
-	 * @param country
-	 * @param city
-	 * @throws CFFModelException
-	 * @throws MalformedURLException
+	 * @param region The region where the subject is located
+	 * @param fax The telefax number of the subject
+	 * @param orcid The ORCID iD of the subject
+	 * @param website The website of the subject
+	 * @param email The email address of the subject
+	 * @param address The address of the subject
+	 * @param tel The telephone number of the subject
+	 * @param postCode The post code ("zip code") of the city where the subject is located
+	 * @param country The country where the subject is located
+	 * @param city The city where the subject is located
+	 * 
+	 * @throws CFFModelException on invalid model values
+	 * @throws MalformedURLException on malformed URLs according to Java specs
 	 */
 	public Subject(@JsonProperty("address") String address, @JsonProperty("city") String city,
 			@JsonProperty("region") String region, @JsonProperty("post-code") String postCode,
@@ -65,6 +68,9 @@ public abstract class Subject {
 		setWebsite(website);
 	}
 
+	/**
+	 * @return the address
+	 */
 	@JsonProperty("address")
 	public String getAddress() {
 		return address;
@@ -75,6 +81,9 @@ public abstract class Subject {
 		this.address = address;
 	}
 
+	/**
+	 * @return the city
+	 */
 	@JsonProperty("city")
 	public String getCity() {
 		return city;
@@ -85,6 +94,9 @@ public abstract class Subject {
 		this.city = city;
 	}
 
+	/**
+	 * @return the region
+	 */
 	@JsonProperty("region")
 	public String getRegion() {
 		return region;
@@ -95,6 +107,9 @@ public abstract class Subject {
 		this.region = region;
 	}
 
+	/**
+	 * @return the postCode
+	 */
 	@JsonProperty("post-code")
 	public String getPostCode() {
 		return postCode;
@@ -105,6 +120,9 @@ public abstract class Subject {
 		this.postCode = postCode;
 	}
 
+	/**
+	 * @return the country
+	 */
 	@JsonProperty("country")
 	public String getCountry() {
 		return country;
@@ -120,6 +138,9 @@ public abstract class Subject {
 		this.country = country;
 	}
 
+	/**
+	 * @return the orcid
+	 */
 	@JsonProperty("orcid")
 	public URL getOrcid() {
 		return orcid;
@@ -141,6 +162,9 @@ public abstract class Subject {
 		}
 	}
 
+	/**
+	 * @return the email
+	 */
 	@JsonProperty("email")
 	public String getEmail() {
 		return email;
@@ -151,6 +175,9 @@ public abstract class Subject {
 		this.email = email;
 	}
 
+	/**
+	 * @return the tel
+	 */
 	@JsonProperty("tel")
 	public String getTel() {
 		return tel;
@@ -161,6 +188,9 @@ public abstract class Subject {
 		this.tel = tel;
 	}
 
+	/**
+	 * @return the fax
+	 */
 	@JsonProperty("fax")
 	public String getFax() {
 		return fax;
@@ -171,6 +201,9 @@ public abstract class Subject {
 		this.fax = fax;
 	}
 
+	/**
+	 * @return the website
+	 */
 	@JsonProperty("website")
 	public URL getWebsite() {
 		return website;
