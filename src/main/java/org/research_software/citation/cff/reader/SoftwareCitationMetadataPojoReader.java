@@ -50,7 +50,7 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 					throw e.getCause();
 				}
 				catch (Throwable e1) {
-					// TODO
+					// Should not happen really. 
 					e1.printStackTrace();
 				}
 			}
@@ -78,7 +78,7 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 					throw e.getCause();
 				}
 				catch (Throwable e1) {
-					// TODO
+					// Should not happen really.
 					e1.printStackTrace();
 				}
 			}
