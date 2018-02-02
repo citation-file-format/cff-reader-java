@@ -44,8 +44,8 @@ for (reference : citationMetadata.getReferences()) {
 	reference.getTitle();
 	...
 	for (author : reference.getPersonAuthors()) {
-	author.getFamilyNames();
-	author.getGivenNames();
+		author.getFamilyNames();
+		author.getGivenNames();
 	...
 	}
 	for (author : reference.getEntityAuthors()) {
