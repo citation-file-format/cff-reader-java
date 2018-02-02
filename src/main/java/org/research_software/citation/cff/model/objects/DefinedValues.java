@@ -1,5 +1,19 @@
 /**
- * 
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
  */
 package org.research_software.citation.cff.model.objects;
 
@@ -9,18 +23,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * // TODO Add description
+ * Provides constants for static values for different model keys.
+ * 
+ * For an overview of the defined values, cf. the format specifications
+ * at <https://citation-file-format.github.io/>.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
 final class DefinedValues {
 
-	private DefinedValues() {
-	}
-
 	/**
-	 * 
+	 * Valid values for **reference `type`s** according to the
+	 * [format specifications](https://citation-file-format.github.io/).
 	 */
 	public final static Set<String> REFERENCE_TYPES = new HashSet<>(Arrays.asList("art", "article", "audiovisual",
 			"bill", "blog", "book", "catalogue", "conference", "conference-paper", "data", "database", "dictionary",
@@ -32,16 +47,26 @@ final class DefinedValues {
 			"website"));
 
 	/**
-	 * 
+	 * Valid values for **reference `status`** according to the
+	 * [format specifications](https://citation-file-format.github.io/).
 	 */
 	public static final Set<String> REFERENCE_STATUS = new HashSet<>(
 			Arrays.asList("in-preparation", "abstract", "submitted", "in-press", "advance-online", "preprint"));
 
 	/**
+	 * A regex for valid ORCID iDs.
 	 * 
+	 * Cf. <https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier>,
+	 * section "Expressing the ORCID iD".
 	 */
 	public static final String ORCID_URL_PATTERN = "https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{4}";
 
+	/**
+	 * Valid values for **`country`** according to the
+	 * [format specifications](https://citation-file-format.github.io/).
+	 * 
+	 * These are ISO 3166-1 alpha-2 codes.
+	 */
 	public static final Set<String> COUNTRY = new HashSet<>(Arrays.asList("AF", "AX", "AL", "DZ", "AS", "AD", "AO",
 			"AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM",
 			"BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "KY", "CF",
@@ -58,6 +83,13 @@ final class DefinedValues {
 			"TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "US", "UY", "UZ", "VU", "VE",
 			"VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"));
 
+	/**
+	 * Validates whether a value for **`language`** is valid,
+	 * i.e., is a 3-char ISO 639-3 or 2-char ISO 639-1 code.
+	 * 
+	 * @param language The language string to check for validity.
+	 * @return Whether the language string is valid.
+	 */
 	@SuppressWarnings("unchecked")
 	public static boolean isLanguageValid(String language) {
 		// Use reflection to get the correct Set
@@ -75,6 +107,10 @@ final class DefinedValues {
 		return false;
 	}
 
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_A = new HashSet<>(Arrays.asList("aa", "aaa", "aab", "aac", "aad", "aae",
 			"aaf", "aag", "aah", "aai", "aak", "aal", "aan", "aao", "aap", "aaq", "aar", "aas", "aat", "aau", "aaw",
 			"aax", "aaz", "ab", "aba", "abb", "abc", "abd", "abe", "abf", "abg", "abh", "abi", "abj", "abk", "abl",
@@ -111,6 +147,11 @@ final class DefinedValues {
 			"axg", "axk", "axl", "axm", "axx", "ay", "aya", "ayb", "ayc", "ayd", "aye", "ayg", "ayh", "ayi", "ayk",
 			"ayl", "aym", "ayn", "ayo", "ayp", "ayq", "ayr", "ays", "ayt", "ayu", "ayy", "ayz", "az", "aza", "azb",
 			"azd", "aze", "azg", "azj", "azm", "azn", "azo", "azt", "azz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_B = new HashSet<>(Arrays.asList("ba", "baa", "bab", "bac", "bae", "baf",
 			"bag", "bah", "baj", "bak", "bal", "bam", "ban", "bao", "bap", "bar", "bas", "bau", "bav", "baw", "bax",
 			"bay", "bba", "bbb", "bbc", "bbd", "bbe", "bbf", "bbg", "bbh", "bbi", "bbj", "bbk", "bbl", "bbm", "bbn",
@@ -155,6 +196,11 @@ final class DefinedValues {
 			"byj", "byk", "byl", "bym", "byn", "byo", "byp", "byq", "byr", "bys", "byt", "byv", "byw", "byx", "byz",
 			"bza", "bzb", "bzc", "bzd", "bze", "bzf", "bzg", "bzh", "bzi", "bzj", "bzk", "bzl", "bzm", "bzn", "bzo",
 			"bzp", "bzq", "bzr", "bzs", "bzt", "bzu", "bzv", "bzw", "bzx", "bzy", "bzz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_C = new HashSet<>(Arrays.asList("ca", "caa", "cab", "cac", "cad", "cae",
 			"caf", "cag", "cah", "caj", "cak", "cal", "cam", "can", "cao", "cap", "caq", "car", "cas", "cat", "cav",
 			"caw", "cax", "cay", "caz", "cbb", "cbc", "cbd", "cbg", "cbi", "cbj", "cbk", "cbl", "cbn", "cbo", "cbq",
@@ -178,6 +224,11 @@ final class DefinedValues {
 			"cua", "cub", "cuc", "cug", "cuh", "cui", "cuj", "cuk", "cul", "cuo", "cup", "cuq", "cur", "cut", "cuu",
 			"cuv", "cuw", "cux", "cv", "cvg", "cvn", "cwa", "cwb", "cwd", "cwe", "cwg", "cwt", "cy", "cya", "cyb",
 			"cym", "cyo", "czh", "czk", "czn", "czo", "czt"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_D = new HashSet<>(Arrays.asList("da", "daa", "dac", "dad", "dae", "dag",
 			"dah", "dai", "daj", "dak", "dal", "dam", "dan", "dao", "daq", "dar", "das", "dau", "dav", "daw", "dax",
 			"daz", "dba", "dbb", "dbd", "dbe", "dbf", "dbg", "dbi", "dbj", "dbl", "dbm", "dbn", "dbo", "dbp", "dbq",
@@ -199,6 +250,11 @@ final class DefinedValues {
 			"duq", "dur", "dus", "duu", "duv", "duw", "dux", "duy", "duz", "dv", "dva", "dwa", "dwr", "dws", "dwu",
 			"dww", "dwy", "dya", "dyb", "dyd", "dyg", "dyi", "dym", "dyn", "dyo", "dyu", "dyy", "dz", "dza", "dze",
 			"dzg", "dzl", "dzn", "dzo"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_E = new HashSet<>(Arrays.asList("eaa", "ebg", "ebk", "ebo", "ebr", "ebu",
 			"ecr", "ecs", "ecy", "ee", "eee", "efa", "efe", "efi", "ega", "egl", "ego", "egy", "ehu", "eip", "eit",
 			"eiv", "eja", "eka", "ekc", "eke", "ekg", "eki", "ekk", "ekl", "ekm", "eko", "ekp", "ekr", "eky", "el",
@@ -209,6 +265,11 @@ final class DefinedValues {
 			"esk", "esl", "esm", "esn", "eso", "esq", "ess", "est", "esu", "esy", "et", "etb", "etc", "eth", "etn",
 			"eto", "etr", "ets", "ett", "etu", "etx", "etz", "eu", "eus", "eve", "evh", "evn", "ewe", "ewo", "ext",
 			"eya", "eyo", "eza", "eze"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_F = new HashSet<>(Arrays.asList("fa", "faa", "fab", "fad", "faf", "fag",
 			"fah", "fai", "faj", "fak", "fal", "fam", "fan", "fao", "fap", "far", "fas", "fat", "fau", "fax", "fay",
 			"faz", "fbl", "fcs", "fer", "ff", "ffi", "ffm", "fgr", "fi", "fia", "fie", "fij", "fil", "fin", "fip",
@@ -217,6 +278,11 @@ final class DefinedValues {
 			"frd", "frk", "frm", "fro", "frp", "frq", "frr", "frs", "frt", "fry", "fse", "fsl", "fss", "fub", "fuc",
 			"fud", "fue", "fuf", "fuh", "fui", "fuj", "ful", "fum", "fun", "fuq", "fur", "fut", "fuu", "fuv", "fuy",
 			"fvr", "fwa", "fwe", "fy"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_G = new HashSet<>(Arrays.asList("ga", "gaa", "gab", "gac", "gad", "gae",
 			"gaf", "gag", "gah", "gai", "gaj", "gak", "gal", "gam", "gan", "gao", "gap", "gaq", "gar", "gas", "gat",
 			"gau", "gaw", "gax", "gay", "gaz", "gba", "gbb", "gbd", "gbe", "gbf", "gbg", "gbh", "gbi", "gbj", "gbk",
@@ -241,6 +307,11 @@ final class DefinedValues {
 			"gwa", "gwb", "gwc", "gwd", "gwe", "gwf", "gwg", "gwi", "gwj", "gwm", "gwn", "gwr", "gwt", "gwu", "gww",
 			"gwx", "gxx", "gya", "gyb", "gyd", "gye", "gyf", "gyg", "gyi", "gyl", "gym", "gyn", "gyr", "gyy", "gza",
 			"gzi", "gzn"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_H = new HashSet<>(Arrays.asList("ha", "haa", "hab", "hac", "had", "hae",
 			"haf", "hag", "hah", "hai", "haj", "hak", "hal", "ham", "han", "hao", "hap", "haq", "har", "has", "hat",
 			"hau", "hav", "haw", "hax", "hay", "haz", "hba", "hbb", "hbn", "hbo", "hbs", "hbu", "hca", "hch", "hdn",
@@ -255,6 +326,11 @@ final class DefinedValues {
 			"ht", "hti", "hto", "hts", "htu", "htx", "hu", "hub", "huc", "hud", "hue", "huf", "hug", "huh", "hui",
 			"huj", "huk", "hul", "hum", "hun", "huo", "hup", "huq", "hur", "hus", "hut", "huu", "huv", "huw", "hux",
 			"huy", "huz", "hvc", "hve", "hvk", "hvn", "hvv", "hwa", "hwc", "hwo", "hy", "hya", "hye", "hz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_I = new HashSet<>(Arrays.asList("ia", "iai", "ian", "iar", "iba", "ibb",
 			"ibd", "ibe", "ibg", "ibh", "ibl", "ibm", "ibn", "ibo", "ibr", "ibu", "iby", "ica", "ich", "icl", "icr",
 			"id", "ida", "idb", "idc", "idd", "ide", "idi", "ido", "idr", "ids", "idt", "idu", "ie", "ifa", "ifb",
@@ -268,6 +344,11 @@ final class DefinedValues {
 			"ism", "isn", "iso", "isr", "ist", "isu", "it", "ita", "itb", "itd", "ite", "iti", "itk", "itl", "itm",
 			"ito", "itr", "its", "itt", "itv", "itw", "itx", "ity", "itz", "iu", "ium", "ivb", "ivv", "iwk", "iwm",
 			"iwo", "iws", "ixc", "ixl", "iya", "iyo", "iyx", "izh", "izr", "izz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_J = new HashSet<>(Arrays.asList("ja", "jaa", "jab", "jac", "jad", "jae",
 			"jaf", "jah", "jaj", "jak", "jal", "jam", "jan", "jao", "jaq", "jas", "jat", "jau", "jav", "jax", "jay",
 			"jaz", "jbe", "jbi", "jbj", "jbk", "jbn", "jbo", "jbr", "jbt", "jbu", "jbw", "jcs", "jct", "jda", "jdg",
@@ -278,6 +359,11 @@ final class DefinedValues {
 			"jns", "job", "jod", "jog", "jor", "jos", "jow", "jpa", "jpn", "jpr", "jqr", "jra", "jrb", "jrr", "jrt",
 			"jru", "jsl", "jua", "jub", "juc", "jud", "juh", "jui", "juk", "jul", "jum", "jun", "juo", "jup", "jur",
 			"jus", "jut", "juu", "juw", "juy", "jv", "jvd", "jvn", "jwi", "jya", "jye", "jyy"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_K = new HashSet<>(Arrays.asList("ka", "kaa", "kab", "kac", "kad", "kae",
 			"kaf", "kag", "kah", "kai", "kaj", "kak", "kal", "kam", "kan", "kao", "kap", "kaq", "kas", "kat", "kau",
 			"kav", "kaw", "kax", "kay", "kaz", "kba", "kbb", "kbc", "kbd", "kbe", "kbg", "kbh", "kbi", "kbj", "kbk",
@@ -323,6 +409,11 @@ final class DefinedValues {
 			"kyi", "kyj", "kyk", "kyl", "kym", "kyn", "kyo", "kyp", "kyq", "kyr", "kys", "kyt", "kyu", "kyv", "kyw",
 			"kyx", "kyy", "kyz", "kza", "kzb", "kzc", "kzd", "kze", "kzf", "kzg", "kzi", "kzk", "kzl", "kzm", "kzn",
 			"kzo", "kzp", "kzq", "kzr", "kzs", "kzu", "kzv", "kzw", "kzx", "kzy", "kzz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_L = new HashSet<>(Arrays.asList("la", "laa", "lab", "lac", "lad", "lae",
 			"laf", "lag", "lah", "lai", "laj", "lak", "lal", "lam", "lan", "lao", "lap", "laq", "lar", "las", "lat",
 			"lau", "lav", "law", "lax", "lay", "laz", "lb", "lba", "lbb", "lbc", "lbe", "lbf", "lbg", "lbi", "lbj",
@@ -348,6 +439,11 @@ final class DefinedValues {
 			"luq", "lur", "lus", "lut", "luu", "luv", "luw", "luy", "luz", "lv", "lva", "lvk", "lvs", "lvu", "lwa",
 			"lwe", "lwg", "lwh", "lwl", "lwm", "lwo", "lwt", "lwu", "lww", "lya", "lyg", "lyn", "lzh", "lzl", "lzn",
 			"lzz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_M = new HashSet<>(Arrays.asList("maa", "mab", "mad", "mae", "maf", "mag",
 			"mah", "mai", "maj", "mak", "mal", "mam", "man", "maq", "mar", "mas", "mat", "mau", "mav", "maw", "max",
 			"maz", "mba", "mbb", "mbc", "mbd", "mbe", "mbf", "mbh", "mbi", "mbj", "mbk", "mbl", "mbm", "mbn", "mbo",
@@ -392,6 +488,11 @@ final class DefinedValues {
 			"myg", "myh", "myi", "myj", "myk", "myl", "mym", "myo", "myp", "myr", "mys", "myu", "myv", "myw", "myx",
 			"myy", "myz", "mza", "mzb", "mzc", "mzd", "mze", "mzg", "mzh", "mzi", "mzj", "mzk", "mzl", "mzm", "mzn",
 			"mzo", "mzp", "mzq", "mzr", "mzs", "mzt", "mzu", "mzv", "mzw", "mzx", "mzy", "mzz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_N = new HashSet<>(Arrays.asList("na", "naa", "nab", "nac", "nae", "naf",
 			"nag", "naj", "nak", "nal", "nam", "nan", "nao", "nap", "naq", "nar", "nas", "nat", "nau", "nav", "naw",
 			"nax", "nay", "naz", "nb", "nba", "nbb", "nbc", "nbd", "nbe", "nbg", "nbh", "nbi", "nbj", "nbk", "nbl",
@@ -427,6 +528,11 @@ final class DefinedValues {
 			"nyb", "nyc", "nyd", "nye", "nyf", "nyg", "nyh", "nyi", "nyj", "nyk", "nyl", "nym", "nyn", "nyo", "nyp",
 			"nyq", "nyr", "nys", "nyt", "nyu", "nyv", "nyw", "nyx", "nyy", "nza", "nzb", "nzi", "nzk", "nzm", "nzs",
 			"nzu", "nzy", "nzz"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_O = new HashSet<>(Arrays.asList("oaa", "oac", "oar", "oav", "obi", "obk",
 			"obl", "obm", "obo", "obr", "obt", "obu", "oc", "oca", "och", "oci", "oco", "ocu", "oda", "odk", "odt",
 			"odu", "ofo", "ofs", "ofu", "ogb", "ogc", "oge", "ogg", "ogo", "ogu", "oht", "ohu", "oia", "oin", "oj",
@@ -440,6 +546,11 @@ final class DefinedValues {
 			"osu", "osx", "ota", "otb", "otd", "ote", "oti", "otk", "otl", "otm", "otn", "otq", "otr", "ots", "ott",
 			"otu", "otw", "otx", "oty", "otz", "oua", "oub", "oue", "oui", "oum", "ovd", "owi", "owl", "oyb", "oyd",
 			"oym", "oyy", "ozm"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_P = new HashSet<>(Arrays.asList("pa", "pab", "pac", "pad", "pae", "paf",
 			"pag", "pah", "pai", "pak", "pal", "pam", "pan", "pao", "pap", "paq", "par", "pas", "pat", "pau", "pav",
 			"paw", "pax", "pay", "paz", "pbb", "pbc", "pbe", "pbf", "pbg", "pbh", "pbi", "pbl", "pbn", "pbo", "pbp",
@@ -464,11 +575,21 @@ final class DefinedValues {
 			"ptv", "ptw", "pty", "pua", "pub", "puc", "pud", "pue", "puf", "pug", "pui", "puj", "pum", "puo", "pup",
 			"puq", "pur", "pus", "put", "puu", "puw", "pux", "puy", "pwa", "pwb", "pwg", "pwi", "pwm", "pwn", "pwo",
 			"pwr", "pww", "pxm", "pye", "pym", "pyn", "pys", "pyu", "pyx", "pyy", "pzn"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_Q = new HashSet<>(Arrays.asList("qu", "qua", "qub", "quc", "qud", "que",
 			"quf", "qug", "quh", "qui", "quk", "qul", "qum", "qun", "qup", "quq", "qur", "qus", "quv", "quw", "qux",
 			"quy", "quz", "qva", "qvc", "qve", "qvh", "qvi", "qvj", "qvl", "qvm", "qvn", "qvo", "qvp", "qvs", "qvw",
 			"qvy", "qvz", "qwa", "qwc", "qwh", "qwm", "qws", "qwt", "qxa", "qxc", "qxh", "qxl", "qxn", "qxo", "qxp",
 			"qxq", "qxr", "qxs", "qxt", "qxu", "qxw", "qya", "qyp"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_R = new HashSet<>(Arrays.asList("raa", "rab", "rac", "rad", "raf", "rag",
 			"rah", "rai", "raj", "rak", "ral", "ram", "ran", "rao", "rap", "raq", "rar", "ras", "rat", "rau", "rav",
 			"raw", "rax", "ray", "raz", "rbb", "rbk", "rbl", "rbp", "rcf", "rdb", "rea", "reb", "ree", "reg", "rei",
@@ -481,6 +602,11 @@ final class DefinedValues {
 			"rsl", "rsm", "rtc", "rth", "rtm", "rts", "rtw", "ru", "rub", "ruc", "rue", "ruf", "rug", "ruh", "rui",
 			"ruk", "run", "ruo", "rup", "ruq", "rus", "rut", "ruu", "ruy", "ruz", "rw", "rwa", "rwk", "rwm", "rwo",
 			"rwr", "rxd", "rxw", "ryn", "rys", "ryu", "rzh"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_S = new HashSet<>(Arrays.asList("sa", "saa", "sab", "sac", "sad", "sae",
 			"saf", "sag", "sah", "saj", "sak", "sam", "san", "sao", "saq", "sar", "sas", "sat", "sau", "sav", "saw",
 			"sax", "say", "saz", "sba", "sbb", "sbc", "sbd", "sbe", "sbf", "sbg", "sbh", "sbi", "sbj", "sbk", "sbl",
@@ -518,6 +644,11 @@ final class DefinedValues {
 			"sxn", "sxo", "sxr", "sxs", "sxu", "sxw", "sya", "syb", "syc", "syi", "syk", "syl", "sym", "syn", "syo",
 			"syr", "sys", "syw", "syx", "syy", "sza", "szb", "szc", "szd", "sze", "szg", "szl", "szn", "szp", "szs",
 			"szv", "szw"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_T = new HashSet<>(Arrays.asList("ta", "taa", "tab", "tac", "tad", "tae",
 			"taf", "tag", "tah", "taj", "tak", "tal", "tam", "tan", "tao", "tap", "taq", "tar", "tas", "tat", "tau",
 			"tav", "taw", "tax", "tay", "taz", "tba", "tbb", "tbc", "tbd", "tbe", "tbf", "tbg", "tbh", "tbi", "tbj",
@@ -555,6 +686,11 @@ final class DefinedValues {
 			"txq", "txr", "txs", "txt", "txu", "txx", "txy", "ty", "tya", "tye", "tyh", "tyi", "tyj", "tyl", "tyn",
 			"typ", "tyr", "tys", "tyt", "tyu", "tyv", "tyx", "tyz", "tza", "tzh", "tzj", "tzl", "tzm", "tzn", "tzo",
 			"tzx"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_U = new HashSet<>(Arrays.asList("uam", "uan", "uar", "uba", "ubi", "ubl",
 			"ubr", "ubu", "uby", "uda", "ude", "udg", "udi", "udj", "udl", "udm", "udu", "ues", "ufi", "ug", "uga",
 			"ugb", "uge", "ugn", "ugo", "ugy", "uha", "uhn", "uig", "uis", "uiv", "uji", "uk", "uka", "ukg", "ukh",
@@ -565,6 +701,11 @@ final class DefinedValues {
 			"urn", "uro", "urp", "urr", "urt", "uru", "urv", "urw", "urx", "ury", "urz", "usa", "ush", "usi", "usk",
 			"usp", "usu", "uta", "ute", "utp", "utr", "utu", "uum", "uun", "uur", "uuu", "uve", "uvh", "uvl", "uwa",
 			"uya", "uz", "uzb", "uzn", "uzs"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_V = new HashSet<>(Arrays.asList("vaa", "vae", "vaf", "vag", "vah", "vai",
 			"vaj", "val", "vam", "van", "vao", "vap", "var", "vas", "vau", "vav", "vay", "vbb", "vbk", "ve", "vec",
 			"ved", "vel", "vem", "ven", "veo", "vep", "ver", "vgr", "vgt", "vi", "vic", "vid", "vie", "vif", "vig",
@@ -572,6 +713,11 @@ final class DefinedValues {
 			"vlp", "vls", "vma", "vmb", "vmc", "vmd", "vme", "vmf", "vmg", "vmh", "vmi", "vmj", "vmk", "vml", "vmm",
 			"vmp", "vmq", "vmr", "vms", "vmu", "vmv", "vmw", "vmx", "vmy", "vmz", "vnk", "vnm", "vnp", "vo", "vol",
 			"vor", "vot", "vra", "vro", "vrs", "vrt", "vsi", "vsl", "vsv", "vto", "vum", "vun", "vut", "vwa"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_W = new HashSet<>(Arrays.asList("wa", "waa", "wab", "wac", "wad", "wae",
 			"waf", "wag", "wah", "wai", "waj", "wal", "wam", "wan", "wao", "wap", "waq", "war", "was", "wat", "wau",
 			"wav", "waw", "wax", "way", "waz", "wba", "wbb", "wbe", "wbf", "wbh", "wbi", "wbj", "wbk", "wbl", "wbm",
@@ -588,6 +734,11 @@ final class DefinedValues {
 			"wsa", "wsg", "wsi", "wsk", "wsr", "wss", "wsu", "wsv", "wtf", "wth", "wti", "wtk", "wtm", "wtw", "wua",
 			"wub", "wud", "wuh", "wul", "wum", "wun", "wur", "wut", "wuu", "wuv", "wux", "wuy", "wwa", "wwb", "wwo",
 			"wwr", "www", "wxa", "wxw", "wya", "wyb", "wyi", "wym", "wyr", "wyy"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_X = new HashSet<>(Arrays.asList("xaa", "xab", "xac", "xad", "xae", "xag",
 			"xai", "xaj", "xak", "xal", "xam", "xan", "xao", "xap", "xaq", "xar", "xas", "xat", "xau", "xav", "xaw",
 			"xay", "xbb", "xbc", "xbd", "xbe", "xbg", "xbi", "xbj", "xbm", "xbn", "xbo", "xbp", "xbr", "xbw", "xby",
@@ -609,6 +760,11 @@ final class DefinedValues {
 			"xud", "xug", "xuj", "xul", "xum", "xun", "xuo", "xup", "xur", "xut", "xuu", "xve", "xvi", "xvn", "xvo",
 			"xvs", "xwa", "xwc", "xwd", "xwe", "xwg", "xwj", "xwk", "xwl", "xwo", "xwr", "xwt", "xww", "xxb", "xxk",
 			"xxm", "xxr", "xxt", "xya", "xyb", "xyj", "xyk", "xyl", "xyt", "xyy", "xzh", "xzm", "xzp"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_Y = new HashSet<>(Arrays.asList("yaa", "yab", "yac", "yad", "yae", "yaf",
 			"yag", "yah", "yai", "yaj", "yak", "yal", "yam", "yan", "yao", "yap", "yaq", "yar", "yas", "yat", "yau",
 			"yav", "yaw", "yax", "yay", "yaz", "yba", "ybb", "ybe", "ybh", "ybi", "ybj", "ybk", "ybl", "ybm", "ybn",
@@ -626,6 +782,11 @@ final class DefinedValues {
 			"yui", "yuj", "yuk", "yul", "yum", "yun", "yup", "yuq", "yur", "yut", "yuw", "yux", "yuy", "yuz", "yva",
 			"yvt", "ywa", "ywg", "ywl", "ywn", "ywq", "ywr", "ywt", "ywu", "yww", "yxa", "yxg", "yxl", "yxm", "yxu",
 			"yxy", "yyr", "yyu", "yyz", "yzg", "yzk"));
+	
+	/**
+	 * Constant set of valid languages starting with letter *_{LETTER_IN_VARIABLE_NAME}*.
+	 * Must be public as it is accessed using reflection.
+	 */
 	public final static Set<String> LANGUAGES_Z = new HashSet<>(Arrays.asList("za", "zaa", "zab", "zac", "zad", "zae",
 			"zaf", "zag", "zah", "zai", "zaj", "zak", "zal", "zam", "zao", "zap", "zaq", "zar", "zas", "zat", "zau",
 			"zav", "zaw", "zax", "zay", "zaz", "zbc", "zbe", "zbl", "zbt", "zbw", "zca", "zch", "zdj", "zea", "zeg",
