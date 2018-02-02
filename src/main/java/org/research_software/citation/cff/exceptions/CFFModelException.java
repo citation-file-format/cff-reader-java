@@ -12,7 +12,7 @@ package org.research_software.citation.cff.exceptions;
 public class CFFModelException extends IllegalArgumentException {
 
 	/**
-	 * 
+	 * The default serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +25,12 @@ public class CFFModelException extends IllegalArgumentException {
 		this(message, null);
 	}
 
+	/**
+	 * // TODO Add description
+	 * 
+	 * @param message
+	 * @param cause
+	 */
 	public CFFModelException(String message, Throwable cause) {
 		super(message, cause);
 	}
