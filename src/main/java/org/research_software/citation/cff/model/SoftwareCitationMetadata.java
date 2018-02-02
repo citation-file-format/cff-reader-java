@@ -15,7 +15,9 @@ import org.research_software.citation.cff.model.objects.Subject;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * // TODO Add description
+ * A set of software citation metadata for a specific software.
+ * 
+ * @see <https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects>
  * 
  * @version Citation File Format Version 1.0.3
  *
@@ -31,107 +33,77 @@ public interface SoftwareCitationMetadata {
 	 */
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The version of CFF used to represent the sftware citation metadata
 	 */
 	public String getCffVersion();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The message pertaining to the use of the software citation metadata
 	 */
 	public String getMessage();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The title of the software
 	 */
 	public String getTitle();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The exact version of the software
 	 */
 	public String getVersion();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The DOI of the software version
 	 */
 	public String getDoi();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The release date of the software version
 	 */
 	public LocalDate getDateReleased();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return An abstract or description of the software version
 	 */
 	public String getAbstract();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A commit hash or revision number for the version of the software
 	 */
 	public String getCommit();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A list of keywords pertaining to the software version
 	 */
 	public List<String> getKeywords();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The [SPDX short license identifier](https://spdx.org/licenses/)for the license under which the software version has been published
 	 */
 	public String getLicense();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The URL pointing to the license text if the license is not included in the [SPDX License list](https://spdx.org/licenses/)
 	 */
 	public URL getLicenseUrl();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The URL of the repository for the software version
 	 */
 	public URL getRepository();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The URL of the source code repository for the software version
 	 */
 	public URL getRepositoryCode();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The URL of the artifact repository for the software version
 	 */
 	public URL getRepositoryArtifact();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return The URL of the software version landing page or website
 	 */
 	public URL getUrl();
 	
@@ -141,49 +113,39 @@ public interface SoftwareCitationMetadata {
 	 */
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A list of authors of the software version
 	 */
 	public List<Subject> getAuthors();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A filtered list of authors of the software version, containing only those of type {@link Person}
 	 */
 	public List<Person> getPersonAuthors();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A filtered list of authors of the software version, containing only those of type {@link Entity}
 	 */
 	public List<Entity> getEntityAuthors();
 
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A list of contacts for the software version
 	 */
 	public List<Subject> getContacts();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A filtered list of contacts of the software version, containing only those of type {@link Person}
 	 */
 	public List<Person> getPersonContacts();
 	
 	/**
-	 * // TODO Add description
-	 * 
-	 * @return
+	 * @return A filtered list of contacts of the software version, containing only those of type {@link Entity}
 	 */
 	public List<Entity> getEntityContacts();
 
 
-	
+	/**
+	 * @return A list of additional references for the software version, e.g, software papers, or papers describing concepts or algorithms implemented in the software version
+	 */
 	public List<Reference> getReferences();
 	
 }
