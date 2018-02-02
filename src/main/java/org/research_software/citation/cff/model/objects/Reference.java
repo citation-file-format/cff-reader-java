@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Model element representing an additional reference to the software.
  * 
- * @see <https://citation-file-format.github.io/1.0.3/specifications/#/references-optional>
+ * @see <a href="https://citation-file-format.github.io/1.0.3/specifications/#/references-optional">https://citation-file-format.github.io/1.0.3/specifications/#/references-optional</a>
  * 
  * @version Citation File Format Version 1.0.3
  * 

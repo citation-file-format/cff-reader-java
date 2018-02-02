@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Model element representing a person.
  * 
- * @see <https://citation-file-format.github.io/1.0.3/specifications/#/person-objects>
+ * @see <a href="https://citation-file-format.github.io/1.0.3/specifications/#/person-objects">https://citation-file-format.github.io/1.0.3/specifications/#/person-objects</a>
  * 
  * @version Citation File Format Version 1.0.3
  *

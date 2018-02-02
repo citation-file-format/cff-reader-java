@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Model element representing an entity, e.g., a project group,
  * organization, publishing house, conference, or similar.
  * 
- * @see <https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects>
+ * @see <a href="https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects">https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects</a>
  * 
  * @version Citation File Format Version 1.0.3
  *

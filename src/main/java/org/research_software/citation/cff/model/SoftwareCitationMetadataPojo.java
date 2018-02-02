@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * // TODO Add description
+ * A POJO-based implementation of {@link SoftwareCitationMetadata}.
  * 
  * @version Citation File Format Version 1.0.3
  *
@@ -51,7 +51,8 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	private List<Reference> references = new ArrayList<Reference>();
 
 	/**
-	 *
+	 * Constructor for databinding.
+	 * 
 	 * @param repositoryArtifact
 	 * @param dateReleased
 	 * @param keywords
@@ -135,43 +136,55 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		this.references = references;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getCffVersion()
+	 */
 	@JsonProperty("cff-version")
 	public String getCffVersion() {
 		return cffVersion;
 	}
 
 	@JsonProperty("cff-version")
-	public void setCffVersion(String cffVersion) {
+	private void setCffVersion(String cffVersion) {
 		this.cffVersion = cffVersion;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getMessage()
+	 */
 	@JsonProperty("message")
 	public String getMessage() {
 		return message;
 	}
 
 	@JsonProperty("message")
-	public void setMessage(String message) {
+	private void setMessage(String message) {
 		this.message = message;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getAbstract()
+	 */
 	@JsonProperty("abstract")
 	public String getAbstract() {
 		return abstractString;
 	}
 
 	@JsonProperty("abstract")
-	public void setAbstract(String _abstract) {
+	private void setAbstract(String _abstract) {
 		this.abstractString = _abstract;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getAuthors()
+	 */
 	@JsonProperty("authors")
 	public List<Subject> getAuthors() {
 		return authors;
 	}
 
 	@JsonProperty("authors")
-	public void setAuthors(List<Subject> authors) {
+	private void setAuthors(List<Subject> authors) {
 		this.authors = authors;
 	}
 
@@ -197,16 +210,22 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return filterEntities(getAuthors());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getCommit()
+	 */
 	@JsonProperty("commit")
 	public String getCommit() {
 		return commit;
 	}
 
 	@JsonProperty("commit")
-	public void setCommit(String commit) {
+	private void setCommit(String commit) {
 		this.commit = commit;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getContacts()
+	 */
 	@JsonProperty("contact")
 	public List<Subject> getContacts() {
 		return contact;
@@ -234,23 +253,21 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return filterEntities(getContacts());
 	}
 
-	/**
-	 * // TODO Add description
-	 * 
-	 * @param contact
-	 */
 	@JsonProperty("contact")
-	public void setContact(List<Subject> contact) {
+	private void setContact(List<Subject> contact) {
 		this.contact = contact;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getDateReleased()
+	 */
 	@JsonProperty("date-released")
 	public LocalDate getDateReleased() {
 		return dateReleased;
 	}
 
 	@JsonProperty("date-released")
-	public void setDateReleased(String dateReleased) throws DateTimeParseException {
+	private void setDateReleased(String dateReleased) throws DateTimeParseException {
 		try {
 			this.dateReleased = LocalDate.parse(dateReleased);
 		}
@@ -263,6 +280,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getDoi()
+	 */
 	@JsonProperty("doi")
 	public String getDoi() {
 		return doi;
@@ -273,6 +293,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		this.doi = doi;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getKeywords()
+	 */
 	@JsonProperty("keywords")
 	public List<String> getKeywords() {
 		return keywords;
@@ -283,6 +306,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		this.keywords = keywords;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getLicense()
+	 */
 	@JsonProperty("license")
 	public String getLicense() {
 		return license;
@@ -293,6 +319,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		this.license = license;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getLicenseUrl()
+	 */
 	@JsonProperty("license-url")
 	public URL getLicenseUrl() {
 		return licenseUrl;
@@ -311,6 +340,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepository()
+	 */
 	@JsonProperty("repository")
 	public URL getRepository() {
 		return repository;
@@ -329,6 +361,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepositoryCode()
+	 */
 	@JsonProperty("repository-code")
 	public URL getRepositoryCode() {
 		return repositoryCode;
@@ -347,6 +382,9 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepositoryArtifact()
+	 */
 	@JsonProperty("repository-artifact")
 	public URL getRepositoryArtifact() {
 		return repositoryArtifact;
@@ -366,16 +404,22 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getTitle()
+	 */
 	@JsonProperty("title")
 	public String getTitle() {
 		return title;
 	}
 
 	@JsonProperty("title")
-	public void setTitle(String title) {
+	private void setTitle(String title) {
 		this.title = title;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getUrl()
+	 */
 	@JsonProperty("url")
 	public URL getUrl() {
 		return url;
@@ -394,23 +438,29 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getVersion()
+	 */
 	@JsonProperty("version")
 	public String getVersion() {
 		return version;
 	}
 
 	@JsonProperty("version")
-	public void setVersion(String version) {
+	private void setVersion(String version) {
 		this.version = version;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getReferences()
+	 */
 	@JsonProperty("references")
 	public List<Reference> getReferences() {
 		return references;
 	}
 
 	@JsonProperty("references")
-	public void setReferences(List<Reference> references) {
+	private void setReferences(List<Reference> references) {
 		this.references = references;
 	}
 

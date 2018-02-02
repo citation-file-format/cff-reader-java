@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /**
  * A set of software citation metadata for a specific software.
  * 
- * @see <https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects>
+ * @see <a href="https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects">https://citation-file-format.github.io/1.0.3/specifications/#/entity-objects</a>
  * 
  * @version Citation File Format Version 1.0.3
  *
@@ -33,7 +33,7 @@ public interface SoftwareCitationMetadata {
 	 */
 	
 	/**
-	 * @return The version of CFF used to represent the sftware citation metadata
+	 * @return The version of CFF used to represent the software citation metadata
 	 */
 	public String getCffVersion();
 
