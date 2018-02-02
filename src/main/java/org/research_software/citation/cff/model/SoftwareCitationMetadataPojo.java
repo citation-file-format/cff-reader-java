@@ -170,6 +170,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return authors;
 	}
 
+	@JsonProperty("authors")
+	public void setAuthors(List<Subject> authors) {
+		this.authors = authors;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -180,7 +185,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	public List<Person> getPersonAuthors() {
 		return filterPersons(getAuthors());
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -190,11 +195,6 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	@Override
 	public List<Entity> getEntityAuthors() {
 		return filterEntities(getAuthors());
-	}
-
-	@JsonProperty("authors")
-	public void setAuthors(List<Subject> authors) {
-		this.authors = authors;
 	}
 
 	@JsonProperty("commit")

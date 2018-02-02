@@ -997,6 +997,14 @@ public final class Reference {
 	private void setAuthors(List<Subject> authors) {
 		this.authors = authors;
 	}
+	
+	public List<Person> getPersonAuthors() {
+		return filterPersons(getAuthors());
+	}
+	
+	public List<Entity> getEntityAuthors() {
+		return filterEntities(getAuthors());
+	}
 
 	@JsonProperty("contact")
 	public List<Subject> getContact() {
@@ -1006,6 +1014,14 @@ public final class Reference {
 	@JsonProperty("contact")
 	private void setContact(List<Subject> contact) {
 		this.contact = contact;
+	}
+
+	public List<Person> getPersonContacts() {
+		return filterPersons(getContact());
+	}
+	
+	public List<Entity> getEntityContacts() {
+		return filterEntities(getContact());
 	}
 
 	@JsonProperty("database-provider")
@@ -1028,6 +1044,14 @@ public final class Reference {
 		this.editors = editors;
 	}
 
+	public List<Person> getPersonEditors() {
+		return filterPersons(getEditors());
+	}
+	
+	public List<Entity> getEntityEditors() {
+		return filterEntities(getEditors());
+	}
+
 	@JsonProperty("editors-series")
 	public List<Subject> getEditorsSeries() {
 		return editorsSeries;
@@ -1036,6 +1060,14 @@ public final class Reference {
 	@JsonProperty("editors-series")
 	private void setEditorsSeries(List<Subject> editorsSeries) {
 		this.editorsSeries = editorsSeries;
+	}
+
+	public List<Person> getPersonEditorsSeries() {
+		return filterPersons(getEditorsSeries());
+	}
+	
+	public List<Entity> getEntityEditorsSeries() {
+		return filterEntities(getEditorsSeries());
 	}
 
 	@JsonProperty("institution")
@@ -1078,6 +1110,14 @@ public final class Reference {
 		this.recipients = recipients;
 	}
 
+	public List<Person> getPersonRecipients() {
+		return filterPersons(getRecipients());
+	}
+	
+	public List<Entity> getEntityRecipients() {
+		return filterEntities(getRecipients());
+	}
+
 	@JsonProperty("senders")
 	public List<Subject> getSenders() {
 		return senders;
@@ -1088,6 +1128,14 @@ public final class Reference {
 		this.senders = senders;
 	}
 
+	public List<Person> getPersonSenders() {
+		return filterPersons(getSenders());
+	}
+	
+	public List<Entity> getEntitySenders() {
+		return filterEntities(getSenders());
+	}
+
 	@JsonProperty("translators")
 	public List<Subject> getTranslators() {
 		return translators;
@@ -1096,6 +1144,38 @@ public final class Reference {
 	@JsonProperty("translators")
 	private void setTranslators(List<Subject> translators) {
 		this.translators = translators;
+	}
+
+	public List<Person> getPersonTranslators() {
+		return filterPersons(getTranslators());
+	}
+	
+	public List<Entity> getEntityTranslators() {
+		return filterEntities(getTranslators());
+	}
+
+	/*
+	 * HELPER METHODS
+	 */
+
+	private List<Person> filterPersons(List<Subject> subjects) {
+		List<Person> personList = new ArrayList<>();
+		for (Subject subject : subjects) {
+			if (subject instanceof Person) {
+				personList.add((Person) subject);
+			}
+		}
+		return personList;
+	}
+
+	private List<Entity> filterEntities(List<Subject> subjects) {
+		List<Entity> entityList = new ArrayList<>();
+		for (Subject subject : subjects) {
+			if (subject instanceof Entity) {
+				entityList.add((Entity) subject);
+			}
+		}
+		return entityList;
 	}
 
 }
