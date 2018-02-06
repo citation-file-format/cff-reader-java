@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/citation-file-format/cff-reader-java.svg?branch=master)](https://travis-ci.org/citation-file-format/cff-reader-java) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java)
-[![Coverage Status](https://coveralls.io/repos/github/citation-file-format/cff-reader-java/badge.svg?branch=develop)](https://coveralls.io/github/citation-file-format/cff-reader-java?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/citation-file-format/cff-reader-java/badge.svg?branch=master)](https://coveralls.io/github/citation-file-format/cff-reader-java?branch=master)
 
 # cff-reader-java
 
