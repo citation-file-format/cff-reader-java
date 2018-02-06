@@ -22,7 +22,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
  * @author Stephan Druskat &lt;[mail@sdruskat.net](mailto:mail@sdruskat.net)&gt;
  * 
  */
-<span class="nc" id="L25">public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetadataReader {</span>
+<span class="fc" id="L25">public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetadataReader {</span>
 
 	private static final String CFF_FILE_NAME = &quot;CITATION.cff&quot;;
 
@@ -30,13 +30,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
 	 */
 	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException {
-<span class="nc bnc" id="L33" title="All 2 branches missed.">		if (!cffFile.getName().equals(CFF_FILE_NAME)) {</span>
-<span class="nc" id="L34">			throw new InvalidCFFFileNameException(&quot;File name of CFF file must be '&quot; + CFF_FILE_NAME + &quot;' (is '&quot; + cffFile.getName() + &quot;')!&quot;);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">		if (!cffFile.getName().equals(CFF_FILE_NAME)) {</span>
+<span class="fc" id="L34">			throw new InvalidCFFFileNameException(&quot;File name of CFF file must be '&quot; + CFF_FILE_NAME + &quot;' (is '&quot; + cffFile.getName() + &quot;')!&quot;);</span>
 		}
-<span class="nc" id="L36">		SoftwareCitationMetadata citation = null;</span>
+<span class="fc" id="L36">		SoftwareCitationMetadata citation = null;</span>
 		try {
-<span class="nc" id="L38">			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);</span>
-<span class="nc" id="L39">		}</span>
+<span class="fc" id="L38">			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);</span>
+		}
 <span class="nc" id="L40">		catch (JsonMappingException e) {</span>
 <span class="nc bnc" id="L41" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
 				try {
@@ -48,20 +48,20 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 				}
 			}
 		}
-<span class="nc" id="L51">		catch (Exception e) {</span>
-<span class="nc" id="L52">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-		}
-<span class="nc" id="L54">		return citation;</span>
+<span class="fc" id="L51">		catch (Exception e) {</span>
+<span class="fc" id="L52">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+<span class="pc" id="L53">		}</span>
+<span class="fc" id="L54">		return citation;</span>
 	}
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromStream(java.io.InputStream)
 	 */
 	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException {
-<span class="nc" id="L61">		SoftwareCitationMetadata citation = null;</span>
+<span class="fc" id="L61">		SoftwareCitationMetadata citation = null;</span>
 		try {
-<span class="nc" id="L63">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
-<span class="nc" id="L64">		}</span>
+<span class="fc" id="L63">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
+		}
 <span class="nc" id="L65">		catch (JsonMappingException e) {</span>
 <span class="nc bnc" id="L66" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
 				try {
@@ -73,10 +73,10 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 				}
 			}
 		}
-<span class="nc" id="L76">		catch (Exception e) {</span>
-<span class="nc" id="L77">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-		}
-<span class="nc" id="L79">		return citation;</span>
+<span class="fc" id="L76">		catch (Exception e) {</span>
+<span class="fc" id="L77">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+<span class="pc" id="L78">		}</span>
+<span class="fc" id="L79">		return citation;</span>
 	}
 
 	/**
@@ -88,13 +88,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 	 * @return The constructed mapper
 	 */
 	private ObjectMapper getMapper() {
-<span class="nc" id="L91">		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
+<span class="fc" id="L91">		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
 
-<span class="nc" id="L93">		final SimpleModule module = new SimpleModule();</span>
+<span class="fc" id="L93">		final SimpleModule module = new SimpleModule();</span>
 		// Add custom deserializer for Subject
-<span class="nc" id="L95">		module.addDeserializer(Subject.class, new SubjectDeserializer());</span>
-<span class="nc" id="L96">		mapper.registerModule(module);</span>
-<span class="nc" id="L97">		return mapper;</span>
+<span class="fc" id="L95">		module.addDeserializer(Subject.class, new SubjectDeserializer());</span>
+<span class="fc" id="L96">		mapper.registerModule(module);</span>
+<span class="fc" id="L97">		return mapper;</span>
 	}
 
 }
