@@ -1,9 +1,9 @@
 package org.research_software.citation.cff.model.objects;
 
-import java.net.MalformedURLException; 
+import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.research_software.citation.cff.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,14 +48,13 @@ public abstract class Subject {
 	 * @param country The country where the subject is located
 	 * @param city The city where the subject is located
 	 * 
-	 * @throws CFFModelException on invalid model values
-	 * @throws MalformedURLException on malformed URLs according to Java specs
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses 
 	 */
 	public Subject(@JsonProperty("address") String address, @JsonProperty("city") String city,
 			@JsonProperty("region") String region, @JsonProperty("post-code") String postCode,
 			@JsonProperty("country") String country, @JsonProperty("orcid") String orcid,
 			@JsonProperty("email") String email, @JsonProperty("tel") String tel, @JsonProperty("fax") String fax,
-			@JsonProperty("website") String website) throws MalformedURLException, CFFModelException {
+			@JsonProperty("website") String website) throws InvalidDataException {
 		this.address = address;
 		this.city = city;
 		this.region = region;
@@ -129,10 +128,10 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("country")
-	private void setCountry(String country) {
+	private void setCountry(String country) throws InvalidDataException {
 		if (country != null) {
 			if (!DefinedValues.COUNTRY.contains(country)) {
-				throw new CFFModelException("'country' value '" + country + "' is not a valid ISO 3166-1 alpha-2 code.");
+				throw new InvalidDataException("'country' value '" + country + "' is not a valid ISO 3166-1 alpha-2 code.");
 			}
 		}
 		this.country = country;
@@ -147,17 +146,17 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("orcid")
-	private void setOrcid(String orcid) throws MalformedURLException, CFFModelException {
+	private void setOrcid(String orcid) throws InvalidDataException {
 		if (orcid != null) {
 			if (!orcid.matches(DefinedValues.ORCID_URL_PATTERN)) {
-				throw new CFFModelException("ORCID id " + orcid
+				throw new InvalidDataException("ORCID id " + orcid
 						+ " is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!");
 			}
 			try {
 				this.orcid = new URL(orcid);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The ORCID URL '" + orcid + "' is not valid: " + e.getMessage());
+				throw new InvalidDataException("The ORCID URL '" + orcid + "' is not valid!", e);
 			}
 		}
 	}
@@ -210,13 +209,13 @@ public abstract class Subject {
 	}
 
 	@JsonProperty("website")
-	private void setWebsite(String website) throws MalformedURLException {
+	private void setWebsite(String website) throws InvalidDataException {
 		if (website != null) {
 			try {
 				this.website = new URL(website);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The website URL '" + orcid + "' is not valid: " + e.getMessage());
+				throw new InvalidDataException("The website URL '" + orcid + "' is not valid!", e);
 			}
 		}
 	}

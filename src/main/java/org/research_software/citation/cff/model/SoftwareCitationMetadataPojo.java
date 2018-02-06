@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.research_software.citation.cff.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
@@ -71,9 +71,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 * @param licenseUrl
 	 * @param cffVersion
 	 * @param abstractString
-	 * @throws MalformedURLException
-	 * @throws NullPointerException
-	 * @throws DateTimeParseException
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses
 	 */
 	public SoftwareCitationMetadataPojo(@JsonProperty("cff-version") String cffVersion,
 			@JsonProperty("message") String message,
@@ -93,28 +91,28 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 			@JsonProperty("repository-artifact") String repositoryArtifact, 
 			@JsonProperty("url") String url,
 			@JsonProperty("references") List<Reference> references)
-			throws MalformedURLException, DateTimeParseException, NullPointerException {
+			throws InvalidDataException {
 		super();
 		if (cffVersion == null) {
 			throw new NullPointerException("'cff-version' is a required key and must be present and not null!");
 		}
 		else if (!cffVersion.equals(CFF_VERSION)) {
-			throw new CFFModelException("'cff-version' must be " + CFF_VERSION + "!");
+			throw new InvalidDataException("'cff-version' must be " + CFF_VERSION + "!");
 		}
 		this.cffVersion = cffVersion;
 		if (message == null) {
-			throw new NullPointerException("'message' is a required key and must be present and not null!");
+			throw new InvalidDataException("'message' is a required key and must be present and not null!");
 		}
 		this.message = message;
 		this.abstractString = abstractString;
 		if (authors == null) {
-			throw new NullPointerException("'authors' is a required key and must be present and not null!");
+			throw new InvalidDataException("'authors' is a required key and must be present and not null!");
 		}
 		this.authors = authors;
 		this.commit = commit;
 		this.contact = contact;
 		if (dateReleased == null) {
-			throw new NullPointerException("'date-released' is a required key and must be present and not null!");
+			throw new InvalidDataException("'date-released' is a required key and must be present and not null!");
 		}
 		setDateReleased(dateReleased);
 		this.doi = doi;
@@ -125,12 +123,12 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		setRepositoryCode(repositoryCode);
 		setRepositoryArtifact(repositoryArtifact);
 		if (title == null) {
-			throw new NullPointerException("'title' is a required key and must be present and not null!");
+			throw new InvalidDataException("'title' is a required key and must be present and not null!");
 		}
 		this.title = title;
 		setUrl(url);
 		if (version == null) {
-			throw new NullPointerException("'version' is a required key and must be present and not null!");
+			throw new InvalidDataException("'version' is a required key and must be present and not null!");
 		}
 		this.version = version;
 		this.references = references;
@@ -267,16 +265,15 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("date-released")
-	private void setDateReleased(String dateReleased) throws DateTimeParseException {
+	private void setDateReleased(String dateReleased) throws InvalidDataException {
 		try {
 			this.dateReleased = LocalDate.parse(dateReleased);
 		}
 		catch (DateTimeParseException e) {
-			throw new DateTimeParseException("DateTimeParseException in field 'date-released'!", e.getParsedString(),
-					e.getErrorIndex(), e);
+			throw new InvalidDataException("DateTimeParseException in field 'date-released'!", e);
 		}
 		catch (NullPointerException e) {
-			throw new CFFModelException("'date-released' is null!");
+			throw new InvalidDataException("'date-released' is a required value and must not be empty or null!");
 		}
 	}
 
@@ -328,14 +325,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("license-url")
-	private void setLicenseUrl(String licenseUrl) throws MalformedURLException {
+	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
 		if (licenseUrl != null) {
 			try {
 				this.licenseUrl = new URL(licenseUrl);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The citation metadata for '" + getTitle()
-						+ "' contains an invalid URL in field 'license-url': " + e.getMessage());
+				throw new InvalidDataException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'license-url'!", e);
 			}
 		}
 	}
@@ -349,14 +346,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("repository")
-	private void setRepository(String repository) throws MalformedURLException {
+	private void setRepository(String repository) throws InvalidDataException {
 		if (repository != null) {
 			try {
 				this.repository = new URL(repository);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The citation metadata for '" + getTitle()
-						+ "' contains an invalid URL in field 'repository': " + e.getMessage());
+				throw new InvalidDataException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository'!", e);
 			}
 		}
 	}
@@ -370,14 +367,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("repository-code")
-	private void setRepositoryCode(String repositoryCode) throws MalformedURLException {
+	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
 		if (repositoryCode != null) {
 			try {
 				this.repositoryCode = new URL(repositoryCode);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The citation metadata for '" + getTitle()
-						+ "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+				throw new InvalidDataException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository-code'!", e);
 			}
 		}
 	}
@@ -391,14 +388,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("repository-artifact")
-	private void setRepositoryArtifact(String repositoryArtifact) throws MalformedURLException {
+	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
 		if (repositoryArtifact != null) {
 			try {
 				this.repositoryArtifact = new URL(repositoryArtifact);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The citation metadata for '" + getTitle()
-						+ "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
+				throw new InvalidDataException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'repository-artifact'!", e);
 
 			}
 		}
@@ -426,14 +423,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("url")
-	private void setUrl(String url) throws MalformedURLException {
+	private void setUrl(String url) throws InvalidDataException {
 		if (url != null) {
 			try {
 				this.url = new URL(url);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The citation metadata for '" + getTitle()
-						+ "' contains an invalid URL in field 'url': " + e.getMessage());
+				throw new InvalidDataException("The citation metadata for '" + getTitle()
+						+ "' contains an invalid URL in field 'url'!", e);
 			}
 		}
 	}

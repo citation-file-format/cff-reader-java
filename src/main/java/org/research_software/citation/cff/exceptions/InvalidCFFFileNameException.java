@@ -18,12 +18,16 @@
 package org.research_software.citation.cff.exceptions;
 
 /**
- * Exception thrown on model issues.
+ * Exception thrown on encountering an invalid name
+ * of the file that is being read.
+ * 
+ * Exceptions of this type may wrap the original exception
+ * for inspection by the client.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
-public class CFFModelException extends IllegalArgumentException {
+public class InvalidCFFFileNameException extends Exception {
 
 	/**
 	 * The default serial version UID.
@@ -35,18 +39,8 @@ public class CFFModelException extends IllegalArgumentException {
 	 * 
 	 * @param message The message accompanying a throw of the exception.
 	 */
-	public CFFModelException(String message) {
-		this(message, null);
-	}
-
-	/**
-	 * Constructor accepting a message and a cause for the exception.
-	 * 
-	 * @param message The message accompanying a throw of the exception.
-	 * @param cause The cause of the exception (a {@link Throwable}).
-	 */
-	public CFFModelException(String message, Throwable cause) {
-		super(message, cause);
+	public InvalidCFFFileNameException(String message) {
+		super(message);
 	}
 
 }

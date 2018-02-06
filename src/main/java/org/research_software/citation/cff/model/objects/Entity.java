@@ -17,11 +17,10 @@
  */
 package org.research_software.citation.cff.model.objects;
 
-import java.net.MalformedURLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import org.research_software.citation.cff.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -63,8 +62,7 @@ public final class Entity extends Subject {
 	 * @param fax The telefax number of the entity 
 	 * @param website The website of the entity
 	 * 
-	 * @throws CFFModelException on invalid model values
-	 * @throws MalformedURLException on malformed URLs according to Java specs
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses
 	 */
 	public Entity(@JsonProperty("name") String name, @JsonProperty("date-start") String dateStart,
 			@JsonProperty("date-end") String dateEnd, @JsonProperty("location") String location,
@@ -72,10 +70,10 @@ public final class Entity extends Subject {
 			@JsonProperty("region") String region, @JsonProperty("post-code") String postCode,
 			@JsonProperty("country") String country, @JsonProperty("orcid") String orcid,
 			@JsonProperty("email") String email, @JsonProperty("tel") String tel, @JsonProperty("fax") String fax,
-			@JsonProperty("website") String website) throws MalformedURLException, CFFModelException {
+			@JsonProperty("website") String website) throws InvalidDataException {
 		super(address, city, region, postCode, country, orcid, email, tel, fax, website);
 		if (name == null) {
-			throw new NullPointerException("'name' is a required key in entities and must be present and not null!");
+			throw new InvalidDataException("'name' is a required key in entities and must be present and not null!");
 		}
 		this.name = name;
 		setDateStart(dateStart);
@@ -105,13 +103,13 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("date-start")
-	private void setDateStart(String dateStart) {
+	private void setDateStart(String dateStart) throws InvalidDataException {
 		if (dateStart != null) {
 			try {
 				this.dateStart = LocalDate.parse(dateStart);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-start': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-start'!", e);
 			}
 		}
 	}
@@ -125,13 +123,13 @@ public final class Entity extends Subject {
 	}
 
 	@JsonProperty("date-end")
-	private void setDateEnd(String dateEnd) {
+	private void setDateEnd(String dateEnd) throws InvalidDataException {
 		if (dateEnd != null) {
 			try {
 				this.dateEnd = LocalDate.parse(dateEnd);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-end': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-end'!", e);
 			}
 		}
 	}

@@ -17,9 +17,7 @@
  */
 package org.research_software.citation.cff.model.objects;
 
-import java.net.MalformedURLException;
-
-import org.research_software.citation.cff.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,8 +60,7 @@ public final class Person extends Subject {
 	 * @param fax The person's telefax number
 	 * @param website The person's website
 	 * 
-	 * @throws CFFModelException on invalid model values
-	 * @throws MalformedURLException on malformed URLs according to Java specs
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses
 	 */
 	public Person(
 			@JsonProperty("family-names") String familyNames,
@@ -80,14 +77,14 @@ public final class Person extends Subject {
 			@JsonProperty("email") String email,
 			@JsonProperty("tel") String tel,
 			@JsonProperty("fax") String fax,
-			@JsonProperty("website") String website) throws MalformedURLException, CFFModelException {
+			@JsonProperty("website") String website) throws InvalidDataException {
 		super(address, city, region, postCode, country, orcid, email, tel, fax, website);
 		if (familyNames == null) {
-			throw new NullPointerException("'family-names' is a required key in persons and must be present and not null!");
+			throw new InvalidDataException("'family-names' is a required key in persons and must be present and not null!");
 		}
 		this.familyNames = familyNames;
 		if (givenNames == null) {
-			throw new NullPointerException("'given-names' is a required key in persons and must be present and not null!");
+			throw new InvalidDataException("'given-names' is a required key in persons and must be present and not null!");
 		}
 		this.givenNames = givenNames;
 		this.nameParticle = nameParticle;

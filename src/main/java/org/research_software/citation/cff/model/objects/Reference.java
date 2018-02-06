@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.research_software.citation.cff.exceptions.CFFModelException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -169,9 +169,7 @@ public final class Reference {
 	 * @param notes Notes pertaining to the reference
 	 * @param doi The DOI of the reference
 	 * 
-	 * @throws MalformedURLException on malformed URLs according to Java specs
-	 * @throws NullPointerException on missing required values
-	 * @throws CFFModelException on invalid model values
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses or malformed URLs
 	 */
 	public Reference(@JsonProperty("type") String type,
 			@JsonProperty("title") String title,
@@ -242,21 +240,21 @@ public final class Reference {
 			@JsonProperty("recipients") List<Subject> recipients,
 			@JsonProperty("senders") List<Subject> senders,
 			@JsonProperty("translators") List<Subject> translators)
-			throws MalformedURLException, NullPointerException, CFFModelException {
+			throws InvalidDataException {
 		super();
 		if (type == null) {
-			throw new NullPointerException("'type' is a required key in references and must be present and not null!");
+			throw new InvalidDataException("'type' is a required key in references and must be present and not null!");
 		}
 		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {
-			throw new CFFModelException("The reference type '" + type + "' is not defined.");
+			throw new InvalidDataException("The reference type '" + type + "' is not defined in the CFF format specifications.");
 		}
 		this.type = type;
 		if (title == null) {
-			throw new NullPointerException("'title' is a required key in references and must be present and not null!");
+			throw new InvalidDataException("'title' is a required key in references and must be present and not null!");
 		}
 		this.title = title;
 		if (authors == null || authors.isEmpty()) {
-			throw new NullPointerException(
+			throw new InvalidDataException(
 					"'authors' is a required key in references and must be present and not null!");
 		}
 		this.abbreviation = abbreviation;
@@ -504,13 +502,13 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-accessed")
-	private void setDateAccessed(String dateAccessed) throws CFFModelException {
+	private void setDateAccessed(String dateAccessed) throws InvalidDataException {
 		if (dateAccessed != null) {
 			try {
 				this.dateAccessed = LocalDate.parse(dateAccessed);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-accessed': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-accessed'!", e);
 			}
 		}
 	}
@@ -526,13 +524,13 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-downloaded")
-	private void setDateDownloaded(String dateDownloaded) throws CFFModelException {
+	private void setDateDownloaded(String dateDownloaded) throws InvalidDataException {
 		if (dateDownloaded != null) {
 			try {
 				this.dateDownloaded = LocalDate.parse(dateDownloaded);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-downloaded': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-downloaded'!", e);
 			}
 		}
 	}
@@ -548,13 +546,13 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-released")
-	private void setDateReleased(String dateReleased) throws CFFModelException {
+	private void setDateReleased(String dateReleased) throws InvalidDataException {
 		if (dateReleased != null) {
 			try {
 				this.dateReleased = LocalDate.parse(dateReleased);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-released': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-released'!", e);
 			}
 		}
 	}
@@ -570,13 +568,13 @@ public final class Reference {
 	}
 
 	@JsonProperty("date-published")
-	private void setDatePublished(String datePublished) throws CFFModelException {
+	private void setDatePublished(String datePublished) throws InvalidDataException {
 		if (datePublished != null) {
 			try {
 				this.datePublished = LocalDate.parse(datePublished);
 			}
 			catch (DateTimeException e) {
-				throw new CFFModelException("DateTimeException in field 'date-published': " + e.getMessage());
+				throw new InvalidDataException("DateTimeException in field 'date-published'!", e);
 			}
 		}
 	}
@@ -802,14 +800,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("languages")
-	private void setLanguages(List<String> languages) throws CFFModelException {
+	private void setLanguages(List<String> languages) throws InvalidDataException {
 		if (languages != null) {
 			for (String language : languages) {
 				if (language.length() > 3 || language.length() <= 1) {
-					throw new CFFModelException("The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
+					throw new InvalidDataException("The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
 				}
 				if (!DefinedValues.isLanguageValid(language)) {
-					throw new CFFModelException(
+					throw new InvalidDataException(
 							"The language '" + language + "' is not a valid ISO 639-1 or 639-3 code.");
 				}
 			}
@@ -843,14 +841,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("license-url")
-	private void setLicenseUrl(String licenseUrl) throws MalformedURLException {
+	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
 		if (licenseUrl != null) {
 			try {
 				this.licenseUrl = new URL(licenseUrl);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
-						+ "' contains an invalid URL in field 'license-url': " + e.getMessage());
+				throw new InvalidDataException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'license-url': " + e.getMessage(), e);
 			}
 		}
 	}
@@ -1031,14 +1029,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("repository")
-	private void setRepository(String repository) throws MalformedURLException {
+	private void setRepository(String repository) throws InvalidDataException {
 		if (repository != null) {
 			try {
 				this.repository = new URL(repository);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
-						+ "' contains an invalid URL in field 'repository': " + e.getMessage());
+				throw new InvalidDataException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository': " + e.getMessage(), e);
 			}
 		}
 	}
@@ -1054,14 +1052,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("repository-code")
-	private void setRepositoryCode(String repositoryCode) throws MalformedURLException {
+	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
 		if (repositoryCode != null) {
 			try {
 				this.repositoryCode = new URL(repositoryCode);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
-						+ "' contains an invalid URL in field 'repository-code': " + e.getMessage());
+				throw new InvalidDataException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository-code': " + e.getMessage(), e);
 			}
 		}
 	}
@@ -1077,14 +1075,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("repository-artifact")
-	private void setRepositoryArtifact(String repositoryArtifact) throws MalformedURLException {
+	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
 		if (repositoryArtifact != null) {
 			try {
 				this.repositoryArtifact = new URL(repositoryArtifact);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
-						+ "' contains an invalid URL in field 'repository-artifact': " + e.getMessage());
+				throw new InvalidDataException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'repository-artifact': " + e.getMessage(), e);
 			}
 		}
 	}
@@ -1130,10 +1128,10 @@ public final class Reference {
 	}
 
 	@JsonProperty("status")
-	private void setStatus(String status) throws CFFModelException {
+	private void setStatus(String status) throws InvalidDataException {
 		if (status != null) {
 			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {
-				throw new CFFModelException("The status '" + status + "' is not defined.");
+				throw new InvalidDataException("The status '" + status + "' is not defined in the CFF format specifications.");
 			}
 		}
 		this.status = status;
@@ -1180,14 +1178,14 @@ public final class Reference {
 	}
 
 	@JsonProperty("url")
-	private void setUrl(String url) throws MalformedURLException {
+	private void setUrl(String url) throws InvalidDataException {
 		if (url != null) {
 			try {
 				this.url = new URL(url);
 			}
 			catch (MalformedURLException e) {
-				throw new MalformedURLException("The reference '" + getTitle() + "' of type '" + getType()
-						+ "' contains an invalid URL in field 'url': " + e.getMessage());
+				throw new InvalidDataException("The reference '" + getTitle() + "' of type '" + getType()
+						+ "' contains an invalid URL in field 'url': " + e.getMessage(), e);
 			}
 		}
 	}

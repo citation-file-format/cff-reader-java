@@ -8,24 +8,21 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
-import org.research_software.citation.cff.exceptions.CFFReaderException;
+import org.research_software.citation.cff.exceptions.InvalidCFFFileNameException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
+import org.research_software.citation.cff.exceptions.ReadException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * // TODO Add description
@@ -36,7 +33,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 public class SoftwareCitationMetadataPojoReaderTest {
 
 	private static final String CITATION_FILE_PATH = "CITATION.cff";
+	private static final String INVALID_CITATION_FILE_PATH = "invalid-files/CITATION.cff";
 	private static final String CITATION_FILE_PATH_WITH_PRECEDING_SLASH = "/" + CITATION_FILE_PATH;
+	private static final String INVALID_CITATION_FILE_PATH_WITH_PRECEDING_SLASH = "/" + INVALID_CITATION_FILE_PATH;
 	private SoftwareCitationMetadataPojoReader fixture = null;
 
 	/**
@@ -52,24 +51,12 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	/**
 	 * // TODO Add description
 	 * 
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.research_software.citation.cff.reader.SoftwareCitationMetadataPojoReader#readFromFile(java.io.File)}.
-	 * @throws NullPointerException 
-	 * @throws IOException
-	 * @throws JsonMappingException
-	 * @throws JsonParseException
+	 * @throws InvalidCFFFileNameException
+	 * @throws ReadException
 	 * @throws MalformedURLException
-	 * @throws CFFReaderException 
 	 */
 	@Test
-	public final void testReadFromFile() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException, CFFReaderException {
+	public final void testReadFromFile() throws InvalidCFFFileNameException, ReadException, MalformedURLException {
 		File cffFile = new File(getClass().getClassLoader().getResource(CITATION_FILE_PATH).getFile());
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromFile(cffFile);
@@ -77,16 +64,13 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 
 	/**
-	 * Test method for
-	 * {@link org.research_software.citation.cff.reader.SoftwareCitationMetadataPojoReader#readFromStream(java.io.InputStream)}.
-	 * @throws IOException 
-	 * @throws MalformedURLException 
-	 * @throws NullPointerException 
-	 * @throws JsonMappingException 
-	 * @throws JsonParseException 
+	 * // TODO Add description
+	 * 
+	 * @throws ReadException
+	 * @throws MalformedURLException
 	 */
 	@Test
-	public final void testReadFromStream() throws JsonParseException, JsonMappingException, NullPointerException, MalformedURLException, IOException {
+	public final void testReadFromStream() throws ReadException, MalformedURLException {
 		InputStream stream = this.getClass().getResourceAsStream(CITATION_FILE_PATH_WITH_PRECEDING_SLASH);
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromStream(stream);
@@ -96,26 +80,56 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	/**
 	 * // TODO Add description
 	 * 
-	 * @throws IOException
-	 * @throws NullPointerException
-	 * @throws CFFReaderException
+	 * @throws InvalidCFFFileNameException
+	 * @throws ReadException
 	 */
-	@Test(expected = CFFReaderException.class)
-	public final void testBadCFFFileName() throws IOException, NullPointerException, CFFReaderException  {
+	@Test(expected = InvalidCFFFileNameException.class)
+	public final void testBadCFFFileName() throws InvalidCFFFileNameException, ReadException {
 		File file = new File("CITATION.xff");
 		getFixture().readFromFile(file);
 	}
 	
+	/**
+	 * // TODO Add description
+	 * 
+	 * @throws ReadException
+	 * @throws InvalidCFFFileNameException
+	 */
+	@Test(expected = ReadException.class)
+	public final void testInvalidFile() throws ReadException, InvalidCFFFileNameException {
+		File file = new File(INVALID_CITATION_FILE_PATH);
+		getFixture().readFromFile(file);
+	}
+	
+	/**
+	 * // TODO Add description
+	 * 
+	 * @throws InvalidCFFFileNameException
+	 * @throws ReadException
+	 */
+	@Test(expected = ReadException.class)
+	public final void testInvalidStream() throws InvalidCFFFileNameException, ReadException {
+		InputStream stream = this.getClass().getResourceAsStream(INVALID_CITATION_FILE_PATH_WITH_PRECEDING_SLASH);
+		getFixture().readFromStream(stream);
+	}
+	
+	/**
+	 * // TODO Add description
+	 * 
+	 * @throws InvalidDataException
+	 */
 	@Test
-	public final void testBadCFFFileNameMessage() {
+	public final void testBadCFFFileNameMessage() throws InvalidDataException {
 		File file = new File("CITATION.xff");
 		try {
 			getFixture().readFromFile(file);
 		}
-		catch (NullPointerException | IOException | CFFReaderException e) {
-			assertThat(e, instanceOf(CFFReaderException.class));
+		catch (InvalidCFFFileNameException | ReadException e) {
+			assertThat(e, instanceOf(InvalidCFFFileNameException.class));
 			assertThat(e.getMessage(), is("File name of CFF file must be 'CITATION.cff' (is 'CITATION.xff')!"));
+			return;
 		}
+		fail();
 	}
 	
 	private void test(SoftwareCitationMetadata citation) throws MalformedURLException {

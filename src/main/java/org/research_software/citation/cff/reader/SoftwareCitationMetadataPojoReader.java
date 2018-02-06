@@ -4,17 +4,13 @@
 package org.research_software.citation.cff.reader;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.time.DateTimeException;
-
-import org.research_software.citation.cff.exceptions.CFFModelException;
-import org.research_software.citation.cff.exceptions.CFFReaderException;
+import org.research_software.citation.cff.exceptions.InvalidCFFFileNameException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
+import org.research_software.citation.cff.exceptions.ReadException;
 import org.research_software.citation.cff.model.SoftwareCitationMetadata;
 import org.research_software.citation.cff.model.objects.Subject;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -33,19 +29,16 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
 	 */
-	public SoftwareCitationMetadata readFromFile(File cffFile)
-			throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException, CFFReaderException {
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException {
 		if (!cffFile.getName().equals(CFF_FILE_NAME)) {
-			throw new CFFReaderException("File name of CFF file must be '" + CFF_FILE_NAME + "' (is '" + cffFile.getName() + "')!");
+			throw new InvalidCFFFileNameException("File name of CFF file must be '" + CFF_FILE_NAME + "' (is '" + cffFile.getName() + "')!");
 		}
 		SoftwareCitationMetadata citation = null;
 		try {
 			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);
 		}
 		catch (JsonMappingException e) {
-			if (e.getCause() instanceof NullPointerException 
-					|| e.getCause() instanceof CFFModelException
-					|| e.getCause() instanceof DateTimeException) {
+			if (e.getCause() instanceof InvalidDataException) {
 				try {
 					throw e.getCause();
 				}
@@ -54,9 +47,9 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 					e1.printStackTrace();
 				}
 			}
-			else {
-				throw e;
-			}
+		}
+		catch (Exception e) {
+			throw new ReadException("The read process failed due to an exception.", e);
 		}
 		return citation;
 	}
@@ -64,27 +57,24 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromStream(java.io.InputStream)
 	 */
-	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream)
-			throws JsonParseException, JsonMappingException, IOException, NullPointerException, MalformedURLException {
+	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException {
 		SoftwareCitationMetadata citation = null;
 		try {
 			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);
 		}
 		catch (JsonMappingException e) {
-			if (e.getCause() instanceof NullPointerException 
-					|| e.getCause() instanceof CFFModelException
-					|| e.getCause() instanceof DateTimeException) {
+			if (e.getCause() instanceof InvalidDataException) {
 				try {
-					throw e.getCause();
+					throw ((InvalidDataException) e.getCause());
 				}
 				catch (Throwable e1) {
 					// Should not happen really.
 					e1.printStackTrace();
 				}
 			}
-			else {
-				throw e;
-			}
+		}
+		catch (Exception e) {
+			throw new ReadException("The read process failed due to an exception.", e);
 		}
 		return citation;
 	}
