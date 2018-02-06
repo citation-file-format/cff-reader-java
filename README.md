@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/citation-file-format/cff-reader-java.svg?branch=feature%2Fpojo-implementation)](https://travis-ci.org/citation-file-format/cff-reader-java) 
+[![Build Status](https://travis-ci.org/citation-file-format/cff-reader-java.svg?branch=master)](https://travis-ci.org/citation-file-format/cff-reader-java) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java)
 [![Coverage Status](https://coveralls.io/repos/github/citation-file-format/cff-reader-java/badge.svg?branch=develop)](https://coveralls.io/github/citation-file-format/cff-reader-java?branch=develop)
 
