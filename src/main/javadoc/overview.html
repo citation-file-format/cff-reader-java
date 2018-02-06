@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/html">
+<body>
+	<p>
+		An API for reading files in the <a
+			href="https://citation-file-format.github.io">Citation File
+			Format</a>.
+	</p>
+
+	<h1>Entry point</h1>
+
+	<p>
+		The main entry point to the API is via the <code><a href="org/research_software/citation/cff/reader/SoftwareCitationMetadataReader.html">SoftwareCitationMetadataReader</a></code>. For example:
+	</p>
+
+	<pre>
+		<code>
+SoftwareCitationMetadataReader reader = new SoftwareCitationMetadataPojoReader();
+		
+File cffFile = new File(...);
+SoftwareCitationMetadata citationMetadata = reader.readFromFile(cffFile);
+
+/* 
+ * Alternatively, e.g., for reading files from the
+ * class loader via 
+ * `this.getClass().getResourceAsStream("/CITATION.cff")`
+ */
+InputStream cffInputStream = ...;
+citationMetadata = reader.readFromStream(cffInputStream);
+
+</code>
+	</pre>
+
+	<h1>Exceptions</h1>
+	<p>Upon errors, the API will throw exceptions:</p>
+	<ul>
+		<li><code>InvalidCFFFileNameException</code> – thrown on
+			attempted reads of files with an invalid name (CFF file must be named
+			<code>CITATION.cff</code>)</li>
+		<li><code>InvalidDataException</code> – thrown on encountering
+			invalid data in the CFF file, as specified in the <a
+			href="https://citation-file-format.github.io/">Citation File
+				Format specifications</a></li>
+		<li><code>ReadException</code> – thrown on encountering errors or
+			exceptions during the read process</li>
+	</ul>
+	<p>
+		<code>InvalidDataException</code>
+		and
+		<code>ReadException</code>
+		may wrap cause exceptions.
+	</p>
+
+</body>
+</html>
