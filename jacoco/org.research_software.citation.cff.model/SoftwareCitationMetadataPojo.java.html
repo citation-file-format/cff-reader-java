@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SoftwareCitationMetadataPojo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model</a> &gt; <span class="el_source">SoftwareCitationMetadataPojo.java</span></div><h1>SoftwareCitationMetadataPojo.java</h1><pre class="source lang-java linenums">/**
- * 
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.research_software.citation.cff.model;
 
@@ -30,16 +42,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 
-<span class="fc" id="L33">	private static final Object CFF_VERSION = &quot;1.0.3&quot;;</span>
+<span class="fc" id="L45">	private static final Object CFF_VERSION = &quot;1.0.3&quot;;</span>
 	private String cffVersion;
 	private String message;
 	private String abstractString; // &quot;abstract&quot; is a reserved term
-<span class="fc" id="L37">	private List&lt;Subject&gt; authors = new ArrayList&lt;Subject&gt;();</span>
+<span class="fc" id="L49">	private List&lt;Subject&gt; authors = new ArrayList&lt;Subject&gt;();</span>
 	private String commit;
-<span class="fc" id="L39">	private List&lt;Subject&gt; contact = new ArrayList&lt;Subject&gt;();</span>
+<span class="fc" id="L51">	private List&lt;Subject&gt; contact = new ArrayList&lt;Subject&gt;();</span>
 	private LocalDate dateReleased;
 	private String doi;
-<span class="fc" id="L42">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L54">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
 	private String license;
 	private URL licenseUrl;
 	private URL repository;
@@ -48,7 +60,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	private String title;
 	private URL url;
 	private String version;
-<span class="fc" id="L51">	private List&lt;Reference&gt; references = new ArrayList&lt;Reference&gt;();</span>
+<span class="fc" id="L63">	private List&lt;Reference&gt; references = new ArrayList&lt;Reference&gt;();</span>
 
 	/**
 	 * Constructor for databinding.
@@ -92,99 +104,99 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 			@JsonProperty(&quot;url&quot;) String url,
 			@JsonProperty(&quot;references&quot;) List&lt;Reference&gt; references)
 			throws InvalidDataException {
-<span class="fc" id="L95">		super();</span>
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">		if (cffVersion == null) {</span>
-<span class="nc" id="L97">			throw new NullPointerException(&quot;'cff-version' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L107">		super();</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">		if (cffVersion == null) {</span>
+<span class="nc" id="L109">			throw new NullPointerException(&quot;'cff-version' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc bfc" id="L99" title="All 2 branches covered.">		else if (!cffVersion.equals(CFF_VERSION)) {</span>
-<span class="fc" id="L100">			throw new InvalidDataException(&quot;'cff-version' must be &quot; + CFF_VERSION + &quot;!&quot;);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">		else if (!cffVersion.equals(CFF_VERSION)) {</span>
+<span class="fc" id="L112">			throw new InvalidDataException(&quot;'cff-version' must be &quot; + CFF_VERSION + &quot;!&quot;);</span>
 		}
-<span class="fc" id="L102">		this.cffVersion = cffVersion;</span>
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">		if (message == null) {</span>
-<span class="nc" id="L104">			throw new InvalidDataException(&quot;'message' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L114">		this.cffVersion = cffVersion;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		if (message == null) {</span>
+<span class="nc" id="L116">			throw new InvalidDataException(&quot;'message' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L106">		this.message = message;</span>
-<span class="fc" id="L107">		this.abstractString = abstractString;</span>
-<span class="pc bpc" id="L108" title="1 of 2 branches missed.">		if (authors == null) {</span>
-<span class="nc" id="L109">			throw new InvalidDataException(&quot;'authors' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L118">		this.message = message;</span>
+<span class="fc" id="L119">		this.abstractString = abstractString;</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		if (authors == null) {</span>
+<span class="nc" id="L121">			throw new InvalidDataException(&quot;'authors' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L111">		this.authors = authors;</span>
-<span class="fc" id="L112">		this.commit = commit;</span>
-<span class="fc" id="L113">		this.contact = contact;</span>
-<span class="pc bpc" id="L114" title="1 of 2 branches missed.">		if (dateReleased == null) {</span>
-<span class="nc" id="L115">			throw new InvalidDataException(&quot;'date-released' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L123">		this.authors = authors;</span>
+<span class="fc" id="L124">		this.commit = commit;</span>
+<span class="fc" id="L125">		this.contact = contact;</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">		if (dateReleased == null) {</span>
+<span class="nc" id="L127">			throw new InvalidDataException(&quot;'date-released' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L117">		setDateReleased(dateReleased);</span>
-<span class="fc" id="L118">		this.doi = doi;</span>
-<span class="fc" id="L119">		this.keywords = keywords;</span>
-<span class="fc" id="L120">		this.license = license;</span>
-<span class="fc" id="L121">		setLicenseUrl(licenseUrl);</span>
-<span class="fc" id="L122">		setRepository(repository);</span>
-<span class="fc" id="L123">		setRepositoryCode(repositoryCode);</span>
-<span class="fc" id="L124">		setRepositoryArtifact(repositoryArtifact);</span>
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">		if (title == null) {</span>
-<span class="nc" id="L126">			throw new InvalidDataException(&quot;'title' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L129">		setDateReleased(dateReleased);</span>
+<span class="fc" id="L130">		this.doi = doi;</span>
+<span class="fc" id="L131">		this.keywords = keywords;</span>
+<span class="fc" id="L132">		this.license = license;</span>
+<span class="fc" id="L133">		setLicenseUrl(licenseUrl);</span>
+<span class="fc" id="L134">		setRepository(repository);</span>
+<span class="fc" id="L135">		setRepositoryCode(repositoryCode);</span>
+<span class="fc" id="L136">		setRepositoryArtifact(repositoryArtifact);</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">		if (title == null) {</span>
+<span class="nc" id="L138">			throw new InvalidDataException(&quot;'title' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L128">		this.title = title;</span>
-<span class="fc" id="L129">		setUrl(url);</span>
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">		if (version == null) {</span>
-<span class="nc" id="L131">			throw new InvalidDataException(&quot;'version' is a required key and must be present and not null!&quot;);</span>
+<span class="fc" id="L140">		this.title = title;</span>
+<span class="fc" id="L141">		setUrl(url);</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">		if (version == null) {</span>
+<span class="nc" id="L143">			throw new InvalidDataException(&quot;'version' is a required key and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L133">		this.version = version;</span>
-<span class="fc" id="L134">		this.references = references;</span>
-<span class="fc" id="L135">	}</span>
+<span class="fc" id="L145">		this.version = version;</span>
+<span class="fc" id="L146">		this.references = references;</span>
+<span class="fc" id="L147">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getCffVersion()
 	 */
 	@JsonProperty(&quot;cff-version&quot;)
 	public String getCffVersion() {
-<span class="fc" id="L142">		return cffVersion;</span>
+<span class="fc" id="L154">		return cffVersion;</span>
 	}
 
 	@JsonProperty(&quot;cff-version&quot;)
 	private void setCffVersion(String cffVersion) {
-<span class="nc" id="L147">		this.cffVersion = cffVersion;</span>
-<span class="nc" id="L148">	}</span>
+<span class="nc" id="L159">		this.cffVersion = cffVersion;</span>
+<span class="nc" id="L160">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getMessage()
 	 */
 	@JsonProperty(&quot;message&quot;)
 	public String getMessage() {
-<span class="fc" id="L155">		return message;</span>
+<span class="fc" id="L167">		return message;</span>
 	}
 
 	@JsonProperty(&quot;message&quot;)
 	private void setMessage(String message) {
-<span class="nc" id="L160">		this.message = message;</span>
-<span class="nc" id="L161">	}</span>
+<span class="nc" id="L172">		this.message = message;</span>
+<span class="nc" id="L173">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getAbstract()
 	 */
 	@JsonProperty(&quot;abstract&quot;)
 	public String getAbstract() {
-<span class="fc" id="L168">		return abstractString;</span>
+<span class="fc" id="L180">		return abstractString;</span>
 	}
 
 	@JsonProperty(&quot;abstract&quot;)
 	private void setAbstract(String _abstract) {
-<span class="nc" id="L173">		this.abstractString = _abstract;</span>
-<span class="nc" id="L174">	}</span>
+<span class="nc" id="L185">		this.abstractString = _abstract;</span>
+<span class="nc" id="L186">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getAuthors()
 	 */
 	@JsonProperty(&quot;authors&quot;)
 	public List&lt;Subject&gt; getAuthors() {
-<span class="fc" id="L181">		return authors;</span>
+<span class="fc" id="L193">		return authors;</span>
 	}
 
 	@JsonProperty(&quot;authors&quot;)
 	private void setAuthors(List&lt;Subject&gt; authors) {
-<span class="nc" id="L186">		this.authors = authors;</span>
-<span class="nc" id="L187">	}</span>
+<span class="nc" id="L198">		this.authors = authors;</span>
+<span class="nc" id="L199">	}</span>
 
 	/*
 	 * (non-Javadoc)
@@ -194,7 +206,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 */
 	@Override
 	public List&lt;Person&gt; getPersonAuthors() {
-<span class="fc" id="L197">		return filterPersons(getAuthors());</span>
+<span class="fc" id="L209">		return filterPersons(getAuthors());</span>
 	}
 	
 	/*
@@ -205,7 +217,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 */
 	@Override
 	public List&lt;Entity&gt; getEntityAuthors() {
-<span class="fc" id="L208">		return filterEntities(getAuthors());</span>
+<span class="fc" id="L220">		return filterEntities(getAuthors());</span>
 	}
 
 	/* (non-Javadoc)
@@ -213,20 +225,20 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 */
 	@JsonProperty(&quot;commit&quot;)
 	public String getCommit() {
-<span class="fc" id="L216">		return commit;</span>
+<span class="fc" id="L228">		return commit;</span>
 	}
 
 	@JsonProperty(&quot;commit&quot;)
 	private void setCommit(String commit) {
-<span class="nc" id="L221">		this.commit = commit;</span>
-<span class="nc" id="L222">	}</span>
+<span class="nc" id="L233">		this.commit = commit;</span>
+<span class="nc" id="L234">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getContacts()
 	 */
 	@JsonProperty(&quot;contact&quot;)
 	public List&lt;Subject&gt; getContacts() {
-<span class="fc" id="L229">		return contact;</span>
+<span class="fc" id="L241">		return contact;</span>
 	}
 
 	/*
@@ -237,7 +249,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 */
 	@Override
 	public List&lt;Person&gt; getPersonContacts() {
-<span class="fc" id="L240">		return filterPersons(getContacts());</span>
+<span class="fc" id="L252">		return filterPersons(getContacts());</span>
 	}
 
 	/*
@@ -248,241 +260,241 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	 */
 	@Override
 	public List&lt;Entity&gt; getEntityContacts() {
-<span class="fc" id="L251">		return filterEntities(getContacts());</span>
+<span class="fc" id="L263">		return filterEntities(getContacts());</span>
 	}
 
 	@JsonProperty(&quot;contact&quot;)
 	private void setContact(List&lt;Subject&gt; contact) {
-<span class="nc" id="L256">		this.contact = contact;</span>
-<span class="nc" id="L257">	}</span>
+<span class="nc" id="L268">		this.contact = contact;</span>
+<span class="nc" id="L269">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getDateReleased()
 	 */
 	@JsonProperty(&quot;date-released&quot;)
 	public LocalDate getDateReleased() {
-<span class="fc" id="L264">		return dateReleased;</span>
+<span class="fc" id="L276">		return dateReleased;</span>
 	}
 
 	@JsonProperty(&quot;date-released&quot;)
 	private void setDateReleased(String dateReleased) throws InvalidDataException {
 		try {
-<span class="fc" id="L270">			this.dateReleased = LocalDate.parse(dateReleased);</span>
+<span class="fc" id="L282">			this.dateReleased = LocalDate.parse(dateReleased);</span>
 		}
-<span class="nc" id="L272">		catch (DateTimeParseException e) {</span>
-<span class="nc" id="L273">			throw new InvalidDataException(&quot;DateTimeParseException in field 'date-released'!&quot;, e);</span>
+<span class="nc" id="L284">		catch (DateTimeParseException e) {</span>
+<span class="nc" id="L285">			throw new InvalidDataException(&quot;DateTimeParseException in field 'date-released'!&quot;, e);</span>
 		}
-<span class="nc" id="L275">		catch (NullPointerException e) {</span>
-<span class="nc" id="L276">			throw new InvalidDataException(&quot;'date-released' is a required value and must not be empty or null!&quot;);</span>
-<span class="fc" id="L277">		}</span>
-<span class="fc" id="L278">	}</span>
+<span class="nc" id="L287">		catch (NullPointerException e) {</span>
+<span class="nc" id="L288">			throw new InvalidDataException(&quot;'date-released' is a required value and must not be empty or null!&quot;);</span>
+<span class="fc" id="L289">		}</span>
+<span class="fc" id="L290">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getDoi()
 	 */
 	@JsonProperty(&quot;doi&quot;)
 	public String getDoi() {
-<span class="fc" id="L285">		return doi;</span>
+<span class="fc" id="L297">		return doi;</span>
 	}
 
 	@JsonProperty(&quot;doi&quot;)
 	public void setDoi(String doi) {
-<span class="nc" id="L290">		this.doi = doi;</span>
-<span class="nc" id="L291">	}</span>
+<span class="nc" id="L302">		this.doi = doi;</span>
+<span class="nc" id="L303">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getKeywords()
 	 */
 	@JsonProperty(&quot;keywords&quot;)
 	public List&lt;String&gt; getKeywords() {
-<span class="fc" id="L298">		return keywords;</span>
+<span class="fc" id="L310">		return keywords;</span>
 	}
 
 	@JsonProperty(&quot;keywords&quot;)
 	public void setKeywords(List&lt;String&gt; keywords) {
-<span class="nc" id="L303">		this.keywords = keywords;</span>
-<span class="nc" id="L304">	}</span>
+<span class="nc" id="L315">		this.keywords = keywords;</span>
+<span class="nc" id="L316">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getLicense()
 	 */
 	@JsonProperty(&quot;license&quot;)
 	public String getLicense() {
-<span class="fc" id="L311">		return license;</span>
+<span class="fc" id="L323">		return license;</span>
 	}
 
 	@JsonProperty(&quot;license&quot;)
 	public void setLicense(String license) {
-<span class="nc" id="L316">		this.license = license;</span>
-<span class="nc" id="L317">	}</span>
+<span class="nc" id="L328">		this.license = license;</span>
+<span class="nc" id="L329">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getLicenseUrl()
 	 */
 	@JsonProperty(&quot;license-url&quot;)
 	public URL getLicenseUrl() {
-<span class="fc" id="L324">		return licenseUrl;</span>
+<span class="fc" id="L336">		return licenseUrl;</span>
 	}
 
 	@JsonProperty(&quot;license-url&quot;)
 	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
-<span class="fc bfc" id="L329" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
 			try {
-<span class="fc" id="L331">				this.licenseUrl = new URL(licenseUrl);</span>
+<span class="fc" id="L343">				this.licenseUrl = new URL(licenseUrl);</span>
 			}
-<span class="nc" id="L333">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L334">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
+<span class="nc" id="L345">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L346">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
 						+ &quot;' contains an invalid URL in field 'license-url'!&quot;, e);
-<span class="fc" id="L336">			}</span>
+<span class="fc" id="L348">			}</span>
 		}
-<span class="fc" id="L338">	}</span>
+<span class="fc" id="L350">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepository()
 	 */
 	@JsonProperty(&quot;repository&quot;)
 	public URL getRepository() {
-<span class="fc" id="L345">		return repository;</span>
+<span class="fc" id="L357">		return repository;</span>
 	}
 
 	@JsonProperty(&quot;repository&quot;)
 	private void setRepository(String repository) throws InvalidDataException {
-<span class="fc bfc" id="L350" title="All 2 branches covered.">		if (repository != null) {</span>
+<span class="fc bfc" id="L362" title="All 2 branches covered.">		if (repository != null) {</span>
 			try {
-<span class="fc" id="L352">				this.repository = new URL(repository);</span>
+<span class="fc" id="L364">				this.repository = new URL(repository);</span>
 			}
-<span class="nc" id="L354">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L355">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
+<span class="nc" id="L366">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L367">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
 						+ &quot;' contains an invalid URL in field 'repository'!&quot;, e);
-<span class="fc" id="L357">			}</span>
+<span class="fc" id="L369">			}</span>
 		}
-<span class="fc" id="L359">	}</span>
+<span class="fc" id="L371">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepositoryCode()
 	 */
 	@JsonProperty(&quot;repository-code&quot;)
 	public URL getRepositoryCode() {
-<span class="fc" id="L366">		return repositoryCode;</span>
+<span class="fc" id="L378">		return repositoryCode;</span>
 	}
 
 	@JsonProperty(&quot;repository-code&quot;)
 	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
-<span class="fc bfc" id="L371" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
+<span class="fc bfc" id="L383" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
 			try {
-<span class="fc" id="L373">				this.repositoryCode = new URL(repositoryCode);</span>
+<span class="fc" id="L385">				this.repositoryCode = new URL(repositoryCode);</span>
 			}
-<span class="nc" id="L375">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L376">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
+<span class="nc" id="L387">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L388">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
 						+ &quot;' contains an invalid URL in field 'repository-code'!&quot;, e);
-<span class="fc" id="L378">			}</span>
+<span class="fc" id="L390">			}</span>
 		}
-<span class="fc" id="L380">	}</span>
+<span class="fc" id="L392">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getRepositoryArtifact()
 	 */
 	@JsonProperty(&quot;repository-artifact&quot;)
 	public URL getRepositoryArtifact() {
-<span class="fc" id="L387">		return repositoryArtifact;</span>
+<span class="fc" id="L399">		return repositoryArtifact;</span>
 	}
 
 	@JsonProperty(&quot;repository-artifact&quot;)
 	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
-<span class="fc bfc" id="L392" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
+<span class="fc bfc" id="L404" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
 			try {
-<span class="fc" id="L394">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
+<span class="fc" id="L406">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
 			}
-<span class="nc" id="L396">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L397">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
+<span class="nc" id="L408">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L409">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
 						+ &quot;' contains an invalid URL in field 'repository-artifact'!&quot;, e);
 
-<span class="fc" id="L400">			}</span>
+<span class="fc" id="L412">			}</span>
 		}
-<span class="fc" id="L402">	}</span>
+<span class="fc" id="L414">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getTitle()
 	 */
 	@JsonProperty(&quot;title&quot;)
 	public String getTitle() {
-<span class="fc" id="L409">		return title;</span>
+<span class="fc" id="L421">		return title;</span>
 	}
 
 	@JsonProperty(&quot;title&quot;)
 	private void setTitle(String title) {
-<span class="nc" id="L414">		this.title = title;</span>
-<span class="nc" id="L415">	}</span>
+<span class="nc" id="L426">		this.title = title;</span>
+<span class="nc" id="L427">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getUrl()
 	 */
 	@JsonProperty(&quot;url&quot;)
 	public URL getUrl() {
-<span class="fc" id="L422">		return url;</span>
+<span class="fc" id="L434">		return url;</span>
 	}
 
 	@JsonProperty(&quot;url&quot;)
 	private void setUrl(String url) throws InvalidDataException {
-<span class="fc bfc" id="L427" title="All 2 branches covered.">		if (url != null) {</span>
+<span class="fc bfc" id="L439" title="All 2 branches covered.">		if (url != null) {</span>
 			try {
-<span class="fc" id="L429">				this.url = new URL(url);</span>
+<span class="fc" id="L441">				this.url = new URL(url);</span>
 			}
-<span class="nc" id="L431">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L432">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
+<span class="nc" id="L443">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L444">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
 						+ &quot;' contains an invalid URL in field 'url'!&quot;, e);
-<span class="fc" id="L434">			}</span>
+<span class="fc" id="L446">			}</span>
 		}
-<span class="fc" id="L436">	}</span>
+<span class="fc" id="L448">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getVersion()
 	 */
 	@JsonProperty(&quot;version&quot;)
 	public String getVersion() {
-<span class="fc" id="L443">		return version;</span>
+<span class="fc" id="L455">		return version;</span>
 	}
 
 	@JsonProperty(&quot;version&quot;)
 	private void setVersion(String version) {
-<span class="nc" id="L448">		this.version = version;</span>
-<span class="nc" id="L449">	}</span>
+<span class="nc" id="L460">		this.version = version;</span>
+<span class="nc" id="L461">	}</span>
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#getReferences()
 	 */
 	@JsonProperty(&quot;references&quot;)
 	public List&lt;Reference&gt; getReferences() {
-<span class="fc" id="L456">		return references;</span>
+<span class="fc" id="L468">		return references;</span>
 	}
 
 	@JsonProperty(&quot;references&quot;)
 	private void setReferences(List&lt;Reference&gt; references) {
-<span class="nc" id="L461">		this.references = references;</span>
-<span class="nc" id="L462">	}</span>
+<span class="nc" id="L473">		this.references = references;</span>
+<span class="nc" id="L474">	}</span>
 
 	/*
 	 * HELPER METHODS
 	 */
 
 	private List&lt;Person&gt; filterPersons(List&lt;Subject&gt; subjects) {
-<span class="fc" id="L469">		List&lt;Person&gt; personList = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L470" title="All 2 branches covered.">		for (Subject subject : subjects) {</span>
-<span class="fc bfc" id="L471" title="All 2 branches covered.">			if (subject instanceof Person) {</span>
-<span class="fc" id="L472">				personList.add((Person) subject);</span>
+<span class="fc" id="L481">		List&lt;Person&gt; personList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L482" title="All 2 branches covered.">		for (Subject subject : subjects) {</span>
+<span class="fc bfc" id="L483" title="All 2 branches covered.">			if (subject instanceof Person) {</span>
+<span class="fc" id="L484">				personList.add((Person) subject);</span>
 			}
-<span class="fc" id="L474">		}</span>
-<span class="fc" id="L475">		return personList;</span>
+<span class="fc" id="L486">		}</span>
+<span class="fc" id="L487">		return personList;</span>
 	}
 
 	private List&lt;Entity&gt; filterEntities(List&lt;Subject&gt; subjects) {
-<span class="fc" id="L479">		List&lt;Entity&gt; entityList = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L480" title="All 2 branches covered.">		for (Subject subject : subjects) {</span>
-<span class="fc bfc" id="L481" title="All 2 branches covered.">			if (subject instanceof Entity) {</span>
-<span class="fc" id="L482">				entityList.add((Entity) subject);</span>
+<span class="fc" id="L491">		List&lt;Entity&gt; entityList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L492" title="All 2 branches covered.">		for (Subject subject : subjects) {</span>
+<span class="fc bfc" id="L493" title="All 2 branches covered.">			if (subject instanceof Entity) {</span>
+<span class="fc" id="L494">				entityList.add((Entity) subject);</span>
 			}
-<span class="fc" id="L484">		}</span>
-<span class="fc" id="L485">		return entityList;</span>
+<span class="fc" id="L496">		}</span>
+<span class="fc" id="L497">		return entityList;</span>
 	}
 
 }

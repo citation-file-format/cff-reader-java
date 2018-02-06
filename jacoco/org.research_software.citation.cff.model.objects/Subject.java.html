@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Subject.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Subject.java</span></div><h1>Subject.java</h1><pre class="source lang-java linenums">package org.research_software.citation.cff.model.objects;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Subject.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Subject.java</span></div><h1>Subject.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.research_software.citation.cff.model.objects;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,171 +69,171 @@ public abstract class Subject {
 			@JsonProperty(&quot;region&quot;) String region, @JsonProperty(&quot;post-code&quot;) String postCode,
 			@JsonProperty(&quot;country&quot;) String country, @JsonProperty(&quot;orcid&quot;) String orcid,
 			@JsonProperty(&quot;email&quot;) String email, @JsonProperty(&quot;tel&quot;) String tel, @JsonProperty(&quot;fax&quot;) String fax,
-<span class="fc" id="L57">			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {</span>
-<span class="fc" id="L58">		this.address = address;</span>
-<span class="fc" id="L59">		this.city = city;</span>
-<span class="fc" id="L60">		this.region = region;</span>
-<span class="fc" id="L61">		this.postCode = postCode;</span>
-<span class="fc" id="L62">		setCountry(country);</span>
-<span class="fc" id="L63">		setOrcid(orcid);</span>
-<span class="fc" id="L64">		this.email = email;</span>
-<span class="fc" id="L65">		this.tel = tel;</span>
-<span class="fc" id="L66">		this.fax = fax;</span>
-<span class="fc" id="L67">		setWebsite(website);</span>
-<span class="fc" id="L68">	}</span>
+<span class="fc" id="L72">			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {</span>
+<span class="fc" id="L73">		this.address = address;</span>
+<span class="fc" id="L74">		this.city = city;</span>
+<span class="fc" id="L75">		this.region = region;</span>
+<span class="fc" id="L76">		this.postCode = postCode;</span>
+<span class="fc" id="L77">		setCountry(country);</span>
+<span class="fc" id="L78">		setOrcid(orcid);</span>
+<span class="fc" id="L79">		this.email = email;</span>
+<span class="fc" id="L80">		this.tel = tel;</span>
+<span class="fc" id="L81">		this.fax = fax;</span>
+<span class="fc" id="L82">		setWebsite(website);</span>
+<span class="fc" id="L83">	}</span>
 
 	/**
 	 * @return the address
 	 */
 	@JsonProperty(&quot;address&quot;)
 	public String getAddress() {
-<span class="fc" id="L75">		return address;</span>
+<span class="fc" id="L90">		return address;</span>
 	}
 
 	@JsonProperty(&quot;address&quot;)
 	private void setAddress(String address) {
-<span class="nc" id="L80">		this.address = address;</span>
-<span class="nc" id="L81">	}</span>
+<span class="nc" id="L95">		this.address = address;</span>
+<span class="nc" id="L96">	}</span>
 
 	/**
 	 * @return the city
 	 */
 	@JsonProperty(&quot;city&quot;)
 	public String getCity() {
-<span class="fc" id="L88">		return city;</span>
+<span class="fc" id="L103">		return city;</span>
 	}
 
 	@JsonProperty(&quot;city&quot;)
 	private void setCity(String city) {
-<span class="nc" id="L93">		this.city = city;</span>
-<span class="nc" id="L94">	}</span>
+<span class="nc" id="L108">		this.city = city;</span>
+<span class="nc" id="L109">	}</span>
 
 	/**
 	 * @return the region
 	 */
 	@JsonProperty(&quot;region&quot;)
 	public String getRegion() {
-<span class="fc" id="L101">		return region;</span>
+<span class="fc" id="L116">		return region;</span>
 	}
 
 	@JsonProperty(&quot;region&quot;)
 	private void setRegion(String region) {
-<span class="nc" id="L106">		this.region = region;</span>
-<span class="nc" id="L107">	}</span>
+<span class="nc" id="L121">		this.region = region;</span>
+<span class="nc" id="L122">	}</span>
 
 	/**
 	 * @return the postCode
 	 */
 	@JsonProperty(&quot;post-code&quot;)
 	public String getPostCode() {
-<span class="fc" id="L114">		return postCode;</span>
+<span class="fc" id="L129">		return postCode;</span>
 	}
 
 	@JsonProperty(&quot;post-code&quot;)
 	private void setPostCode(String postCode) {
-<span class="nc" id="L119">		this.postCode = postCode;</span>
-<span class="nc" id="L120">	}</span>
+<span class="nc" id="L134">		this.postCode = postCode;</span>
+<span class="nc" id="L135">	}</span>
 
 	/**
 	 * @return the country
 	 */
 	@JsonProperty(&quot;country&quot;)
 	public String getCountry() {
-<span class="fc" id="L127">		return country;</span>
+<span class="fc" id="L142">		return country;</span>
 	}
 
 	@JsonProperty(&quot;country&quot;)
 	private void setCountry(String country) throws InvalidDataException {
-<span class="fc bfc" id="L132" title="All 2 branches covered.">		if (country != null) {</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">			if (!DefinedValues.COUNTRY.contains(country)) {</span>
-<span class="fc" id="L134">				throw new InvalidDataException(&quot;'country' value '&quot; + country + &quot;' is not a valid ISO 3166-1 alpha-2 code.&quot;);</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">		if (country != null) {</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">			if (!DefinedValues.COUNTRY.contains(country)) {</span>
+<span class="fc" id="L149">				throw new InvalidDataException(&quot;'country' value '&quot; + country + &quot;' is not a valid ISO 3166-1 alpha-2 code.&quot;);</span>
 			}
 		}
-<span class="fc" id="L137">		this.country = country;</span>
-<span class="fc" id="L138">	}</span>
+<span class="fc" id="L152">		this.country = country;</span>
+<span class="fc" id="L153">	}</span>
 
 	/**
 	 * @return the orcid
 	 */
 	@JsonProperty(&quot;orcid&quot;)
 	public URL getOrcid() {
-<span class="fc" id="L145">		return orcid;</span>
+<span class="fc" id="L160">		return orcid;</span>
 	}
 
 	@JsonProperty(&quot;orcid&quot;)
 	private void setOrcid(String orcid) throws InvalidDataException {
-<span class="fc bfc" id="L150" title="All 2 branches covered.">		if (orcid != null) {</span>
-<span class="fc bfc" id="L151" title="All 2 branches covered.">			if (!orcid.matches(DefinedValues.ORCID_URL_PATTERN)) {</span>
-<span class="fc" id="L152">				throw new InvalidDataException(&quot;ORCID id &quot; + orcid</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">		if (orcid != null) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">			if (!orcid.matches(DefinedValues.ORCID_URL_PATTERN)) {</span>
+<span class="fc" id="L167">				throw new InvalidDataException(&quot;ORCID id &quot; + orcid</span>
 						+ &quot; is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!&quot;);
 			}
 			try {
-<span class="fc" id="L156">				this.orcid = new URL(orcid);</span>
+<span class="fc" id="L171">				this.orcid = new URL(orcid);</span>
 			}
-<span class="nc" id="L158">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L159">				throw new InvalidDataException(&quot;The ORCID URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
-<span class="fc" id="L160">			}</span>
+<span class="nc" id="L173">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L174">				throw new InvalidDataException(&quot;The ORCID URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
+<span class="fc" id="L175">			}</span>
 		}
-<span class="fc" id="L162">	}</span>
+<span class="fc" id="L177">	}</span>
 
 	/**
 	 * @return the email
 	 */
 	@JsonProperty(&quot;email&quot;)
 	public String getEmail() {
-<span class="fc" id="L169">		return email;</span>
+<span class="fc" id="L184">		return email;</span>
 	}
 
 	@JsonProperty(&quot;email&quot;)
 	private void setEmail(String email) {
-<span class="nc" id="L174">		this.email = email;</span>
-<span class="nc" id="L175">	}</span>
+<span class="nc" id="L189">		this.email = email;</span>
+<span class="nc" id="L190">	}</span>
 
 	/**
 	 * @return the tel
 	 */
 	@JsonProperty(&quot;tel&quot;)
 	public String getTel() {
-<span class="fc" id="L182">		return tel;</span>
+<span class="fc" id="L197">		return tel;</span>
 	}
 
 	@JsonProperty(&quot;tel&quot;)
 	private void setTel(String tel) {
-<span class="nc" id="L187">		this.tel = tel;</span>
-<span class="nc" id="L188">	}</span>
+<span class="nc" id="L202">		this.tel = tel;</span>
+<span class="nc" id="L203">	}</span>
 
 	/**
 	 * @return the fax
 	 */
 	@JsonProperty(&quot;fax&quot;)
 	public String getFax() {
-<span class="fc" id="L195">		return fax;</span>
+<span class="fc" id="L210">		return fax;</span>
 	}
 
 	@JsonProperty(&quot;fax&quot;)
 	private void setFax(String fax) {
-<span class="nc" id="L200">		this.fax = fax;</span>
-<span class="nc" id="L201">	}</span>
+<span class="nc" id="L215">		this.fax = fax;</span>
+<span class="nc" id="L216">	}</span>
 
 	/**
 	 * @return the website
 	 */
 	@JsonProperty(&quot;website&quot;)
 	public URL getWebsite() {
-<span class="fc" id="L208">		return website;</span>
+<span class="fc" id="L223">		return website;</span>
 	}
 
 	@JsonProperty(&quot;website&quot;)
 	private void setWebsite(String website) throws InvalidDataException {
-<span class="fc bfc" id="L213" title="All 2 branches covered.">		if (website != null) {</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">		if (website != null) {</span>
 			try {
-<span class="fc" id="L215">				this.website = new URL(website);</span>
+<span class="fc" id="L230">				this.website = new URL(website);</span>
 			}
-<span class="nc" id="L217">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L218">				throw new InvalidDataException(&quot;The website URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
-<span class="fc" id="L219">			}</span>
+<span class="nc" id="L232">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L233">				throw new InvalidDataException(&quot;The website URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
+<span class="fc" id="L234">			}</span>
 		}
-<span class="fc" id="L221">	}</span>
+<span class="fc" id="L236">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

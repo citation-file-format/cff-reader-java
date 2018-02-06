@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InvalidDataException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.exceptions</a> &gt; <span class="el_source">InvalidDataException.java</span></div><h1>InvalidDataException.java</h1><pre class="source lang-java linenums">/**
- * 
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.research_software.citation.cff.exceptions;
 
@@ -20,8 +32,8 @@ public class InvalidDataException extends Exception {
 	 * @param message The message accompanying a throw of the exception.
 	 */
 	public InvalidDataException(String message) {
-<span class="fc" id="L23">		super(message);</span>
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L35">		super(message);</span>
+<span class="fc" id="L36">	}</span>
 
 	/**
 	 * Constructor accepting a message and a cause for the exception.
@@ -30,8 +42,8 @@ public class InvalidDataException extends Exception {
 	 * @param cause The cause of the exception (another {@link Exception}).
 	 */
 	public InvalidDataException(String message, Exception cause) {
-<span class="nc" id="L33">		super(message, cause);</span>
-<span class="nc" id="L34">	}</span>
+<span class="nc" id="L45">		super(message, cause);</span>
+<span class="nc" id="L46">	}</span>
 
 	/**
 	 * The default serial version UID.

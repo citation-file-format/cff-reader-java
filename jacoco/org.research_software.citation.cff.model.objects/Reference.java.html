@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reference.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Reference.java</span></div><h1>Reference.java</h1><pre class="source lang-java linenums">package org.research_software.citation.cff.model.objects;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reference.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Reference.java</span></div><h1>Reference.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.research_software.citation.cff.model.objects;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,8 +69,8 @@ public final class Reference {
 	private String issueDate;
 	private String issueTitle;
 	private String journal;
-<span class="fc" id="L57">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L58">	private List&lt;String&gt; languages = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L72">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L73">	private List&lt;String&gt; languages = new ArrayList&lt;String&gt;();</span>
 	private String license;
 	private URL licenseUrl;
 	private Integer locStart;
@@ -67,7 +82,7 @@ public final class Reference {
 	private String number;
 	private Integer numberVolumes;
 	private Integer pages;
-<span class="fc" id="L70">	private List&lt;String&gt; patentStates = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L85">	private List&lt;String&gt; patentStates = new ArrayList&lt;String&gt;();</span>
 	private String pmcid;
 	private URL repository;
 	private URL repositoryCode;
@@ -241,90 +256,90 @@ public final class Reference {
 			@JsonProperty(&quot;senders&quot;) List&lt;Subject&gt; senders,
 			@JsonProperty(&quot;translators&quot;) List&lt;Subject&gt; translators)
 			throws InvalidDataException {
-<span class="fc" id="L244">		super();</span>
-<span class="pc bpc" id="L245" title="1 of 2 branches missed.">		if (type == null) {</span>
-<span class="nc" id="L246">			throw new InvalidDataException(&quot;'type' is a required key in references and must be present and not null!&quot;);</span>
+<span class="fc" id="L259">		super();</span>
+<span class="pc bpc" id="L260" title="1 of 2 branches missed.">		if (type == null) {</span>
+<span class="nc" id="L261">			throw new InvalidDataException(&quot;'type' is a required key in references and must be present and not null!&quot;);</span>
 		}
-<span class="fc bfc" id="L248" title="All 2 branches covered.">		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {</span>
-<span class="fc" id="L249">			throw new InvalidDataException(&quot;The reference type '&quot; + type + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {</span>
+<span class="fc" id="L264">			throw new InvalidDataException(&quot;The reference type '&quot; + type + &quot;' is not defined in the CFF format specifications.&quot;);</span>
 		}
-<span class="fc" id="L251">		this.type = type;</span>
-<span class="pc bpc" id="L252" title="1 of 2 branches missed.">		if (title == null) {</span>
-<span class="nc" id="L253">			throw new InvalidDataException(&quot;'title' is a required key in references and must be present and not null!&quot;);</span>
+<span class="fc" id="L266">		this.type = type;</span>
+<span class="pc bpc" id="L267" title="1 of 2 branches missed.">		if (title == null) {</span>
+<span class="nc" id="L268">			throw new InvalidDataException(&quot;'title' is a required key in references and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L255">		this.title = title;</span>
-<span class="pc bpc" id="L256" title="2 of 4 branches missed.">		if (authors == null || authors.isEmpty()) {</span>
-<span class="nc" id="L257">			throw new InvalidDataException(</span>
+<span class="fc" id="L270">		this.title = title;</span>
+<span class="pc bpc" id="L271" title="2 of 4 branches missed.">		if (authors == null || authors.isEmpty()) {</span>
+<span class="nc" id="L272">			throw new InvalidDataException(</span>
 					&quot;'authors' is a required key in references and must be present and not null!&quot;);
 		}
-<span class="fc" id="L260">		this.abbreviation = abbreviation;</span>
-<span class="fc" id="L261">		this.abstractString = abstractString;</span>
-<span class="fc" id="L262">		this.collectionDoi = collectionDoi;</span>
-<span class="fc" id="L263">		this.collectionTitle = collectionTitle;</span>
-<span class="fc" id="L264">		this.collectionType = collectionType;</span>
-<span class="fc" id="L265">		this.commit = commit;</span>
-<span class="fc" id="L266">		this.copyright = copyright;</span>
-<span class="fc" id="L267">		this.dataType = dataType;</span>
-<span class="fc" id="L268">		this.database = database;</span>
-<span class="fc" id="L269">		setDateAccessed(dateAccessed);</span>
-<span class="fc" id="L270">		setDateDownloaded(dateDownloaded);</span>
-<span class="fc" id="L271">		setDateReleased(dateReleased);</span>
-<span class="fc" id="L272">		setDatePublished(datePublished);</span>
-<span class="fc" id="L273">		this.department = department;</span>
-<span class="fc" id="L274">		this.doi = doi;</span>
-<span class="fc" id="L275">		this.edition = edition;</span>
-<span class="fc" id="L276">		this.end = end;</span>
-<span class="fc" id="L277">		this.entry = entry;</span>
-<span class="fc" id="L278">		this.filename = filename;</span>
-<span class="fc" id="L279">		this.format = format;</span>
-<span class="fc" id="L280">		this.isbn = isbn;</span>
-<span class="fc" id="L281">		this.issn = issn;</span>
-<span class="fc" id="L282">		this.issue = issue;</span>
-<span class="fc" id="L283">		this.issueDate = issueDate;</span>
-<span class="fc" id="L284">		this.issueTitle = issueTitle;</span>
-<span class="fc" id="L285">		this.journal = journal;</span>
-<span class="fc" id="L286">		this.keywords = keywords;</span>
-<span class="fc" id="L287">		setLanguages(languages);</span>
-<span class="fc" id="L288">		this.license = license;</span>
-<span class="fc" id="L289">		setLicenseUrl(licenseUrl);</span>
-<span class="fc" id="L290">		this.locStart = locStart;</span>
-<span class="fc" id="L291">		this.locEnd = locEnd;</span>
-<span class="fc" id="L292">		this.medium = medium;</span>
-<span class="fc" id="L293">		this.month = month;</span>
-<span class="fc" id="L294">		this.nihmsid = nihmsid;</span>
-<span class="fc" id="L295">		this.notes = notes;</span>
-<span class="fc" id="L296">		this.number = number;</span>
-<span class="fc" id="L297">		this.numberVolumes = numberVolumes;</span>
-<span class="fc" id="L298">		this.pages = pages;</span>
-<span class="fc" id="L299">		this.patentStates = patentStates;</span>
-<span class="fc" id="L300">		this.pmcid = pmcid;</span>
-<span class="fc" id="L301">		setRepository(repository);</span>
-<span class="fc" id="L302">		setRepositoryCode(repositoryCode);</span>
-<span class="fc" id="L303">		setRepositoryArtifact(repositoryArtifact);</span>
-<span class="fc" id="L304">		this.scope = scope;</span>
-<span class="fc" id="L305">		this.section = section;</span>
-<span class="fc" id="L306">		setStatus(status);</span>
-<span class="fc" id="L307">		this.start = start;</span>
-<span class="fc" id="L308">		this.thesisType = thesisType;</span>
-<span class="fc" id="L309">		setUrl(url);</span>
-<span class="fc" id="L310">		this.version = version;</span>
-<span class="fc" id="L311">		this.volume = volume;</span>
-<span class="fc" id="L312">		this.volumeTitle = volumeTitle;</span>
-<span class="fc" id="L313">		this.year = year;</span>
-<span class="fc" id="L314">		this.yearOriginal = yearOriginal;</span>
-<span class="fc" id="L315">		this.conference = conference;</span>
-<span class="fc" id="L316">		this.authors = authors;</span>
-<span class="fc" id="L317">		this.contact = contact;</span>
-<span class="fc" id="L318">		this.databaseProvider = databaseProvider;</span>
-<span class="fc" id="L319">		this.editors = editors;</span>
-<span class="fc" id="L320">		this.editorsSeries = editorsSeries;</span>
-<span class="fc" id="L321">		this.institution = institution;</span>
-<span class="fc" id="L322">		this.location = location;</span>
-<span class="fc" id="L323">		this.publisher = publisher;</span>
-<span class="fc" id="L324">		this.recipients = recipients;</span>
-<span class="fc" id="L325">		this.senders = senders;</span>
-<span class="fc" id="L326">		this.translators = translators;</span>
-<span class="fc" id="L327">	}</span>
+<span class="fc" id="L275">		this.abbreviation = abbreviation;</span>
+<span class="fc" id="L276">		this.abstractString = abstractString;</span>
+<span class="fc" id="L277">		this.collectionDoi = collectionDoi;</span>
+<span class="fc" id="L278">		this.collectionTitle = collectionTitle;</span>
+<span class="fc" id="L279">		this.collectionType = collectionType;</span>
+<span class="fc" id="L280">		this.commit = commit;</span>
+<span class="fc" id="L281">		this.copyright = copyright;</span>
+<span class="fc" id="L282">		this.dataType = dataType;</span>
+<span class="fc" id="L283">		this.database = database;</span>
+<span class="fc" id="L284">		setDateAccessed(dateAccessed);</span>
+<span class="fc" id="L285">		setDateDownloaded(dateDownloaded);</span>
+<span class="fc" id="L286">		setDateReleased(dateReleased);</span>
+<span class="fc" id="L287">		setDatePublished(datePublished);</span>
+<span class="fc" id="L288">		this.department = department;</span>
+<span class="fc" id="L289">		this.doi = doi;</span>
+<span class="fc" id="L290">		this.edition = edition;</span>
+<span class="fc" id="L291">		this.end = end;</span>
+<span class="fc" id="L292">		this.entry = entry;</span>
+<span class="fc" id="L293">		this.filename = filename;</span>
+<span class="fc" id="L294">		this.format = format;</span>
+<span class="fc" id="L295">		this.isbn = isbn;</span>
+<span class="fc" id="L296">		this.issn = issn;</span>
+<span class="fc" id="L297">		this.issue = issue;</span>
+<span class="fc" id="L298">		this.issueDate = issueDate;</span>
+<span class="fc" id="L299">		this.issueTitle = issueTitle;</span>
+<span class="fc" id="L300">		this.journal = journal;</span>
+<span class="fc" id="L301">		this.keywords = keywords;</span>
+<span class="fc" id="L302">		setLanguages(languages);</span>
+<span class="fc" id="L303">		this.license = license;</span>
+<span class="fc" id="L304">		setLicenseUrl(licenseUrl);</span>
+<span class="fc" id="L305">		this.locStart = locStart;</span>
+<span class="fc" id="L306">		this.locEnd = locEnd;</span>
+<span class="fc" id="L307">		this.medium = medium;</span>
+<span class="fc" id="L308">		this.month = month;</span>
+<span class="fc" id="L309">		this.nihmsid = nihmsid;</span>
+<span class="fc" id="L310">		this.notes = notes;</span>
+<span class="fc" id="L311">		this.number = number;</span>
+<span class="fc" id="L312">		this.numberVolumes = numberVolumes;</span>
+<span class="fc" id="L313">		this.pages = pages;</span>
+<span class="fc" id="L314">		this.patentStates = patentStates;</span>
+<span class="fc" id="L315">		this.pmcid = pmcid;</span>
+<span class="fc" id="L316">		setRepository(repository);</span>
+<span class="fc" id="L317">		setRepositoryCode(repositoryCode);</span>
+<span class="fc" id="L318">		setRepositoryArtifact(repositoryArtifact);</span>
+<span class="fc" id="L319">		this.scope = scope;</span>
+<span class="fc" id="L320">		this.section = section;</span>
+<span class="fc" id="L321">		setStatus(status);</span>
+<span class="fc" id="L322">		this.start = start;</span>
+<span class="fc" id="L323">		this.thesisType = thesisType;</span>
+<span class="fc" id="L324">		setUrl(url);</span>
+<span class="fc" id="L325">		this.version = version;</span>
+<span class="fc" id="L326">		this.volume = volume;</span>
+<span class="fc" id="L327">		this.volumeTitle = volumeTitle;</span>
+<span class="fc" id="L328">		this.year = year;</span>
+<span class="fc" id="L329">		this.yearOriginal = yearOriginal;</span>
+<span class="fc" id="L330">		this.conference = conference;</span>
+<span class="fc" id="L331">		this.authors = authors;</span>
+<span class="fc" id="L332">		this.contact = contact;</span>
+<span class="fc" id="L333">		this.databaseProvider = databaseProvider;</span>
+<span class="fc" id="L334">		this.editors = editors;</span>
+<span class="fc" id="L335">		this.editorsSeries = editorsSeries;</span>
+<span class="fc" id="L336">		this.institution = institution;</span>
+<span class="fc" id="L337">		this.location = location;</span>
+<span class="fc" id="L338">		this.publisher = publisher;</span>
+<span class="fc" id="L339">		this.recipients = recipients;</span>
+<span class="fc" id="L340">		this.senders = senders;</span>
+<span class="fc" id="L341">		this.translators = translators;</span>
+<span class="fc" id="L342">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -333,13 +348,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;type&quot;)
 	public String getType() {
-<span class="fc" id="L336">		return type;</span>
+<span class="fc" id="L351">		return type;</span>
 	}
 
 	@JsonProperty(&quot;type&quot;)
 	private void setType(String type) {
-<span class="nc" id="L341">		this.type = type;</span>
-<span class="nc" id="L342">	}</span>
+<span class="nc" id="L356">		this.type = type;</span>
+<span class="nc" id="L357">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -348,13 +363,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;title&quot;)
 	public String getTitle() {
-<span class="fc" id="L351">		return title;</span>
+<span class="fc" id="L366">		return title;</span>
 	}
 
 	@JsonProperty(&quot;title&quot;)
 	private void setTitle(String title) {
-<span class="nc" id="L356">		this.title = title;</span>
-<span class="nc" id="L357">	}</span>
+<span class="nc" id="L371">		this.title = title;</span>
+<span class="nc" id="L372">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -363,13 +378,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;abbreviation&quot;)
 	public String getAbbreviation() {
-<span class="fc" id="L366">		return abbreviation;</span>
+<span class="fc" id="L381">		return abbreviation;</span>
 	}
 
 	@JsonProperty(&quot;abbreviation&quot;)
 	private void setAbbreviation(String abbreviation) {
-<span class="nc" id="L371">		this.abbreviation = abbreviation;</span>
-<span class="nc" id="L372">	}</span>
+<span class="nc" id="L386">		this.abbreviation = abbreviation;</span>
+<span class="nc" id="L387">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -378,13 +393,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;abstract&quot;)
 	public String getAbstract() {
-<span class="fc" id="L381">		return abstractString;</span>
+<span class="fc" id="L396">		return abstractString;</span>
 	}
 
 	@JsonProperty(&quot;abstract&quot;)
 	private void setAbstract(String _abstract) {
-<span class="nc" id="L386">		this.abstractString = _abstract;</span>
-<span class="nc" id="L387">	}</span>
+<span class="nc" id="L401">		this.abstractString = _abstract;</span>
+<span class="nc" id="L402">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -393,13 +408,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-doi&quot;)
 	public String getCollectionDoi() {
-<span class="fc" id="L396">		return collectionDoi;</span>
+<span class="fc" id="L411">		return collectionDoi;</span>
 	}
 
 	@JsonProperty(&quot;collection-doi&quot;)
 	private void setCollectionDoi(String collectionDoi) {
-<span class="nc" id="L401">		this.collectionDoi = collectionDoi;</span>
-<span class="nc" id="L402">	}</span>
+<span class="nc" id="L416">		this.collectionDoi = collectionDoi;</span>
+<span class="nc" id="L417">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -408,13 +423,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-title&quot;)
 	public String getCollectionTitle() {
-<span class="fc" id="L411">		return collectionTitle;</span>
+<span class="fc" id="L426">		return collectionTitle;</span>
 	}
 
 	@JsonProperty(&quot;collection-title&quot;)
 	private void setCollectionTitle(String collectionTitle) {
-<span class="nc" id="L416">		this.collectionTitle = collectionTitle;</span>
-<span class="nc" id="L417">	}</span>
+<span class="nc" id="L431">		this.collectionTitle = collectionTitle;</span>
+<span class="nc" id="L432">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -423,13 +438,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-type&quot;)
 	public String getCollectionType() {
-<span class="fc" id="L426">		return collectionType;</span>
+<span class="fc" id="L441">		return collectionType;</span>
 	}
 
 	@JsonProperty(&quot;collection-type&quot;)
 	private void setCollectionType(String collectionType) {
-<span class="nc" id="L431">		this.collectionType = collectionType;</span>
-<span class="nc" id="L432">	}</span>
+<span class="nc" id="L446">		this.collectionType = collectionType;</span>
+<span class="nc" id="L447">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -438,13 +453,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;commit&quot;)
 	public String getCommit() {
-<span class="fc" id="L441">		return commit;</span>
+<span class="fc" id="L456">		return commit;</span>
 	}
 
 	@JsonProperty(&quot;commit&quot;)
 	private void setCommit(String commit) {
-<span class="nc" id="L446">		this.commit = commit;</span>
-<span class="nc" id="L447">	}</span>
+<span class="nc" id="L461">		this.commit = commit;</span>
+<span class="nc" id="L462">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -453,13 +468,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;copyright&quot;)
 	public String getCopyright() {
-<span class="fc" id="L456">		return copyright;</span>
+<span class="fc" id="L471">		return copyright;</span>
 	}
 
 	@JsonProperty(&quot;copyright&quot;)
 	private void setCopyright(String copyright) {
-<span class="nc" id="L461">		this.copyright = copyright;</span>
-<span class="nc" id="L462">	}</span>
+<span class="nc" id="L476">		this.copyright = copyright;</span>
+<span class="nc" id="L477">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -468,13 +483,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;data-type&quot;)
 	public String getDataType() {
-<span class="fc" id="L471">		return dataType;</span>
+<span class="fc" id="L486">		return dataType;</span>
 	}
 
 	@JsonProperty(&quot;data-type&quot;)
 	private void setDataType(String dataType) {
-<span class="nc" id="L476">		this.dataType = dataType;</span>
-<span class="nc" id="L477">	}</span>
+<span class="nc" id="L491">		this.dataType = dataType;</span>
+<span class="nc" id="L492">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -483,13 +498,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;database&quot;)
 	public String getDatabase() {
-<span class="fc" id="L486">		return database;</span>
+<span class="fc" id="L501">		return database;</span>
 	}
 
 	@JsonProperty(&quot;database&quot;)
 	private void setDatabase(String database) {
-<span class="nc" id="L491">		this.database = database;</span>
-<span class="nc" id="L492">	}</span>
+<span class="nc" id="L506">		this.database = database;</span>
+<span class="nc" id="L507">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -498,20 +513,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-accessed&quot;)
 	public LocalDate getDateAccessed() {
-<span class="fc" id="L501">		return dateAccessed;</span>
+<span class="fc" id="L516">		return dateAccessed;</span>
 	}
 
 	@JsonProperty(&quot;date-accessed&quot;)
 	private void setDateAccessed(String dateAccessed) throws InvalidDataException {
-<span class="fc bfc" id="L506" title="All 2 branches covered.">		if (dateAccessed != null) {</span>
+<span class="fc bfc" id="L521" title="All 2 branches covered.">		if (dateAccessed != null) {</span>
 			try {
-<span class="fc" id="L508">				this.dateAccessed = LocalDate.parse(dateAccessed);</span>
+<span class="fc" id="L523">				this.dateAccessed = LocalDate.parse(dateAccessed);</span>
 			}
-<span class="nc" id="L510">			catch (DateTimeException e) {</span>
-<span class="nc" id="L511">				throw new InvalidDataException(&quot;DateTimeException in field 'date-accessed'!&quot;, e);</span>
-<span class="fc" id="L512">			}</span>
+<span class="nc" id="L525">			catch (DateTimeException e) {</span>
+<span class="nc" id="L526">				throw new InvalidDataException(&quot;DateTimeException in field 'date-accessed'!&quot;, e);</span>
+<span class="fc" id="L527">			}</span>
 		}
-<span class="fc" id="L514">	}</span>
+<span class="fc" id="L529">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -520,20 +535,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-downloaded&quot;)
 	public LocalDate getDateDownloaded() {
-<span class="fc" id="L523">		return dateDownloaded;</span>
+<span class="fc" id="L538">		return dateDownloaded;</span>
 	}
 
 	@JsonProperty(&quot;date-downloaded&quot;)
 	private void setDateDownloaded(String dateDownloaded) throws InvalidDataException {
-<span class="fc bfc" id="L528" title="All 2 branches covered.">		if (dateDownloaded != null) {</span>
+<span class="fc bfc" id="L543" title="All 2 branches covered.">		if (dateDownloaded != null) {</span>
 			try {
-<span class="fc" id="L530">				this.dateDownloaded = LocalDate.parse(dateDownloaded);</span>
+<span class="fc" id="L545">				this.dateDownloaded = LocalDate.parse(dateDownloaded);</span>
 			}
-<span class="nc" id="L532">			catch (DateTimeException e) {</span>
-<span class="nc" id="L533">				throw new InvalidDataException(&quot;DateTimeException in field 'date-downloaded'!&quot;, e);</span>
-<span class="fc" id="L534">			}</span>
+<span class="nc" id="L547">			catch (DateTimeException e) {</span>
+<span class="nc" id="L548">				throw new InvalidDataException(&quot;DateTimeException in field 'date-downloaded'!&quot;, e);</span>
+<span class="fc" id="L549">			}</span>
 		}
-<span class="fc" id="L536">	}</span>
+<span class="fc" id="L551">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -542,20 +557,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-released&quot;)
 	public LocalDate getDateReleased() {
-<span class="fc" id="L545">		return dateReleased;</span>
+<span class="fc" id="L560">		return dateReleased;</span>
 	}
 
 	@JsonProperty(&quot;date-released&quot;)
 	private void setDateReleased(String dateReleased) throws InvalidDataException {
-<span class="fc bfc" id="L550" title="All 2 branches covered.">		if (dateReleased != null) {</span>
+<span class="fc bfc" id="L565" title="All 2 branches covered.">		if (dateReleased != null) {</span>
 			try {
-<span class="fc" id="L552">				this.dateReleased = LocalDate.parse(dateReleased);</span>
+<span class="fc" id="L567">				this.dateReleased = LocalDate.parse(dateReleased);</span>
 			}
-<span class="nc" id="L554">			catch (DateTimeException e) {</span>
-<span class="nc" id="L555">				throw new InvalidDataException(&quot;DateTimeException in field 'date-released'!&quot;, e);</span>
-<span class="fc" id="L556">			}</span>
+<span class="nc" id="L569">			catch (DateTimeException e) {</span>
+<span class="nc" id="L570">				throw new InvalidDataException(&quot;DateTimeException in field 'date-released'!&quot;, e);</span>
+<span class="fc" id="L571">			}</span>
 		}
-<span class="fc" id="L558">	}</span>
+<span class="fc" id="L573">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -564,20 +579,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-published&quot;)
 	public LocalDate getDatePublished() {
-<span class="fc" id="L567">		return datePublished;</span>
+<span class="fc" id="L582">		return datePublished;</span>
 	}
 
 	@JsonProperty(&quot;date-published&quot;)
 	private void setDatePublished(String datePublished) throws InvalidDataException {
-<span class="fc bfc" id="L572" title="All 2 branches covered.">		if (datePublished != null) {</span>
+<span class="fc bfc" id="L587" title="All 2 branches covered.">		if (datePublished != null) {</span>
 			try {
-<span class="fc" id="L574">				this.datePublished = LocalDate.parse(datePublished);</span>
+<span class="fc" id="L589">				this.datePublished = LocalDate.parse(datePublished);</span>
 			}
-<span class="nc" id="L576">			catch (DateTimeException e) {</span>
-<span class="nc" id="L577">				throw new InvalidDataException(&quot;DateTimeException in field 'date-published'!&quot;, e);</span>
-<span class="fc" id="L578">			}</span>
+<span class="nc" id="L591">			catch (DateTimeException e) {</span>
+<span class="nc" id="L592">				throw new InvalidDataException(&quot;DateTimeException in field 'date-published'!&quot;, e);</span>
+<span class="fc" id="L593">			}</span>
 		}
-<span class="fc" id="L580">	}</span>
+<span class="fc" id="L595">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -586,13 +601,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;department&quot;)
 	public String getDepartment() {
-<span class="fc" id="L589">		return department;</span>
+<span class="fc" id="L604">		return department;</span>
 	}
 
 	@JsonProperty(&quot;department&quot;)
 	private void setDepartment(String department) {
-<span class="nc" id="L594">		this.department = department;</span>
-<span class="nc" id="L595">	}</span>
+<span class="nc" id="L609">		this.department = department;</span>
+<span class="nc" id="L610">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -601,13 +616,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;doi&quot;)
 	public String getDoi() {
-<span class="fc" id="L604">		return doi;</span>
+<span class="fc" id="L619">		return doi;</span>
 	}
 
 	@JsonProperty(&quot;doi&quot;)
 	private void setDoi(String doi) {
-<span class="nc" id="L609">		this.doi = doi;</span>
-<span class="nc" id="L610">	}</span>
+<span class="nc" id="L624">		this.doi = doi;</span>
+<span class="nc" id="L625">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -616,13 +631,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;edition&quot;)
 	public String getEdition() {
-<span class="fc" id="L619">		return edition;</span>
+<span class="fc" id="L634">		return edition;</span>
 	}
 
 	@JsonProperty(&quot;edition&quot;)
 	private void setEdition(String edition) {
-<span class="nc" id="L624">		this.edition = edition;</span>
-<span class="nc" id="L625">	}</span>
+<span class="nc" id="L639">		this.edition = edition;</span>
+<span class="nc" id="L640">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -631,13 +646,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;end&quot;)
 	public Integer getEnd() {
-<span class="fc" id="L634">		return end;</span>
+<span class="fc" id="L649">		return end;</span>
 	}
 
 	@JsonProperty(&quot;end&quot;)
 	private void setEnd(Integer end) {
-<span class="nc" id="L639">		this.end = end;</span>
-<span class="nc" id="L640">	}</span>
+<span class="nc" id="L654">		this.end = end;</span>
+<span class="nc" id="L655">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -646,13 +661,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;entry&quot;)
 	public String getEntry() {
-<span class="fc" id="L649">		return entry;</span>
+<span class="fc" id="L664">		return entry;</span>
 	}
 
 	@JsonProperty(&quot;entry&quot;)
 	private void setEntry(String entry) {
-<span class="nc" id="L654">		this.entry = entry;</span>
-<span class="nc" id="L655">	}</span>
+<span class="nc" id="L669">		this.entry = entry;</span>
+<span class="nc" id="L670">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -661,13 +676,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;filename&quot;)
 	public String getFilename() {
-<span class="fc" id="L664">		return filename;</span>
+<span class="fc" id="L679">		return filename;</span>
 	}
 
 	@JsonProperty(&quot;filename&quot;)
 	private void setFilename(String filename) {
-<span class="nc" id="L669">		this.filename = filename;</span>
-<span class="nc" id="L670">	}</span>
+<span class="nc" id="L684">		this.filename = filename;</span>
+<span class="nc" id="L685">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -676,13 +691,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;format&quot;)
 	public String getFormat() {
-<span class="fc" id="L679">		return format;</span>
+<span class="fc" id="L694">		return format;</span>
 	}
 
 	@JsonProperty(&quot;format&quot;)
 	private void setFormat(String format) {
-<span class="nc" id="L684">		this.format = format;</span>
-<span class="nc" id="L685">	}</span>
+<span class="nc" id="L699">		this.format = format;</span>
+<span class="nc" id="L700">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -691,13 +706,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;isbn&quot;)
 	public String getIsbn() {
-<span class="fc" id="L694">		return isbn;</span>
+<span class="fc" id="L709">		return isbn;</span>
 	}
 
 	@JsonProperty(&quot;isbn&quot;)
 	private void setIsbn(String isbn) {
-<span class="nc" id="L699">		this.isbn = isbn;</span>
-<span class="nc" id="L700">	}</span>
+<span class="nc" id="L714">		this.isbn = isbn;</span>
+<span class="nc" id="L715">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -706,13 +721,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issn&quot;)
 	public String getIssn() {
-<span class="fc" id="L709">		return issn;</span>
+<span class="fc" id="L724">		return issn;</span>
 	}
 
 	@JsonProperty(&quot;issn&quot;)
 	private void setIssn(String issn) {
-<span class="nc" id="L714">		this.issn = issn;</span>
-<span class="nc" id="L715">	}</span>
+<span class="nc" id="L729">		this.issn = issn;</span>
+<span class="nc" id="L730">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -721,13 +736,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue&quot;)
 	public String getIssue() {
-<span class="fc" id="L724">		return issue;</span>
+<span class="fc" id="L739">		return issue;</span>
 	}
 
 	@JsonProperty(&quot;issue&quot;)
 	private void setIssue(String issue) {
-<span class="nc" id="L729">		this.issue = issue;</span>
-<span class="nc" id="L730">	}</span>
+<span class="nc" id="L744">		this.issue = issue;</span>
+<span class="nc" id="L745">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -736,13 +751,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue-date&quot;)
 	public String getIssueDate() {
-<span class="fc" id="L739">		return issueDate;</span>
+<span class="fc" id="L754">		return issueDate;</span>
 	}
 
 	@JsonProperty(&quot;issue-date&quot;)
 	private void setIssueDate(String issueDate) {
-<span class="nc" id="L744">		this.issueDate = issueDate;</span>
-<span class="nc" id="L745">	}</span>
+<span class="nc" id="L759">		this.issueDate = issueDate;</span>
+<span class="nc" id="L760">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -751,13 +766,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue-title&quot;)
 	public String getIssueTitle() {
-<span class="fc" id="L754">		return issueTitle;</span>
+<span class="fc" id="L769">		return issueTitle;</span>
 	}
 
 	@JsonProperty(&quot;issue-title&quot;)
 	private void setIssueTitle(String issueTitle) {
-<span class="nc" id="L759">		this.issueTitle = issueTitle;</span>
-<span class="nc" id="L760">	}</span>
+<span class="nc" id="L774">		this.issueTitle = issueTitle;</span>
+<span class="nc" id="L775">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -766,13 +781,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;journal&quot;)
 	public String getJournal() {
-<span class="fc" id="L769">		return journal;</span>
+<span class="fc" id="L784">		return journal;</span>
 	}
 
 	@JsonProperty(&quot;journal&quot;)
 	private void setJournal(String journal) {
-<span class="nc" id="L774">		this.journal = journal;</span>
-<span class="nc" id="L775">	}</span>
+<span class="nc" id="L789">		this.journal = journal;</span>
+<span class="nc" id="L790">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -781,13 +796,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;keywords&quot;)
 	public List&lt;String&gt; getKeywords() {
-<span class="fc" id="L784">		return keywords;</span>
+<span class="fc" id="L799">		return keywords;</span>
 	}
 
 	@JsonProperty(&quot;keywords&quot;)
 	private void setKeywords(List&lt;String&gt; keywords) {
-<span class="nc" id="L789">		this.keywords = keywords;</span>
-<span class="nc" id="L790">	}</span>
+<span class="nc" id="L804">		this.keywords = keywords;</span>
+<span class="nc" id="L805">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -796,24 +811,24 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;languages&quot;)
 	public List&lt;String&gt; getLanguages() {
-<span class="fc" id="L799">		return languages;</span>
+<span class="fc" id="L814">		return languages;</span>
 	}
 
 	@JsonProperty(&quot;languages&quot;)
 	private void setLanguages(List&lt;String&gt; languages) throws InvalidDataException {
-<span class="fc bfc" id="L804" title="All 2 branches covered.">		if (languages != null) {</span>
-<span class="fc bfc" id="L805" title="All 2 branches covered.">			for (String language : languages) {</span>
-<span class="fc bfc" id="L806" title="All 4 branches covered.">				if (language.length() &gt; 3 || language.length() &lt;= 1) {</span>
-<span class="fc" id="L807">					throw new InvalidDataException(&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
+<span class="fc bfc" id="L819" title="All 2 branches covered.">		if (languages != null) {</span>
+<span class="fc bfc" id="L820" title="All 2 branches covered.">			for (String language : languages) {</span>
+<span class="fc bfc" id="L821" title="All 4 branches covered.">				if (language.length() &gt; 3 || language.length() &lt;= 1) {</span>
+<span class="fc" id="L822">					throw new InvalidDataException(&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
 				}
-<span class="pc bpc" id="L809" title="1 of 2 branches missed.">				if (!DefinedValues.isLanguageValid(language)) {</span>
-<span class="nc" id="L810">					throw new InvalidDataException(</span>
+<span class="pc bpc" id="L824" title="1 of 2 branches missed.">				if (!DefinedValues.isLanguageValid(language)) {</span>
+<span class="nc" id="L825">					throw new InvalidDataException(</span>
 							&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);
 				}
-<span class="fc" id="L813">			}</span>
+<span class="fc" id="L828">			}</span>
 		}
-<span class="fc" id="L815">		this.languages = languages;</span>
-<span class="fc" id="L816">	}</span>
+<span class="fc" id="L830">		this.languages = languages;</span>
+<span class="fc" id="L831">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -822,13 +837,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;license&quot;)
 	public String getLicense() {
-<span class="fc" id="L825">		return license;</span>
+<span class="fc" id="L840">		return license;</span>
 	}
 
 	@JsonProperty(&quot;license&quot;)
 	private void setLicense(String license) {
-<span class="nc" id="L830">		this.license = license;</span>
-<span class="nc" id="L831">	}</span>
+<span class="nc" id="L845">		this.license = license;</span>
+<span class="nc" id="L846">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -837,21 +852,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;license-url&quot;)
 	public URL getLicenseUrl() {
-<span class="fc" id="L840">		return licenseUrl;</span>
+<span class="fc" id="L855">		return licenseUrl;</span>
 	}
 
 	@JsonProperty(&quot;license-url&quot;)
 	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
-<span class="fc bfc" id="L845" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
+<span class="fc bfc" id="L860" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
 			try {
-<span class="fc" id="L847">				this.licenseUrl = new URL(licenseUrl);</span>
+<span class="fc" id="L862">				this.licenseUrl = new URL(licenseUrl);</span>
 			}
-<span class="nc" id="L849">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L850">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
-<span class="nc" id="L851">						+ &quot;' contains an invalid URL in field 'license-url': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L852">			}</span>
+<span class="nc" id="L864">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L865">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L866">						+ &quot;' contains an invalid URL in field 'license-url': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L867">			}</span>
 		}
-<span class="fc" id="L854">	}</span>
+<span class="fc" id="L869">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -860,13 +875,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;loc-start&quot;)
 	public Integer getLocStart() {
-<span class="fc" id="L863">		return locStart;</span>
+<span class="fc" id="L878">		return locStart;</span>
 	}
 
 	@JsonProperty(&quot;loc-start&quot;)
 	private void setLocStart(Integer locStart) {
-<span class="nc" id="L868">		this.locStart = locStart;</span>
-<span class="nc" id="L869">	}</span>
+<span class="nc" id="L883">		this.locStart = locStart;</span>
+<span class="nc" id="L884">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -875,13 +890,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;loc-end&quot;)
 	public Integer getLocEnd() {
-<span class="fc" id="L878">		return locEnd;</span>
+<span class="fc" id="L893">		return locEnd;</span>
 	}
 
 	@JsonProperty(&quot;loc-end&quot;)
 	private void setLocEnd(Integer locEnd) {
-<span class="nc" id="L883">		this.locEnd = locEnd;</span>
-<span class="nc" id="L884">	}</span>
+<span class="nc" id="L898">		this.locEnd = locEnd;</span>
+<span class="nc" id="L899">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -890,13 +905,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;medium&quot;)
 	public String getMedium() {
-<span class="fc" id="L893">		return medium;</span>
+<span class="fc" id="L908">		return medium;</span>
 	}
 
 	@JsonProperty(&quot;medium&quot;)
 	private void setMedium(String medium) {
-<span class="nc" id="L898">		this.medium = medium;</span>
-<span class="nc" id="L899">	}</span>
+<span class="nc" id="L913">		this.medium = medium;</span>
+<span class="nc" id="L914">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -905,13 +920,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;month&quot;)
 	public Integer getMonth() {
-<span class="fc" id="L908">		return month;</span>
+<span class="fc" id="L923">		return month;</span>
 	}
 
 	@JsonProperty(&quot;month&quot;)
 	private void setMonth(Integer month) {
-<span class="nc" id="L913">		this.month = month;</span>
-<span class="nc" id="L914">	}</span>
+<span class="nc" id="L928">		this.month = month;</span>
+<span class="nc" id="L929">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -920,13 +935,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;nihmsid&quot;)
 	public String getNihmsid() {
-<span class="fc" id="L923">		return nihmsid;</span>
+<span class="fc" id="L938">		return nihmsid;</span>
 	}
 
 	@JsonProperty(&quot;nihmsid&quot;)
 	private void setNihmsid(String nihmsid) {
-<span class="nc" id="L928">		this.nihmsid = nihmsid;</span>
-<span class="nc" id="L929">	}</span>
+<span class="nc" id="L943">		this.nihmsid = nihmsid;</span>
+<span class="nc" id="L944">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -935,13 +950,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;notes&quot;)
 	public String getNotes() {
-<span class="fc" id="L938">		return notes;</span>
+<span class="fc" id="L953">		return notes;</span>
 	}
 
 	@JsonProperty(&quot;notes&quot;)
 	private void setNotes(String notes) {
-<span class="nc" id="L943">		this.notes = notes;</span>
-<span class="nc" id="L944">	}</span>
+<span class="nc" id="L958">		this.notes = notes;</span>
+<span class="nc" id="L959">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -950,13 +965,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;number&quot;)
 	public String getNumber() {
-<span class="fc" id="L953">		return number;</span>
+<span class="fc" id="L968">		return number;</span>
 	}
 
 	@JsonProperty(&quot;number&quot;)
 	private void setNumber(String number) {
-<span class="nc" id="L958">		this.number = number;</span>
-<span class="nc" id="L959">	}</span>
+<span class="nc" id="L973">		this.number = number;</span>
+<span class="nc" id="L974">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -965,13 +980,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;number-volumes&quot;)
 	public Integer getNumberVolumes() {
-<span class="fc" id="L968">		return numberVolumes;</span>
+<span class="fc" id="L983">		return numberVolumes;</span>
 	}
 
 	@JsonProperty(&quot;number-volumes&quot;)
 	private void setNumberVolumes(Integer numberVolumes) {
-<span class="nc" id="L973">		this.numberVolumes = numberVolumes;</span>
-<span class="nc" id="L974">	}</span>
+<span class="nc" id="L988">		this.numberVolumes = numberVolumes;</span>
+<span class="nc" id="L989">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -980,13 +995,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;pages&quot;)
 	public Integer getPages() {
-<span class="fc" id="L983">		return pages;</span>
+<span class="fc" id="L998">		return pages;</span>
 	}
 
 	@JsonProperty(&quot;pages&quot;)
 	private void setPages(Integer pages) {
-<span class="nc" id="L988">		this.pages = pages;</span>
-<span class="nc" id="L989">	}</span>
+<span class="nc" id="L1003">		this.pages = pages;</span>
+<span class="nc" id="L1004">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -995,13 +1010,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;patent-states&quot;)
 	public List&lt;String&gt; getPatentStates() {
-<span class="fc" id="L998">		return patentStates;</span>
+<span class="fc" id="L1013">		return patentStates;</span>
 	}
 
 	@JsonProperty(&quot;patent-states&quot;)
 	private void setPatentStates(List&lt;String&gt; patentStates) {
-<span class="nc" id="L1003">		this.patentStates = patentStates;</span>
-<span class="nc" id="L1004">	}</span>
+<span class="nc" id="L1018">		this.patentStates = patentStates;</span>
+<span class="nc" id="L1019">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1010,13 +1025,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;pmcid&quot;)
 	public String getPmcid() {
-<span class="fc" id="L1013">		return pmcid;</span>
+<span class="fc" id="L1028">		return pmcid;</span>
 	}
 
 	@JsonProperty(&quot;pmcid&quot;)
 	private void setPmcid(String pmcid) {
-<span class="nc" id="L1018">		this.pmcid = pmcid;</span>
-<span class="nc" id="L1019">	}</span>
+<span class="nc" id="L1033">		this.pmcid = pmcid;</span>
+<span class="nc" id="L1034">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1025,21 +1040,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository&quot;)
 	public URL getRepository() {
-<span class="fc" id="L1028">		return repository;</span>
+<span class="fc" id="L1043">		return repository;</span>
 	}
 
 	@JsonProperty(&quot;repository&quot;)
 	private void setRepository(String repository) throws InvalidDataException {
-<span class="fc bfc" id="L1033" title="All 2 branches covered.">		if (repository != null) {</span>
+<span class="fc bfc" id="L1048" title="All 2 branches covered.">		if (repository != null) {</span>
 			try {
-<span class="fc" id="L1035">				this.repository = new URL(repository);</span>
+<span class="fc" id="L1050">				this.repository = new URL(repository);</span>
 			}
-<span class="nc" id="L1037">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L1038">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
-<span class="nc" id="L1039">						+ &quot;' contains an invalid URL in field 'repository': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1040">			}</span>
+<span class="nc" id="L1052">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1053">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1054">						+ &quot;' contains an invalid URL in field 'repository': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1055">			}</span>
 		}
-<span class="fc" id="L1042">	}</span>
+<span class="fc" id="L1057">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1048,21 +1063,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository-code&quot;)
 	public URL getRepositoryCode() {
-<span class="fc" id="L1051">		return repositoryCode;</span>
+<span class="fc" id="L1066">		return repositoryCode;</span>
 	}
 
 	@JsonProperty(&quot;repository-code&quot;)
 	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
-<span class="fc bfc" id="L1056" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
+<span class="fc bfc" id="L1071" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
 			try {
-<span class="fc" id="L1058">				this.repositoryCode = new URL(repositoryCode);</span>
+<span class="fc" id="L1073">				this.repositoryCode = new URL(repositoryCode);</span>
 			}
-<span class="nc" id="L1060">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L1061">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
-<span class="nc" id="L1062">						+ &quot;' contains an invalid URL in field 'repository-code': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1063">			}</span>
+<span class="nc" id="L1075">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1076">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1077">						+ &quot;' contains an invalid URL in field 'repository-code': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1078">			}</span>
 		}
-<span class="fc" id="L1065">	}</span>
+<span class="fc" id="L1080">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1071,21 +1086,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository-artifact&quot;)
 	public URL getRepositoryArtifact() {
-<span class="fc" id="L1074">		return repositoryArtifact;</span>
+<span class="fc" id="L1089">		return repositoryArtifact;</span>
 	}
 
 	@JsonProperty(&quot;repository-artifact&quot;)
 	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
-<span class="fc bfc" id="L1079" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
+<span class="fc bfc" id="L1094" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
 			try {
-<span class="fc" id="L1081">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
+<span class="fc" id="L1096">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
 			}
-<span class="nc" id="L1083">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L1084">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
-<span class="nc" id="L1085">						+ &quot;' contains an invalid URL in field 'repository-artifact': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1086">			}</span>
+<span class="nc" id="L1098">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1099">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1100">						+ &quot;' contains an invalid URL in field 'repository-artifact': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1101">			}</span>
 		}
-<span class="fc" id="L1088">	}</span>
+<span class="fc" id="L1103">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1094,13 +1109,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;scope&quot;)
 	public String getScope() {
-<span class="fc" id="L1097">		return scope;</span>
+<span class="fc" id="L1112">		return scope;</span>
 	}
 
 	@JsonProperty(&quot;scope&quot;)
 	private void setScope(String scope) {
-<span class="nc" id="L1102">		this.scope = scope;</span>
-<span class="nc" id="L1103">	}</span>
+<span class="nc" id="L1117">		this.scope = scope;</span>
+<span class="nc" id="L1118">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1109,13 +1124,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;section&quot;)
 	public String getSection() {
-<span class="fc" id="L1112">		return section;</span>
+<span class="fc" id="L1127">		return section;</span>
 	}
 
 	@JsonProperty(&quot;section&quot;)
 	private void setSection(String section) {
-<span class="nc" id="L1117">		this.section = section;</span>
-<span class="nc" id="L1118">	}</span>
+<span class="nc" id="L1132">		this.section = section;</span>
+<span class="nc" id="L1133">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1124,18 +1139,18 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;status&quot;)
 	public String getStatus() {
-<span class="fc" id="L1127">		return status;</span>
+<span class="fc" id="L1142">		return status;</span>
 	}
 
 	@JsonProperty(&quot;status&quot;)
 	private void setStatus(String status) throws InvalidDataException {
-<span class="fc bfc" id="L1132" title="All 2 branches covered.">		if (status != null) {</span>
-<span class="fc bfc" id="L1133" title="All 2 branches covered.">			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {</span>
-<span class="fc" id="L1134">				throw new InvalidDataException(&quot;The status '&quot; + status + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+<span class="fc bfc" id="L1147" title="All 2 branches covered.">		if (status != null) {</span>
+<span class="fc bfc" id="L1148" title="All 2 branches covered.">			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {</span>
+<span class="fc" id="L1149">				throw new InvalidDataException(&quot;The status '&quot; + status + &quot;' is not defined in the CFF format specifications.&quot;);</span>
 			}
 		}
-<span class="fc" id="L1137">		this.status = status;</span>
-<span class="fc" id="L1138">	}</span>
+<span class="fc" id="L1152">		this.status = status;</span>
+<span class="fc" id="L1153">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1144,13 +1159,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;start&quot;)
 	public Integer getStart() {
-<span class="fc" id="L1147">		return start;</span>
+<span class="fc" id="L1162">		return start;</span>
 	}
 
 	@JsonProperty(&quot;start&quot;)
 	private void setStart(Integer start) {
-<span class="nc" id="L1152">		this.start = start;</span>
-<span class="nc" id="L1153">	}</span>
+<span class="nc" id="L1167">		this.start = start;</span>
+<span class="nc" id="L1168">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1159,13 +1174,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;thesis-type&quot;)
 	public String getThesisType() {
-<span class="fc" id="L1162">		return thesisType;</span>
+<span class="fc" id="L1177">		return thesisType;</span>
 	}
 
 	@JsonProperty(&quot;thesis-type&quot;)
 	private void setThesisType(String thesisType) {
-<span class="nc" id="L1167">		this.thesisType = thesisType;</span>
-<span class="nc" id="L1168">	}</span>
+<span class="nc" id="L1182">		this.thesisType = thesisType;</span>
+<span class="nc" id="L1183">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1174,21 +1189,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;url&quot;)
 	public URL getUrl() {
-<span class="fc" id="L1177">		return url;</span>
+<span class="fc" id="L1192">		return url;</span>
 	}
 
 	@JsonProperty(&quot;url&quot;)
 	private void setUrl(String url) throws InvalidDataException {
-<span class="fc bfc" id="L1182" title="All 2 branches covered.">		if (url != null) {</span>
+<span class="fc bfc" id="L1197" title="All 2 branches covered.">		if (url != null) {</span>
 			try {
-<span class="fc" id="L1184">				this.url = new URL(url);</span>
+<span class="fc" id="L1199">				this.url = new URL(url);</span>
 			}
-<span class="nc" id="L1186">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L1187">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
-<span class="nc" id="L1188">						+ &quot;' contains an invalid URL in field 'url': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1189">			}</span>
+<span class="nc" id="L1201">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1202">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1203">						+ &quot;' contains an invalid URL in field 'url': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1204">			}</span>
 		}
-<span class="fc" id="L1191">	}</span>
+<span class="fc" id="L1206">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1197,13 +1212,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;version&quot;)
 	public String getVersion() {
-<span class="fc" id="L1200">		return version;</span>
+<span class="fc" id="L1215">		return version;</span>
 	}
 
 	@JsonProperty(&quot;version&quot;)
 	private void setVersion(String version) {
-<span class="nc" id="L1205">		this.version = version;</span>
-<span class="nc" id="L1206">	}</span>
+<span class="nc" id="L1220">		this.version = version;</span>
+<span class="nc" id="L1221">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1212,13 +1227,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;volume&quot;)
 	public Integer getVolume() {
-<span class="fc" id="L1215">		return volume;</span>
+<span class="fc" id="L1230">		return volume;</span>
 	}
 
 	@JsonProperty(&quot;volume&quot;)
 	private void setVolume(Integer volume) {
-<span class="nc" id="L1220">		this.volume = volume;</span>
-<span class="nc" id="L1221">	}</span>
+<span class="nc" id="L1235">		this.volume = volume;</span>
+<span class="nc" id="L1236">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1227,13 +1242,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;volume-title&quot;)
 	public String getVolumeTitle() {
-<span class="fc" id="L1230">		return volumeTitle;</span>
+<span class="fc" id="L1245">		return volumeTitle;</span>
 	}
 
 	@JsonProperty(&quot;volume-title&quot;)
 	private void setVolumeTitle(String volumeTitle) {
-<span class="nc" id="L1235">		this.volumeTitle = volumeTitle;</span>
-<span class="nc" id="L1236">	}</span>
+<span class="nc" id="L1250">		this.volumeTitle = volumeTitle;</span>
+<span class="nc" id="L1251">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1242,13 +1257,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;year&quot;)
 	public Integer getYear() {
-<span class="fc" id="L1245">		return year;</span>
+<span class="fc" id="L1260">		return year;</span>
 	}
 
 	@JsonProperty(&quot;year&quot;)
 	private void setYear(Integer year) {
-<span class="nc" id="L1250">		this.year = year;</span>
-<span class="nc" id="L1251">	}</span>
+<span class="nc" id="L1265">		this.year = year;</span>
+<span class="nc" id="L1266">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1257,13 +1272,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;year-original&quot;)
 	public Integer getYearOriginal() {
-<span class="fc" id="L1260">		return yearOriginal;</span>
+<span class="fc" id="L1275">		return yearOriginal;</span>
 	}
 
 	@JsonProperty(&quot;year-original&quot;)
 	private void setYearOriginal(Integer yearOriginal) {
-<span class="nc" id="L1265">		this.yearOriginal = yearOriginal;</span>
-<span class="nc" id="L1266">	}</span>
+<span class="nc" id="L1280">		this.yearOriginal = yearOriginal;</span>
+<span class="nc" id="L1281">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1272,13 +1287,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;conference&quot;)
 	public Entity getConference() {
-<span class="nc" id="L1275">		return conference;</span>
+<span class="nc" id="L1290">		return conference;</span>
 	}
 
 	@JsonProperty(&quot;conference&quot;)
 	private void setConference(Entity conference) {
-<span class="nc" id="L1280">		this.conference = conference;</span>
-<span class="nc" id="L1281">	}</span>
+<span class="nc" id="L1295">		this.conference = conference;</span>
+<span class="nc" id="L1296">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1287,26 +1302,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;authors&quot;)
 	public List&lt;Subject&gt; getAuthors() {
-<span class="nc" id="L1290">		return authors;</span>
+<span class="nc" id="L1305">		return authors;</span>
 	}
 
 	@JsonProperty(&quot;authors&quot;)
 	private void setAuthors(List&lt;Subject&gt; authors) {
-<span class="nc" id="L1295">		this.authors = authors;</span>
-<span class="nc" id="L1296">	}</span>
+<span class="nc" id="L1310">		this.authors = authors;</span>
+<span class="nc" id="L1311">	}</span>
 	
 	/**
 	 * @return A filtered list of authors, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonAuthors() {
-<span class="nc" id="L1302">		return filterPersons(getAuthors());</span>
+<span class="nc" id="L1317">		return filterPersons(getAuthors());</span>
 	}
 	
 	/**
 	 * @return A filtered list of authors, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityAuthors() {
-<span class="nc" id="L1309">		return filterEntities(getAuthors());</span>
+<span class="nc" id="L1324">		return filterEntities(getAuthors());</span>
 	}
 
 	/**
@@ -1316,26 +1331,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;contact&quot;)
 	public List&lt;Subject&gt; getContact() {
-<span class="nc" id="L1319">		return contact;</span>
+<span class="nc" id="L1334">		return contact;</span>
 	}
 
 	@JsonProperty(&quot;contact&quot;)
 	private void setContact(List&lt;Subject&gt; contact) {
-<span class="nc" id="L1324">		this.contact = contact;</span>
-<span class="nc" id="L1325">	}</span>
+<span class="nc" id="L1339">		this.contact = contact;</span>
+<span class="nc" id="L1340">	}</span>
 
 	/**
 	 * @return A filtered list of contacts, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonContacts() {
-<span class="nc" id="L1331">		return filterPersons(getContact());</span>
+<span class="nc" id="L1346">		return filterPersons(getContact());</span>
 	}
 	
 	/**
 	 * @return A filtered list of contacts, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityContacts() {
-<span class="nc" id="L1338">		return filterEntities(getContact());</span>
+<span class="nc" id="L1353">		return filterEntities(getContact());</span>
 	}
 
 	/**
@@ -1345,13 +1360,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;database-provider&quot;)
 	public Entity getDatabaseProvider() {
-<span class="nc" id="L1348">		return databaseProvider;</span>
+<span class="nc" id="L1363">		return databaseProvider;</span>
 	}
 
 	@JsonProperty(&quot;database-provider&quot;)
 	private void setDatabaseProvider(Entity databaseProvider) {
-<span class="nc" id="L1353">		this.databaseProvider = databaseProvider;</span>
-<span class="nc" id="L1354">	}</span>
+<span class="nc" id="L1368">		this.databaseProvider = databaseProvider;</span>
+<span class="nc" id="L1369">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1360,26 +1375,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;editors&quot;)
 	public List&lt;Subject&gt; getEditors() {
-<span class="nc" id="L1363">		return editors;</span>
+<span class="nc" id="L1378">		return editors;</span>
 	}
 
 	@JsonProperty(&quot;editors&quot;)
 	private void setEditors(List&lt;Subject&gt; editors) {
-<span class="nc" id="L1368">		this.editors = editors;</span>
-<span class="nc" id="L1369">	}</span>
+<span class="nc" id="L1383">		this.editors = editors;</span>
+<span class="nc" id="L1384">	}</span>
 
 	/**
 	 * @return A filtered list of editors, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonEditors() {
-<span class="nc" id="L1375">		return filterPersons(getEditors());</span>
+<span class="nc" id="L1390">		return filterPersons(getEditors());</span>
 	}
 	
 	/**
 	 * @return A filtered list of editors, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityEditors() {
-<span class="nc" id="L1382">		return filterEntities(getEditors());</span>
+<span class="nc" id="L1397">		return filterEntities(getEditors());</span>
 	}
 
 	/**
@@ -1389,26 +1404,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;editors-series&quot;)
 	public List&lt;Subject&gt; getEditorsSeries() {
-<span class="nc" id="L1392">		return editorsSeries;</span>
+<span class="nc" id="L1407">		return editorsSeries;</span>
 	}
 
 	@JsonProperty(&quot;editors-series&quot;)
 	private void setEditorsSeries(List&lt;Subject&gt; editorsSeries) {
-<span class="nc" id="L1397">		this.editorsSeries = editorsSeries;</span>
-<span class="nc" id="L1398">	}</span>
+<span class="nc" id="L1412">		this.editorsSeries = editorsSeries;</span>
+<span class="nc" id="L1413">	}</span>
 
 	/**
 	 * @return A filtered list of series editors, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonEditorsSeries() {
-<span class="nc" id="L1404">		return filterPersons(getEditorsSeries());</span>
+<span class="nc" id="L1419">		return filterPersons(getEditorsSeries());</span>
 	}
 	
 	/**
 	 * @return A filtered list of series editors, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityEditorsSeries() {
-<span class="nc" id="L1411">		return filterEntities(getEditorsSeries());</span>
+<span class="nc" id="L1426">		return filterEntities(getEditorsSeries());</span>
 	}
 
 	/**
@@ -1418,13 +1433,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;institution&quot;)
 	public Entity getInstitution() {
-<span class="nc" id="L1421">		return institution;</span>
+<span class="nc" id="L1436">		return institution;</span>
 	}
 
 	@JsonProperty(&quot;institution&quot;)
 	private void setInstitution(Entity institution) {
-<span class="nc" id="L1426">		this.institution = institution;</span>
-<span class="nc" id="L1427">	}</span>
+<span class="nc" id="L1441">		this.institution = institution;</span>
+<span class="nc" id="L1442">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1433,13 +1448,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;location&quot;)
 	public Entity getLocation() {
-<span class="nc" id="L1436">		return location;</span>
+<span class="nc" id="L1451">		return location;</span>
 	}
 
 	@JsonProperty(&quot;location&quot;)
 	private void setLocation(Entity location) {
-<span class="nc" id="L1441">		this.location = location;</span>
-<span class="nc" id="L1442">	}</span>
+<span class="nc" id="L1456">		this.location = location;</span>
+<span class="nc" id="L1457">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1448,13 +1463,13 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;publisher&quot;)
 	public Entity getPublisher() {
-<span class="nc" id="L1451">		return publisher;</span>
+<span class="nc" id="L1466">		return publisher;</span>
 	}
 
 	@JsonProperty(&quot;publisher&quot;)
 	private void setPublisher(Entity publisher) {
-<span class="nc" id="L1456">		this.publisher = publisher;</span>
-<span class="nc" id="L1457">	}</span>
+<span class="nc" id="L1471">		this.publisher = publisher;</span>
+<span class="nc" id="L1472">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1463,26 +1478,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;recipients&quot;)
 	public List&lt;Subject&gt; getRecipients() {
-<span class="nc" id="L1466">		return recipients;</span>
+<span class="nc" id="L1481">		return recipients;</span>
 	}
 
 	@JsonProperty(&quot;recipients&quot;)
 	private void setRecipients(List&lt;Subject&gt; recipients) {
-<span class="nc" id="L1471">		this.recipients = recipients;</span>
-<span class="nc" id="L1472">	}</span>
+<span class="nc" id="L1486">		this.recipients = recipients;</span>
+<span class="nc" id="L1487">	}</span>
 
 	/**
 	 * @return A filtered list of recipients, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonRecipients() {
-<span class="nc" id="L1478">		return filterPersons(getRecipients());</span>
+<span class="nc" id="L1493">		return filterPersons(getRecipients());</span>
 	}
 	
 	/**
 	 * @return A filtered list of recipients, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityRecipients() {
-<span class="nc" id="L1485">		return filterEntities(getRecipients());</span>
+<span class="nc" id="L1500">		return filterEntities(getRecipients());</span>
 	}
 
 	/**
@@ -1492,26 +1507,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;senders&quot;)
 	public List&lt;Subject&gt; getSenders() {
-<span class="nc" id="L1495">		return senders;</span>
+<span class="nc" id="L1510">		return senders;</span>
 	}
 
 	@JsonProperty(&quot;senders&quot;)
 	private void setSenders(List&lt;Subject&gt; senders) {
-<span class="nc" id="L1500">		this.senders = senders;</span>
-<span class="nc" id="L1501">	}</span>
+<span class="nc" id="L1515">		this.senders = senders;</span>
+<span class="nc" id="L1516">	}</span>
 
 	/**
 	 * @return A filtered list of senders, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonSenders() {
-<span class="nc" id="L1507">		return filterPersons(getSenders());</span>
+<span class="nc" id="L1522">		return filterPersons(getSenders());</span>
 	}
 	
 	/**
 	 * @return A filtered list of senders, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntitySenders() {
-<span class="nc" id="L1514">		return filterEntities(getSenders());</span>
+<span class="nc" id="L1529">		return filterEntities(getSenders());</span>
 	}
 
 	/**
@@ -1521,26 +1536,26 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;translators&quot;)
 	public List&lt;Subject&gt; getTranslators() {
-<span class="nc" id="L1524">		return translators;</span>
+<span class="nc" id="L1539">		return translators;</span>
 	}
 
 	@JsonProperty(&quot;translators&quot;)
 	private void setTranslators(List&lt;Subject&gt; translators) {
-<span class="nc" id="L1529">		this.translators = translators;</span>
-<span class="nc" id="L1530">	}</span>
+<span class="nc" id="L1544">		this.translators = translators;</span>
+<span class="nc" id="L1545">	}</span>
 
 	/**
 	 * @return A filtered list of translators, containing only those of type {@link Person}.
 	 */
 	public List&lt;Person&gt; getPersonTranslators() {
-<span class="nc" id="L1536">		return filterPersons(getTranslators());</span>
+<span class="nc" id="L1551">		return filterPersons(getTranslators());</span>
 	}
 	
 	/**
 	 * @return A filtered list of translators, containing only those of type {@link Entity}.
 	 */
 	public List&lt;Entity&gt; getEntityTranslators() {
-<span class="nc" id="L1543">		return filterEntities(getTranslators());</span>
+<span class="nc" id="L1558">		return filterEntities(getTranslators());</span>
 	}
 
 	/*
@@ -1548,23 +1563,23 @@ public final class Reference {
 	 */
 
 	private List&lt;Person&gt; filterPersons(List&lt;Subject&gt; subjects) {
-<span class="nc" id="L1551">		List&lt;Person&gt; personList = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L1552" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
-<span class="nc bnc" id="L1553" title="All 2 branches missed.">			if (subject instanceof Person) {</span>
-<span class="nc" id="L1554">				personList.add((Person) subject);</span>
+<span class="nc" id="L1566">		List&lt;Person&gt; personList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1567" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
+<span class="nc bnc" id="L1568" title="All 2 branches missed.">			if (subject instanceof Person) {</span>
+<span class="nc" id="L1569">				personList.add((Person) subject);</span>
 			}
-<span class="nc" id="L1556">		}</span>
-<span class="nc" id="L1557">		return personList;</span>
+<span class="nc" id="L1571">		}</span>
+<span class="nc" id="L1572">		return personList;</span>
 	}
 
 	private List&lt;Entity&gt; filterEntities(List&lt;Subject&gt; subjects) {
-<span class="nc" id="L1561">		List&lt;Entity&gt; entityList = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L1562" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
-<span class="nc bnc" id="L1563" title="All 2 branches missed.">			if (subject instanceof Entity) {</span>
-<span class="nc" id="L1564">				entityList.add((Entity) subject);</span>
+<span class="nc" id="L1576">		List&lt;Entity&gt; entityList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1577" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
+<span class="nc bnc" id="L1578" title="All 2 branches missed.">			if (subject instanceof Entity) {</span>
+<span class="nc" id="L1579">				entityList.add((Entity) subject);</span>
 			}
-<span class="nc" id="L1566">		}</span>
-<span class="nc" id="L1567">		return entityList;</span>
+<span class="nc" id="L1581">		}</span>
+<span class="nc" id="L1582">		return entityList;</span>
 	}
 
 }
