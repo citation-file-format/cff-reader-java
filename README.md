@@ -96,7 +96,7 @@ including [API JavaDocs](https://citation-file-format.github.io/cff-reader-java/
 
 ## Contribute!
 
-For simple contributions guidelines, please see <CONTRIBUTING.md>.
+For simple contributions guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Build
 
