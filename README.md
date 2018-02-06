@@ -60,16 +60,16 @@ for (reference : citationMetadata.getReferences()) {
 
 Upon errors, the API will throw exceptions:
 
-- `com.fasterxml.jackson.core.JsonParseException` -- Malformed `CITATION.cff` 
-file.
-- `com.fasterxml.jackson.databind.JsonMappingException` -- Fatal problems with 
-mapping of content.
-- `IOException` -- Fatal problems with reading from a source.
-- `NullPointerException` -- Wrapped exception, missing required CFF keys.
-- `MalformedURLException` -- Invalid URL provided in one of the CFF keys 
-expecting a URL.
-- `DateTimeParseException` -- Invalid date provided in one of the CFF keys 
-expecting a date.
+- `InvalidCFFFileNameException` -- thrown on attempted reads of files with an
+invalid name (CFF file must be named `CITATION.cff`)
+- `InvalidDataException` -- thrown on encountering invalid data in the CFF file,
+as specified in the 
+[Citation File Format specifications](https://citation-file-format.github.io/)
+- `ReadException` -- thrown on encountering errors or exceptions during the
+read process
+
+`InvalidDataException` and `ReadException` may wrap cause exceptions.
+
 
 ## Installation
 

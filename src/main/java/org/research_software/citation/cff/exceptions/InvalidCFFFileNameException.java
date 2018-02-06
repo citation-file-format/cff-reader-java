@@ -21,9 +21,6 @@ package org.research_software.citation.cff.exceptions;
  * Exception thrown on encountering an invalid name
  * of the file that is being read.
  * 
- * Exceptions of this type may wrap the original exception
- * for inspection by the client.
- *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
