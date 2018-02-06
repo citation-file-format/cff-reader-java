@@ -85,7 +85,7 @@ Central.
     <dependency>
         <groupId>org.research-software.citation</groupId>
         <artifactId>cff-reader-java</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
     </dependency>
 </dependencies>
 
