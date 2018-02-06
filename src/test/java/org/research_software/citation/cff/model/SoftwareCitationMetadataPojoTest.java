@@ -13,15 +13,18 @@ import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Subject;
 
 /**
- * // TODO Add description
+ * Unit tests for {@link SoftwareCitationMetadataPojo}.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
  */
+@SuppressWarnings("javadoc")
 public class SoftwareCitationMetadataPojoTest {
 
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link SoftwareCitationMetadataPojo} object, passing an invalid CFF version into the constructor.
+	 * 
+	 * Expects an {@link InvalidDataException}.
 	 * 
 	 * @throws InvalidDataException
 	 */
@@ -31,8 +34,9 @@ public class SoftwareCitationMetadataPojoTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link SoftwareCitationMetadataPojo} object, passing an invalid CFF version into the constructor.
 	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testWrongCFFVersionMessage() {

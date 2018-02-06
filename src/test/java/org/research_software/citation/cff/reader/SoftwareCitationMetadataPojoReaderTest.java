@@ -25,7 +25,7 @@ import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
 
 /**
- * // TODO Add description
+ * Unit tests for {@link SoftwareCitationMetadataPojoReader}.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
@@ -39,7 +39,7 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	private SoftwareCitationMetadataPojoReader fixture = null;
 
 	/**
-	 * // TODO Add description
+	 * Sets up the fixture.
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -49,7 +49,7 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 
 	/**
-	 * // TODO Add description
+	 * Tests reading from a valid and key-complete CFF file.
 	 * 
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
@@ -64,7 +64,7 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 
 	/**
-	 * // TODO Add description
+	 * Tests reading from a stream of a valid and key-complete CFF file.
 	 * 
 	 * @throws ReadException
 	 * @throws MalformedURLException
@@ -78,7 +78,9 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Tests reading from a CFF file with an invalid name.
+	 * 
+	 * Expects an {@link InvalidCFFFileNameException}.
 	 * 
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
@@ -90,7 +92,9 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Tests reading from an invalid CFF File (in this case a binary file).
+	 * 
+	 * Expects a {@link ReadException}.
 	 * 
 	 * @throws ReadException
 	 * @throws InvalidCFFFileNameException
@@ -102,7 +106,9 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Tests reading from a stream of an invalid CFF File (in this case a binary file).
+	 * 
+	 * Expects a {@link ReadException}.
 	 * 
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
@@ -114,7 +120,9 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Tests reading from a CFF file with an invalid name.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 * 
 	 * @throws InvalidDataException
 	 */

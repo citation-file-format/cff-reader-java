@@ -6,13 +6,13 @@ package org.research_software.citation.cff.model.objects;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 /**
- * // TODO Add description
+ * Unit tests for {@link Subject}.
+ * 
+ * Uses instances of type {@link Person} as proxy objects as {@link Subject} is `abstract`.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
@@ -20,25 +20,10 @@ import org.research_software.citation.cff.exceptions.InvalidDataException;
 public class SubjectTest {
 
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link Reference} object, passing an invalid ORCID iD into the constructor.
 	 * 
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * // TODO Add description
+	 * Expects an {@link InvalidDataException}.
 	 * 
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Subject#Subject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
 	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidDataException.class)
@@ -47,8 +32,9 @@ public class SubjectTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link Person} object, passing an an invalid ORCID iD into the constructor.
 	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testBadOrcidPatternMessage() {
@@ -64,7 +50,10 @@ public class SubjectTest {
 	}
 	
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Subject#Subject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * Creates a new {@link Reference} object, passing an invalid country into the constructor.
+	 * 
+	 * Expects an {@link InvalidDataException}.
+	 * 
 	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidDataException.class)
@@ -73,8 +62,9 @@ public class SubjectTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link Person} object, passing an an invalid country into the constructor.
 	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testBadCountryMessage() {
@@ -90,7 +80,9 @@ public class SubjectTest {
 	}
 	
 	/**
-	 * // TODO Add description
+	 * Creates new {@link Person} and {@link Entity} objects, passing only the required fields into the constructor.
+	 * 
+	 * In this scenario, no exceptions should be thrown.
 	 * 
 	 * @throws InvalidDataException
 	 */
