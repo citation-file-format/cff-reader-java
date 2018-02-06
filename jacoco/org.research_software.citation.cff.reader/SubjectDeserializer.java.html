@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SubjectDeserializer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.reader</a> &gt; <span class="el_source">SubjectDeserializer.java</span></div><h1>SubjectDeserializer.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package org.research_software.citation.cff.reader;
+
+import java.io.IOException;
+
+import org.research_software.citation.cff.model.objects.Entity;
+import org.research_software.citation.cff.model.objects.Person;
+import org.research_software.citation.cff.model.objects.Subject;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+
+/**
+ * A custom deserializer for {@link Subject} objects, which
+ * can either be of type {@link Person} or of type {@link Entity}.
+ * 
+ * The deserializer decides this based on the presence of the
+ * field `name`, which is present in {@link Entity} objects but
+ * not in {@link Person} objects.
+ *
+ * @author Stephan Druskat &lt;[mail@sdruskat.net](mailto:mail@sdruskat.net)&gt;
+ * 
+ */
+class SubjectDeserializer extends StdDeserializer&lt;Subject&gt; {
+
+	/**
+	 * The default serial version UID.
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected SubjectDeserializer() {
+<span class="fc" id="L38">		this(null);</span>
+<span class="fc" id="L39">	}</span>
+
+	protected SubjectDeserializer(final Class&lt;?&gt; vc) {
+<span class="fc" id="L42">		super(vc);</span>
+<span class="fc" id="L43">	}</span>
+
+	/* (non-Javadoc)
+	 * @see com.fasterxml.jackson.databind.JsonDeserializer#deserialize(com.fasterxml.jackson.core.JsonParser, com.fasterxml.jackson.databind.DeserializationContext)
+	 */
+	@Override
+	public Subject deserialize(JsonParser parser, DeserializationContext context)
+			throws IOException, JsonProcessingException {
+<span class="fc" id="L51">		final JsonNode node = parser.getCodec().readTree(parser);</span>
+<span class="fc" id="L52">		final ObjectMapper mapper = (ObjectMapper) parser.getCodec();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		if (node.has(&quot;name&quot;)) {</span>
+<span class="fc" id="L54">			return mapper.treeToValue(node, Entity.class);</span>
+		}
+		else {
+<span class="fc" id="L57">			return mapper.treeToValue(node, Person.class);</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

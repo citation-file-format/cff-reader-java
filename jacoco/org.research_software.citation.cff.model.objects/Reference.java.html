@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reference.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Reference.java</span></div><h1>Reference.java</h1><pre class="source lang-java linenums">package org.research_software.citation.cff.model.objects;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.research_software.citation.cff.exceptions.InvalidDataException;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * Model element representing an additional reference to the software.
+ * 
+ * @see &lt;a href=&quot;https://citation-file-format.github.io/1.0.3/specifications/#/references-optional&quot;&gt;https://citation-file-format.github.io/1.0.3/specifications/#/references-optional&lt;/a&gt;
+ * 
+ * @version Citation File Format Version 1.0.3
+ * 
+ * @author Stephan Druskat &lt;[mail@sdruskat.net](mailto:mail@sdruskat.net)&gt;
+ * 
+ */
+@SuppressWarnings(&quot;javadoc&quot;)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public final class Reference {
+
+	private String type;
+	private String title;
+	private String abbreviation;
+	private String abstractString; // &quot;abstract&quot; is a reserved term
+	private String collectionDoi;
+	private String collectionTitle;
+	private String collectionType;
+	private String commit;
+	private String copyright;
+	private String dataType;
+	private String database;
+	private LocalDate dateAccessed;
+	private LocalDate dateDownloaded;
+	private LocalDate dateReleased;
+	private LocalDate datePublished;
+	private String department;
+	private String doi;
+	private String edition;
+	private Integer end;
+	private String entry;
+	private String filename;
+	private String format;
+	private String isbn;
+	private String issn;
+	private String issue;
+	private String issueDate;
+	private String issueTitle;
+	private String journal;
+<span class="fc" id="L57">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L58">	private List&lt;String&gt; languages = new ArrayList&lt;String&gt;();</span>
+	private String license;
+	private URL licenseUrl;
+	private Integer locStart;
+	private Integer locEnd;
+	private String medium;
+	private Integer month;
+	private String nihmsid;
+	private String notes;
+	private String number;
+	private Integer numberVolumes;
+	private Integer pages;
+<span class="fc" id="L70">	private List&lt;String&gt; patentStates = new ArrayList&lt;String&gt;();</span>
+	private String pmcid;
+	private URL repository;
+	private URL repositoryCode;
+	private URL repositoryArtifact;
+	private String scope;
+	private String section;
+	private String status;
+	private Integer start;
+	private String thesisType;
+	private URL url;
+	private String version;
+	private Integer volume;
+	private String volumeTitle;
+	private Integer year;
+	private Integer yearOriginal;
+	private Entity conference;
+	private List&lt;Subject&gt; authors;
+	private List&lt;Subject&gt; contact;
+	private Entity databaseProvider;
+	private List&lt;Subject&gt; editors;
+	private List&lt;Subject&gt; editorsSeries;
+	private Entity institution;
+	private Entity location;
+	private Entity publisher;
+	private List&lt;Subject&gt; recipients;
+	private List&lt;Subject&gt; senders;
+	private List&lt;Subject&gt; translators;
+
+	/**
+	 * Constructor for databinding.
+	 *
+	 * @param dateDownloaded The date the reference has been downloaded
+	 * @param edition The edition of the reference
+	 * @param nihmsid The NIHMSID of the reference
+	 * @param location The location of the reference (e.g., for art)
+	 * @param databaseProvider The database provider providing the reference
+	 * @param dateAccessed The date the reference has been accessed
+	 * @param editors The editors of the reference
+	 * @param type The reference type
+	 * @param authors The authors of the reference
+	 * @param languages The languages the reference is composed in
+	 * @param translators The translators of the reference
+	 * @param commit The commit hash for the version of the reference
+	 * @param year The year the reference has been published
+	 * @param collectionTitle The title of the collection containing the reference
+	 * @param conference The conference of which the reference is part
+	 * @param senders The senders of the reference (e.g., for personal communications)
+	 * @param keywords The keywords pertaining to the reference
+	 * @param status The publication status of the reference
+	 * @param datePublished The date the reference has been published
+	 * @param number The accession number of the work (multi-purpose for different reference types)
+	 * @param format The format of the reference
+	 * @param copyright The copyright information pertaining to the reference
+	 * @param url The URL of the reference
+	 * @param locStart The line number in the source code file where the reference starts
+	 * @param collectionDoi The DOI of the collection containing the reference
+	 * @param repositoryCode The URL of the code repository for the reference
+	 * @param start The page number where the reference starts
+	 * @param month The month in which the reference has been published
+	 * @param locEnd The line number in the source code file where the reference ends
+	 * @param patentStates The states for which a patent is granted
+	 * @param licenseUrl The URL pointing to the license text if the license is not included in the [SPDX License list](https://spdx.org/licenses/)
+	 * @param collectionType The type of the collection containing the reference
+	 * @param scope A string describing the scope of the reference in relation to the software
+	 * @param issn The ISSN of the reference
+	 * @param department The department where the reference has been produced
+	 * @param issue The issue of a periodical in which the reference has been published
+	 * @param contact The contacts for the reference
+	 * @param volumeTitle The title of the volume in which the reference has been published
+	 * @param thesisType The type of the reference, if it is a thesis
+	 * @param publisher The publisher which has published the reference
+	 * @param version The version of the reference
+	 * @param journal The name of the journal in which the reference has been published 
+	 * @param title The title of the reference
+	 * @param repository The URL of the repository for the reference
+	 * @param isbn The ISBN of the reference
+	 * @param license The SPDX license short identifier for the license under which the reference has been published
+	 * @param end The page number where the reference ends
+	 * @param institution The institution where the reference has been produced or published
+	 * @param repositoryArtifact The URL of the artifact repository for the reference
+	 * @param dateReleased The date on which the reference has been released
+	 * @param recipients The recipients of the reference (e.g., for personal communications)
+	 * @param numberVolumes The number of volumes making up the collection in which the reference has been published
+	 * @param pages The total number of pages of the reference
+	 * @param issueDate The publication date of the issue of a periodical in which the reference has been published
+	 * @param editorsSeries The editors of the series in which the reference has been published
+	 * @param abbreviation The abbreviation for the reference
+	 * @param abstractString An abstract or description for the reference
+	 * @param database The database which provides the reference
+	 * @param medium The medium of the reference
+	 * @param section The section of a work which is the reference (e.g., for book sections)
+	 * @param issueTitle The title of the issue of a periodical in which the reference has been published
+	 * @param pmcid The PMCID of the reference
+	 * @param dataType The data type of the reference (e.g., for data sets)
+	 * @param yearOriginal The year in which the reference has originally been published
+	 * @param entry An entry in a collection which constitutes the reference
+	 * @param volume The volume of a periodical in which the reference has been published
+	 * @param filename The filename of the reference
+	 * @param notes Notes pertaining to the reference
+	 * @param doi The DOI of the reference
+	 * 
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses or malformed URLs
+	 */
+	public Reference(@JsonProperty(&quot;type&quot;) String type,
+			@JsonProperty(&quot;title&quot;) String title,
+			@JsonProperty(&quot;authors&quot;) List&lt;Subject&gt; authors,
+			@JsonProperty(&quot;conference&quot;) Entity conference,
+			@JsonProperty(&quot;abbreviation&quot;) String abbreviation,
+			@JsonProperty(&quot;abstract&quot;) String abstractString,
+			@JsonProperty(&quot;collection-doi&quot;) String collectionDoi,
+			@JsonProperty(&quot;collection-title&quot;) String collectionTitle,
+			@JsonProperty(&quot;collection-type&quot;) String collectionType,
+			@JsonProperty(&quot;commit&quot;) String commit,
+			@JsonProperty(&quot;copyright&quot;) String copyright,
+			@JsonProperty(&quot;data-type&quot;) String dataType,
+			@JsonProperty(&quot;database&quot;) String database,
+			@JsonProperty(&quot;date-accessed&quot;) String dateAccessed,
+			@JsonProperty(&quot;date-downloaded&quot;) String dateDownloaded,
+			@JsonProperty(&quot;date-released&quot;) String dateReleased,
+			@JsonProperty(&quot;date-published&quot;) String datePublished,
+			@JsonProperty(&quot;department&quot;) String department,
+			@JsonProperty(&quot;doi&quot;) String doi,
+			@JsonProperty(&quot;edition&quot;) String edition,
+			@JsonProperty(&quot;end&quot;) Integer end,
+			@JsonProperty(&quot;entry&quot;) String entry,
+			@JsonProperty(&quot;filename&quot;) String filename,
+			@JsonProperty(&quot;format&quot;) String format,
+			@JsonProperty(&quot;isbn&quot;) String isbn,
+			@JsonProperty(&quot;issn&quot;) String issn,
+			@JsonProperty(&quot;issue&quot;) String issue,
+			@JsonProperty(&quot;issue-date&quot;) String issueDate,
+			@JsonProperty(&quot;issue-title&quot;) String issueTitle,
+			@JsonProperty(&quot;journal&quot;) String journal,
+			@JsonProperty(&quot;keywords&quot;) List&lt;String&gt; keywords,
+			@JsonProperty(&quot;languages&quot;) List&lt;String&gt; languages,
+			@JsonProperty(&quot;license&quot;) String license,
+			@JsonProperty(&quot;license-url&quot;) String licenseUrl,
+			@JsonProperty(&quot;loc-start&quot;) Integer locStart,
+			@JsonProperty(&quot;loc-end&quot;) Integer locEnd,
+			@JsonProperty(&quot;medium&quot;) String medium,
+			@JsonProperty(&quot;month&quot;) Integer month,
+			@JsonProperty(&quot;nihmsid&quot;) String nihmsid,
+			@JsonProperty(&quot;notes&quot;) String notes,
+			@JsonProperty(&quot;number&quot;) String number,
+			@JsonProperty(&quot;number-volumes&quot;) Integer numberVolumes,
+			@JsonProperty(&quot;pages&quot;) Integer pages,
+			@JsonProperty(&quot;patent-states&quot;) List&lt;String&gt; patentStates,
+			@JsonProperty(&quot;pmcid&quot;) String pmcid,
+			@JsonProperty(&quot;repository&quot;) String repository,
+			@JsonProperty(&quot;repository-code&quot;) String repositoryCode,
+			@JsonProperty(&quot;repository-artifact&quot;) String repositoryArtifact,
+			@JsonProperty(&quot;scope&quot;) String scope,
+			@JsonProperty(&quot;section&quot;) String section,
+			@JsonProperty(&quot;status&quot;) String status,
+			@JsonProperty(&quot;start&quot;) Integer start,
+			@JsonProperty(&quot;thesis-type&quot;) String thesisType,
+			@JsonProperty(&quot;url&quot;) String url,
+			@JsonProperty(&quot;version&quot;) String version,
+			@JsonProperty(&quot;volume&quot;) Integer volume,
+			@JsonProperty(&quot;volume-title&quot;) String volumeTitle,
+			@JsonProperty(&quot;year&quot;) Integer year,
+			@JsonProperty(&quot;year-original&quot;) Integer yearOriginal,
+			@JsonProperty(&quot;contact&quot;) List&lt;Subject&gt; contact,
+			@JsonProperty(&quot;database-provider&quot;) Entity databaseProvider,
+			@JsonProperty(&quot;editors&quot;) List&lt;Subject&gt; editors,
+			@JsonProperty(&quot;editors-series&quot;) List&lt;Subject&gt; editorsSeries,
+			@JsonProperty(&quot;institution&quot;) Entity institution,
+			@JsonProperty(&quot;location&quot;) Entity location,
+			@JsonProperty(&quot;publisher&quot;) Entity publisher,
+			@JsonProperty(&quot;recipients&quot;) List&lt;Subject&gt; recipients,
+			@JsonProperty(&quot;senders&quot;) List&lt;Subject&gt; senders,
+			@JsonProperty(&quot;translators&quot;) List&lt;Subject&gt; translators)
+			throws InvalidDataException {
+<span class="fc" id="L244">		super();</span>
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">		if (type == null) {</span>
+<span class="nc" id="L246">			throw new InvalidDataException(&quot;'type' is a required key in references and must be present and not null!&quot;);</span>
+		}
+<span class="fc bfc" id="L248" title="All 2 branches covered.">		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {</span>
+<span class="fc" id="L249">			throw new InvalidDataException(&quot;The reference type '&quot; + type + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+		}
+<span class="fc" id="L251">		this.type = type;</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">		if (title == null) {</span>
+<span class="nc" id="L253">			throw new InvalidDataException(&quot;'title' is a required key in references and must be present and not null!&quot;);</span>
+		}
+<span class="fc" id="L255">		this.title = title;</span>
+<span class="pc bpc" id="L256" title="2 of 4 branches missed.">		if (authors == null || authors.isEmpty()) {</span>
+<span class="nc" id="L257">			throw new InvalidDataException(</span>
+					&quot;'authors' is a required key in references and must be present and not null!&quot;);
+		}
+<span class="fc" id="L260">		this.abbreviation = abbreviation;</span>
+<span class="fc" id="L261">		this.abstractString = abstractString;</span>
+<span class="fc" id="L262">		this.collectionDoi = collectionDoi;</span>
+<span class="fc" id="L263">		this.collectionTitle = collectionTitle;</span>
+<span class="fc" id="L264">		this.collectionType = collectionType;</span>
+<span class="fc" id="L265">		this.commit = commit;</span>
+<span class="fc" id="L266">		this.copyright = copyright;</span>
+<span class="fc" id="L267">		this.dataType = dataType;</span>
+<span class="fc" id="L268">		this.database = database;</span>
+<span class="fc" id="L269">		setDateAccessed(dateAccessed);</span>
+<span class="fc" id="L270">		setDateDownloaded(dateDownloaded);</span>
+<span class="fc" id="L271">		setDateReleased(dateReleased);</span>
+<span class="fc" id="L272">		setDatePublished(datePublished);</span>
+<span class="fc" id="L273">		this.department = department;</span>
+<span class="fc" id="L274">		this.doi = doi;</span>
+<span class="fc" id="L275">		this.edition = edition;</span>
+<span class="fc" id="L276">		this.end = end;</span>
+<span class="fc" id="L277">		this.entry = entry;</span>
+<span class="fc" id="L278">		this.filename = filename;</span>
+<span class="fc" id="L279">		this.format = format;</span>
+<span class="fc" id="L280">		this.isbn = isbn;</span>
+<span class="fc" id="L281">		this.issn = issn;</span>
+<span class="fc" id="L282">		this.issue = issue;</span>
+<span class="fc" id="L283">		this.issueDate = issueDate;</span>
+<span class="fc" id="L284">		this.issueTitle = issueTitle;</span>
+<span class="fc" id="L285">		this.journal = journal;</span>
+<span class="fc" id="L286">		this.keywords = keywords;</span>
+<span class="fc" id="L287">		setLanguages(languages);</span>
+<span class="fc" id="L288">		this.license = license;</span>
+<span class="fc" id="L289">		setLicenseUrl(licenseUrl);</span>
+<span class="fc" id="L290">		this.locStart = locStart;</span>
+<span class="fc" id="L291">		this.locEnd = locEnd;</span>
+<span class="fc" id="L292">		this.medium = medium;</span>
+<span class="fc" id="L293">		this.month = month;</span>
+<span class="fc" id="L294">		this.nihmsid = nihmsid;</span>
+<span class="fc" id="L295">		this.notes = notes;</span>
+<span class="fc" id="L296">		this.number = number;</span>
+<span class="fc" id="L297">		this.numberVolumes = numberVolumes;</span>
+<span class="fc" id="L298">		this.pages = pages;</span>
+<span class="fc" id="L299">		this.patentStates = patentStates;</span>
+<span class="fc" id="L300">		this.pmcid = pmcid;</span>
+<span class="fc" id="L301">		setRepository(repository);</span>
+<span class="fc" id="L302">		setRepositoryCode(repositoryCode);</span>
+<span class="fc" id="L303">		setRepositoryArtifact(repositoryArtifact);</span>
+<span class="fc" id="L304">		this.scope = scope;</span>
+<span class="fc" id="L305">		this.section = section;</span>
+<span class="fc" id="L306">		setStatus(status);</span>
+<span class="fc" id="L307">		this.start = start;</span>
+<span class="fc" id="L308">		this.thesisType = thesisType;</span>
+<span class="fc" id="L309">		setUrl(url);</span>
+<span class="fc" id="L310">		this.version = version;</span>
+<span class="fc" id="L311">		this.volume = volume;</span>
+<span class="fc" id="L312">		this.volumeTitle = volumeTitle;</span>
+<span class="fc" id="L313">		this.year = year;</span>
+<span class="fc" id="L314">		this.yearOriginal = yearOriginal;</span>
+<span class="fc" id="L315">		this.conference = conference;</span>
+<span class="fc" id="L316">		this.authors = authors;</span>
+<span class="fc" id="L317">		this.contact = contact;</span>
+<span class="fc" id="L318">		this.databaseProvider = databaseProvider;</span>
+<span class="fc" id="L319">		this.editors = editors;</span>
+<span class="fc" id="L320">		this.editorsSeries = editorsSeries;</span>
+<span class="fc" id="L321">		this.institution = institution;</span>
+<span class="fc" id="L322">		this.location = location;</span>
+<span class="fc" id="L323">		this.publisher = publisher;</span>
+<span class="fc" id="L324">		this.recipients = recipients;</span>
+<span class="fc" id="L325">		this.senders = senders;</span>
+<span class="fc" id="L326">		this.translators = translators;</span>
+<span class="fc" id="L327">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;type&quot;)
+	public String getType() {
+<span class="fc" id="L336">		return type;</span>
+	}
+
+	@JsonProperty(&quot;type&quot;)
+	private void setType(String type) {
+<span class="nc" id="L341">		this.type = type;</span>
+<span class="nc" id="L342">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;title&quot;)
+	public String getTitle() {
+<span class="fc" id="L351">		return title;</span>
+	}
+
+	@JsonProperty(&quot;title&quot;)
+	private void setTitle(String title) {
+<span class="nc" id="L356">		this.title = title;</span>
+<span class="nc" id="L357">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;abbreviation&quot;)
+	public String getAbbreviation() {
+<span class="fc" id="L366">		return abbreviation;</span>
+	}
+
+	@JsonProperty(&quot;abbreviation&quot;)
+	private void setAbbreviation(String abbreviation) {
+<span class="nc" id="L371">		this.abbreviation = abbreviation;</span>
+<span class="nc" id="L372">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;abstract&quot;)
+	public String getAbstract() {
+<span class="fc" id="L381">		return abstractString;</span>
+	}
+
+	@JsonProperty(&quot;abstract&quot;)
+	private void setAbstract(String _abstract) {
+<span class="nc" id="L386">		this.abstractString = _abstract;</span>
+<span class="nc" id="L387">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;collection-doi&quot;)
+	public String getCollectionDoi() {
+<span class="fc" id="L396">		return collectionDoi;</span>
+	}
+
+	@JsonProperty(&quot;collection-doi&quot;)
+	private void setCollectionDoi(String collectionDoi) {
+<span class="nc" id="L401">		this.collectionDoi = collectionDoi;</span>
+<span class="nc" id="L402">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;collection-title&quot;)
+	public String getCollectionTitle() {
+<span class="fc" id="L411">		return collectionTitle;</span>
+	}
+
+	@JsonProperty(&quot;collection-title&quot;)
+	private void setCollectionTitle(String collectionTitle) {
+<span class="nc" id="L416">		this.collectionTitle = collectionTitle;</span>
+<span class="nc" id="L417">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;collection-type&quot;)
+	public String getCollectionType() {
+<span class="fc" id="L426">		return collectionType;</span>
+	}
+
+	@JsonProperty(&quot;collection-type&quot;)
+	private void setCollectionType(String collectionType) {
+<span class="nc" id="L431">		this.collectionType = collectionType;</span>
+<span class="nc" id="L432">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;commit&quot;)
+	public String getCommit() {
+<span class="fc" id="L441">		return commit;</span>
+	}
+
+	@JsonProperty(&quot;commit&quot;)
+	private void setCommit(String commit) {
+<span class="nc" id="L446">		this.commit = commit;</span>
+<span class="nc" id="L447">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;copyright&quot;)
+	public String getCopyright() {
+<span class="fc" id="L456">		return copyright;</span>
+	}
+
+	@JsonProperty(&quot;copyright&quot;)
+	private void setCopyright(String copyright) {
+<span class="nc" id="L461">		this.copyright = copyright;</span>
+<span class="nc" id="L462">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;data-type&quot;)
+	public String getDataType() {
+<span class="fc" id="L471">		return dataType;</span>
+	}
+
+	@JsonProperty(&quot;data-type&quot;)
+	private void setDataType(String dataType) {
+<span class="nc" id="L476">		this.dataType = dataType;</span>
+<span class="nc" id="L477">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;database&quot;)
+	public String getDatabase() {
+<span class="fc" id="L486">		return database;</span>
+	}
+
+	@JsonProperty(&quot;database&quot;)
+	private void setDatabase(String database) {
+<span class="nc" id="L491">		this.database = database;</span>
+<span class="nc" id="L492">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;date-accessed&quot;)
+	public LocalDate getDateAccessed() {
+<span class="fc" id="L501">		return dateAccessed;</span>
+	}
+
+	@JsonProperty(&quot;date-accessed&quot;)
+	private void setDateAccessed(String dateAccessed) throws InvalidDataException {
+<span class="fc bfc" id="L506" title="All 2 branches covered.">		if (dateAccessed != null) {</span>
+			try {
+<span class="fc" id="L508">				this.dateAccessed = LocalDate.parse(dateAccessed);</span>
+			}
+<span class="nc" id="L510">			catch (DateTimeException e) {</span>
+<span class="nc" id="L511">				throw new InvalidDataException(&quot;DateTimeException in field 'date-accessed'!&quot;, e);</span>
+<span class="fc" id="L512">			}</span>
+		}
+<span class="fc" id="L514">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;date-downloaded&quot;)
+	public LocalDate getDateDownloaded() {
+<span class="fc" id="L523">		return dateDownloaded;</span>
+	}
+
+	@JsonProperty(&quot;date-downloaded&quot;)
+	private void setDateDownloaded(String dateDownloaded) throws InvalidDataException {
+<span class="fc bfc" id="L528" title="All 2 branches covered.">		if (dateDownloaded != null) {</span>
+			try {
+<span class="fc" id="L530">				this.dateDownloaded = LocalDate.parse(dateDownloaded);</span>
+			}
+<span class="nc" id="L532">			catch (DateTimeException e) {</span>
+<span class="nc" id="L533">				throw new InvalidDataException(&quot;DateTimeException in field 'date-downloaded'!&quot;, e);</span>
+<span class="fc" id="L534">			}</span>
+		}
+<span class="fc" id="L536">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;date-released&quot;)
+	public LocalDate getDateReleased() {
+<span class="fc" id="L545">		return dateReleased;</span>
+	}
+
+	@JsonProperty(&quot;date-released&quot;)
+	private void setDateReleased(String dateReleased) throws InvalidDataException {
+<span class="fc bfc" id="L550" title="All 2 branches covered.">		if (dateReleased != null) {</span>
+			try {
+<span class="fc" id="L552">				this.dateReleased = LocalDate.parse(dateReleased);</span>
+			}
+<span class="nc" id="L554">			catch (DateTimeException e) {</span>
+<span class="nc" id="L555">				throw new InvalidDataException(&quot;DateTimeException in field 'date-released'!&quot;, e);</span>
+<span class="fc" id="L556">			}</span>
+		}
+<span class="fc" id="L558">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;date-published&quot;)
+	public LocalDate getDatePublished() {
+<span class="fc" id="L567">		return datePublished;</span>
+	}
+
+	@JsonProperty(&quot;date-published&quot;)
+	private void setDatePublished(String datePublished) throws InvalidDataException {
+<span class="fc bfc" id="L572" title="All 2 branches covered.">		if (datePublished != null) {</span>
+			try {
+<span class="fc" id="L574">				this.datePublished = LocalDate.parse(datePublished);</span>
+			}
+<span class="nc" id="L576">			catch (DateTimeException e) {</span>
+<span class="nc" id="L577">				throw new InvalidDataException(&quot;DateTimeException in field 'date-published'!&quot;, e);</span>
+<span class="fc" id="L578">			}</span>
+		}
+<span class="fc" id="L580">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;department&quot;)
+	public String getDepartment() {
+<span class="fc" id="L589">		return department;</span>
+	}
+
+	@JsonProperty(&quot;department&quot;)
+	private void setDepartment(String department) {
+<span class="nc" id="L594">		this.department = department;</span>
+<span class="nc" id="L595">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;doi&quot;)
+	public String getDoi() {
+<span class="fc" id="L604">		return doi;</span>
+	}
+
+	@JsonProperty(&quot;doi&quot;)
+	private void setDoi(String doi) {
+<span class="nc" id="L609">		this.doi = doi;</span>
+<span class="nc" id="L610">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;edition&quot;)
+	public String getEdition() {
+<span class="fc" id="L619">		return edition;</span>
+	}
+
+	@JsonProperty(&quot;edition&quot;)
+	private void setEdition(String edition) {
+<span class="nc" id="L624">		this.edition = edition;</span>
+<span class="nc" id="L625">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;end&quot;)
+	public Integer getEnd() {
+<span class="fc" id="L634">		return end;</span>
+	}
+
+	@JsonProperty(&quot;end&quot;)
+	private void setEnd(Integer end) {
+<span class="nc" id="L639">		this.end = end;</span>
+<span class="nc" id="L640">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;entry&quot;)
+	public String getEntry() {
+<span class="fc" id="L649">		return entry;</span>
+	}
+
+	@JsonProperty(&quot;entry&quot;)
+	private void setEntry(String entry) {
+<span class="nc" id="L654">		this.entry = entry;</span>
+<span class="nc" id="L655">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;filename&quot;)
+	public String getFilename() {
+<span class="fc" id="L664">		return filename;</span>
+	}
+
+	@JsonProperty(&quot;filename&quot;)
+	private void setFilename(String filename) {
+<span class="nc" id="L669">		this.filename = filename;</span>
+<span class="nc" id="L670">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;format&quot;)
+	public String getFormat() {
+<span class="fc" id="L679">		return format;</span>
+	}
+
+	@JsonProperty(&quot;format&quot;)
+	private void setFormat(String format) {
+<span class="nc" id="L684">		this.format = format;</span>
+<span class="nc" id="L685">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;isbn&quot;)
+	public String getIsbn() {
+<span class="fc" id="L694">		return isbn;</span>
+	}
+
+	@JsonProperty(&quot;isbn&quot;)
+	private void setIsbn(String isbn) {
+<span class="nc" id="L699">		this.isbn = isbn;</span>
+<span class="nc" id="L700">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;issn&quot;)
+	public String getIssn() {
+<span class="fc" id="L709">		return issn;</span>
+	}
+
+	@JsonProperty(&quot;issn&quot;)
+	private void setIssn(String issn) {
+<span class="nc" id="L714">		this.issn = issn;</span>
+<span class="nc" id="L715">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;issue&quot;)
+	public String getIssue() {
+<span class="fc" id="L724">		return issue;</span>
+	}
+
+	@JsonProperty(&quot;issue&quot;)
+	private void setIssue(String issue) {
+<span class="nc" id="L729">		this.issue = issue;</span>
+<span class="nc" id="L730">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;issue-date&quot;)
+	public String getIssueDate() {
+<span class="fc" id="L739">		return issueDate;</span>
+	}
+
+	@JsonProperty(&quot;issue-date&quot;)
+	private void setIssueDate(String issueDate) {
+<span class="nc" id="L744">		this.issueDate = issueDate;</span>
+<span class="nc" id="L745">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;issue-title&quot;)
+	public String getIssueTitle() {
+<span class="fc" id="L754">		return issueTitle;</span>
+	}
+
+	@JsonProperty(&quot;issue-title&quot;)
+	private void setIssueTitle(String issueTitle) {
+<span class="nc" id="L759">		this.issueTitle = issueTitle;</span>
+<span class="nc" id="L760">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;journal&quot;)
+	public String getJournal() {
+<span class="fc" id="L769">		return journal;</span>
+	}
+
+	@JsonProperty(&quot;journal&quot;)
+	private void setJournal(String journal) {
+<span class="nc" id="L774">		this.journal = journal;</span>
+<span class="nc" id="L775">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;keywords&quot;)
+	public List&lt;String&gt; getKeywords() {
+<span class="fc" id="L784">		return keywords;</span>
+	}
+
+	@JsonProperty(&quot;keywords&quot;)
+	private void setKeywords(List&lt;String&gt; keywords) {
+<span class="nc" id="L789">		this.keywords = keywords;</span>
+<span class="nc" id="L790">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;languages&quot;)
+	public List&lt;String&gt; getLanguages() {
+<span class="fc" id="L799">		return languages;</span>
+	}
+
+	@JsonProperty(&quot;languages&quot;)
+	private void setLanguages(List&lt;String&gt; languages) throws InvalidDataException {
+<span class="fc bfc" id="L804" title="All 2 branches covered.">		if (languages != null) {</span>
+<span class="fc bfc" id="L805" title="All 2 branches covered.">			for (String language : languages) {</span>
+<span class="fc bfc" id="L806" title="All 4 branches covered.">				if (language.length() &gt; 3 || language.length() &lt;= 1) {</span>
+<span class="fc" id="L807">					throw new InvalidDataException(&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
+				}
+<span class="pc bpc" id="L809" title="1 of 2 branches missed.">				if (!DefinedValues.isLanguageValid(language)) {</span>
+<span class="nc" id="L810">					throw new InvalidDataException(</span>
+							&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);
+				}
+<span class="fc" id="L813">			}</span>
+		}
+<span class="fc" id="L815">		this.languages = languages;</span>
+<span class="fc" id="L816">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;license&quot;)
+	public String getLicense() {
+<span class="fc" id="L825">		return license;</span>
+	}
+
+	@JsonProperty(&quot;license&quot;)
+	private void setLicense(String license) {
+<span class="nc" id="L830">		this.license = license;</span>
+<span class="nc" id="L831">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;license-url&quot;)
+	public URL getLicenseUrl() {
+<span class="fc" id="L840">		return licenseUrl;</span>
+	}
+
+	@JsonProperty(&quot;license-url&quot;)
+	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
+<span class="fc bfc" id="L845" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
+			try {
+<span class="fc" id="L847">				this.licenseUrl = new URL(licenseUrl);</span>
+			}
+<span class="nc" id="L849">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L850">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L851">						+ &quot;' contains an invalid URL in field 'license-url': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L852">			}</span>
+		}
+<span class="fc" id="L854">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;loc-start&quot;)
+	public Integer getLocStart() {
+<span class="fc" id="L863">		return locStart;</span>
+	}
+
+	@JsonProperty(&quot;loc-start&quot;)
+	private void setLocStart(Integer locStart) {
+<span class="nc" id="L868">		this.locStart = locStart;</span>
+<span class="nc" id="L869">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;loc-end&quot;)
+	public Integer getLocEnd() {
+<span class="fc" id="L878">		return locEnd;</span>
+	}
+
+	@JsonProperty(&quot;loc-end&quot;)
+	private void setLocEnd(Integer locEnd) {
+<span class="nc" id="L883">		this.locEnd = locEnd;</span>
+<span class="nc" id="L884">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;medium&quot;)
+	public String getMedium() {
+<span class="fc" id="L893">		return medium;</span>
+	}
+
+	@JsonProperty(&quot;medium&quot;)
+	private void setMedium(String medium) {
+<span class="nc" id="L898">		this.medium = medium;</span>
+<span class="nc" id="L899">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;month&quot;)
+	public Integer getMonth() {
+<span class="fc" id="L908">		return month;</span>
+	}
+
+	@JsonProperty(&quot;month&quot;)
+	private void setMonth(Integer month) {
+<span class="nc" id="L913">		this.month = month;</span>
+<span class="nc" id="L914">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;nihmsid&quot;)
+	public String getNihmsid() {
+<span class="fc" id="L923">		return nihmsid;</span>
+	}
+
+	@JsonProperty(&quot;nihmsid&quot;)
+	private void setNihmsid(String nihmsid) {
+<span class="nc" id="L928">		this.nihmsid = nihmsid;</span>
+<span class="nc" id="L929">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;notes&quot;)
+	public String getNotes() {
+<span class="fc" id="L938">		return notes;</span>
+	}
+
+	@JsonProperty(&quot;notes&quot;)
+	private void setNotes(String notes) {
+<span class="nc" id="L943">		this.notes = notes;</span>
+<span class="nc" id="L944">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;number&quot;)
+	public String getNumber() {
+<span class="fc" id="L953">		return number;</span>
+	}
+
+	@JsonProperty(&quot;number&quot;)
+	private void setNumber(String number) {
+<span class="nc" id="L958">		this.number = number;</span>
+<span class="nc" id="L959">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;number-volumes&quot;)
+	public Integer getNumberVolumes() {
+<span class="fc" id="L968">		return numberVolumes;</span>
+	}
+
+	@JsonProperty(&quot;number-volumes&quot;)
+	private void setNumberVolumes(Integer numberVolumes) {
+<span class="nc" id="L973">		this.numberVolumes = numberVolumes;</span>
+<span class="nc" id="L974">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;pages&quot;)
+	public Integer getPages() {
+<span class="fc" id="L983">		return pages;</span>
+	}
+
+	@JsonProperty(&quot;pages&quot;)
+	private void setPages(Integer pages) {
+<span class="nc" id="L988">		this.pages = pages;</span>
+<span class="nc" id="L989">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;patent-states&quot;)
+	public List&lt;String&gt; getPatentStates() {
+<span class="fc" id="L998">		return patentStates;</span>
+	}
+
+	@JsonProperty(&quot;patent-states&quot;)
+	private void setPatentStates(List&lt;String&gt; patentStates) {
+<span class="nc" id="L1003">		this.patentStates = patentStates;</span>
+<span class="nc" id="L1004">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;pmcid&quot;)
+	public String getPmcid() {
+<span class="fc" id="L1013">		return pmcid;</span>
+	}
+
+	@JsonProperty(&quot;pmcid&quot;)
+	private void setPmcid(String pmcid) {
+<span class="nc" id="L1018">		this.pmcid = pmcid;</span>
+<span class="nc" id="L1019">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;repository&quot;)
+	public URL getRepository() {
+<span class="fc" id="L1028">		return repository;</span>
+	}
+
+	@JsonProperty(&quot;repository&quot;)
+	private void setRepository(String repository) throws InvalidDataException {
+<span class="fc bfc" id="L1033" title="All 2 branches covered.">		if (repository != null) {</span>
+			try {
+<span class="fc" id="L1035">				this.repository = new URL(repository);</span>
+			}
+<span class="nc" id="L1037">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1038">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1039">						+ &quot;' contains an invalid URL in field 'repository': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1040">			}</span>
+		}
+<span class="fc" id="L1042">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;repository-code&quot;)
+	public URL getRepositoryCode() {
+<span class="fc" id="L1051">		return repositoryCode;</span>
+	}
+
+	@JsonProperty(&quot;repository-code&quot;)
+	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
+<span class="fc bfc" id="L1056" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
+			try {
+<span class="fc" id="L1058">				this.repositoryCode = new URL(repositoryCode);</span>
+			}
+<span class="nc" id="L1060">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1061">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1062">						+ &quot;' contains an invalid URL in field 'repository-code': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1063">			}</span>
+		}
+<span class="fc" id="L1065">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;repository-artifact&quot;)
+	public URL getRepositoryArtifact() {
+<span class="fc" id="L1074">		return repositoryArtifact;</span>
+	}
+
+	@JsonProperty(&quot;repository-artifact&quot;)
+	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
+<span class="fc bfc" id="L1079" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
+			try {
+<span class="fc" id="L1081">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
+			}
+<span class="nc" id="L1083">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1084">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1085">						+ &quot;' contains an invalid URL in field 'repository-artifact': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1086">			}</span>
+		}
+<span class="fc" id="L1088">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;scope&quot;)
+	public String getScope() {
+<span class="fc" id="L1097">		return scope;</span>
+	}
+
+	@JsonProperty(&quot;scope&quot;)
+	private void setScope(String scope) {
+<span class="nc" id="L1102">		this.scope = scope;</span>
+<span class="nc" id="L1103">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;section&quot;)
+	public String getSection() {
+<span class="fc" id="L1112">		return section;</span>
+	}
+
+	@JsonProperty(&quot;section&quot;)
+	private void setSection(String section) {
+<span class="nc" id="L1117">		this.section = section;</span>
+<span class="nc" id="L1118">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;status&quot;)
+	public String getStatus() {
+<span class="fc" id="L1127">		return status;</span>
+	}
+
+	@JsonProperty(&quot;status&quot;)
+	private void setStatus(String status) throws InvalidDataException {
+<span class="fc bfc" id="L1132" title="All 2 branches covered.">		if (status != null) {</span>
+<span class="fc bfc" id="L1133" title="All 2 branches covered.">			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {</span>
+<span class="fc" id="L1134">				throw new InvalidDataException(&quot;The status '&quot; + status + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+			}
+		}
+<span class="fc" id="L1137">		this.status = status;</span>
+<span class="fc" id="L1138">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;start&quot;)
+	public Integer getStart() {
+<span class="fc" id="L1147">		return start;</span>
+	}
+
+	@JsonProperty(&quot;start&quot;)
+	private void setStart(Integer start) {
+<span class="nc" id="L1152">		this.start = start;</span>
+<span class="nc" id="L1153">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;thesis-type&quot;)
+	public String getThesisType() {
+<span class="fc" id="L1162">		return thesisType;</span>
+	}
+
+	@JsonProperty(&quot;thesis-type&quot;)
+	private void setThesisType(String thesisType) {
+<span class="nc" id="L1167">		this.thesisType = thesisType;</span>
+<span class="nc" id="L1168">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;url&quot;)
+	public URL getUrl() {
+<span class="fc" id="L1177">		return url;</span>
+	}
+
+	@JsonProperty(&quot;url&quot;)
+	private void setUrl(String url) throws InvalidDataException {
+<span class="fc bfc" id="L1182" title="All 2 branches covered.">		if (url != null) {</span>
+			try {
+<span class="fc" id="L1184">				this.url = new URL(url);</span>
+			}
+<span class="nc" id="L1186">			catch (MalformedURLException e) {</span>
+<span class="nc" id="L1187">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
+<span class="nc" id="L1188">						+ &quot;' contains an invalid URL in field 'url': &quot; + e.getMessage(), e);</span>
+<span class="fc" id="L1189">			}</span>
+		}
+<span class="fc" id="L1191">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;version&quot;)
+	public String getVersion() {
+<span class="fc" id="L1200">		return version;</span>
+	}
+
+	@JsonProperty(&quot;version&quot;)
+	private void setVersion(String version) {
+<span class="nc" id="L1205">		this.version = version;</span>
+<span class="nc" id="L1206">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;volume&quot;)
+	public Integer getVolume() {
+<span class="fc" id="L1215">		return volume;</span>
+	}
+
+	@JsonProperty(&quot;volume&quot;)
+	private void setVolume(Integer volume) {
+<span class="nc" id="L1220">		this.volume = volume;</span>
+<span class="nc" id="L1221">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;volume-title&quot;)
+	public String getVolumeTitle() {
+<span class="fc" id="L1230">		return volumeTitle;</span>
+	}
+
+	@JsonProperty(&quot;volume-title&quot;)
+	private void setVolumeTitle(String volumeTitle) {
+<span class="nc" id="L1235">		this.volumeTitle = volumeTitle;</span>
+<span class="nc" id="L1236">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;year&quot;)
+	public Integer getYear() {
+<span class="fc" id="L1245">		return year;</span>
+	}
+
+	@JsonProperty(&quot;year&quot;)
+	private void setYear(Integer year) {
+<span class="nc" id="L1250">		this.year = year;</span>
+<span class="nc" id="L1251">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;year-original&quot;)
+	public Integer getYearOriginal() {
+<span class="fc" id="L1260">		return yearOriginal;</span>
+	}
+
+	@JsonProperty(&quot;year-original&quot;)
+	private void setYearOriginal(Integer yearOriginal) {
+<span class="nc" id="L1265">		this.yearOriginal = yearOriginal;</span>
+<span class="nc" id="L1266">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;conference&quot;)
+	public Entity getConference() {
+<span class="nc" id="L1275">		return conference;</span>
+	}
+
+	@JsonProperty(&quot;conference&quot;)
+	private void setConference(Entity conference) {
+<span class="nc" id="L1280">		this.conference = conference;</span>
+<span class="nc" id="L1281">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;authors&quot;)
+	public List&lt;Subject&gt; getAuthors() {
+<span class="nc" id="L1290">		return authors;</span>
+	}
+
+	@JsonProperty(&quot;authors&quot;)
+	private void setAuthors(List&lt;Subject&gt; authors) {
+<span class="nc" id="L1295">		this.authors = authors;</span>
+<span class="nc" id="L1296">	}</span>
+	
+	/**
+	 * @return A filtered list of authors, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonAuthors() {
+<span class="nc" id="L1302">		return filterPersons(getAuthors());</span>
+	}
+	
+	/**
+	 * @return A filtered list of authors, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityAuthors() {
+<span class="nc" id="L1309">		return filterEntities(getAuthors());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;contact&quot;)
+	public List&lt;Subject&gt; getContact() {
+<span class="nc" id="L1319">		return contact;</span>
+	}
+
+	@JsonProperty(&quot;contact&quot;)
+	private void setContact(List&lt;Subject&gt; contact) {
+<span class="nc" id="L1324">		this.contact = contact;</span>
+<span class="nc" id="L1325">	}</span>
+
+	/**
+	 * @return A filtered list of contacts, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonContacts() {
+<span class="nc" id="L1331">		return filterPersons(getContact());</span>
+	}
+	
+	/**
+	 * @return A filtered list of contacts, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityContacts() {
+<span class="nc" id="L1338">		return filterEntities(getContact());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;database-provider&quot;)
+	public Entity getDatabaseProvider() {
+<span class="nc" id="L1348">		return databaseProvider;</span>
+	}
+
+	@JsonProperty(&quot;database-provider&quot;)
+	private void setDatabaseProvider(Entity databaseProvider) {
+<span class="nc" id="L1353">		this.databaseProvider = databaseProvider;</span>
+<span class="nc" id="L1354">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;editors&quot;)
+	public List&lt;Subject&gt; getEditors() {
+<span class="nc" id="L1363">		return editors;</span>
+	}
+
+	@JsonProperty(&quot;editors&quot;)
+	private void setEditors(List&lt;Subject&gt; editors) {
+<span class="nc" id="L1368">		this.editors = editors;</span>
+<span class="nc" id="L1369">	}</span>
+
+	/**
+	 * @return A filtered list of editors, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonEditors() {
+<span class="nc" id="L1375">		return filterPersons(getEditors());</span>
+	}
+	
+	/**
+	 * @return A filtered list of editors, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityEditors() {
+<span class="nc" id="L1382">		return filterEntities(getEditors());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;editors-series&quot;)
+	public List&lt;Subject&gt; getEditorsSeries() {
+<span class="nc" id="L1392">		return editorsSeries;</span>
+	}
+
+	@JsonProperty(&quot;editors-series&quot;)
+	private void setEditorsSeries(List&lt;Subject&gt; editorsSeries) {
+<span class="nc" id="L1397">		this.editorsSeries = editorsSeries;</span>
+<span class="nc" id="L1398">	}</span>
+
+	/**
+	 * @return A filtered list of series editors, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonEditorsSeries() {
+<span class="nc" id="L1404">		return filterPersons(getEditorsSeries());</span>
+	}
+	
+	/**
+	 * @return A filtered list of series editors, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityEditorsSeries() {
+<span class="nc" id="L1411">		return filterEntities(getEditorsSeries());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;institution&quot;)
+	public Entity getInstitution() {
+<span class="nc" id="L1421">		return institution;</span>
+	}
+
+	@JsonProperty(&quot;institution&quot;)
+	private void setInstitution(Entity institution) {
+<span class="nc" id="L1426">		this.institution = institution;</span>
+<span class="nc" id="L1427">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;location&quot;)
+	public Entity getLocation() {
+<span class="nc" id="L1436">		return location;</span>
+	}
+
+	@JsonProperty(&quot;location&quot;)
+	private void setLocation(Entity location) {
+<span class="nc" id="L1441">		this.location = location;</span>
+<span class="nc" id="L1442">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;publisher&quot;)
+	public Entity getPublisher() {
+<span class="nc" id="L1451">		return publisher;</span>
+	}
+
+	@JsonProperty(&quot;publisher&quot;)
+	private void setPublisher(Entity publisher) {
+<span class="nc" id="L1456">		this.publisher = publisher;</span>
+<span class="nc" id="L1457">	}</span>
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;recipients&quot;)
+	public List&lt;Subject&gt; getRecipients() {
+<span class="nc" id="L1466">		return recipients;</span>
+	}
+
+	@JsonProperty(&quot;recipients&quot;)
+	private void setRecipients(List&lt;Subject&gt; recipients) {
+<span class="nc" id="L1471">		this.recipients = recipients;</span>
+<span class="nc" id="L1472">	}</span>
+
+	/**
+	 * @return A filtered list of recipients, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonRecipients() {
+<span class="nc" id="L1478">		return filterPersons(getRecipients());</span>
+	}
+	
+	/**
+	 * @return A filtered list of recipients, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityRecipients() {
+<span class="nc" id="L1485">		return filterEntities(getRecipients());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;senders&quot;)
+	public List&lt;Subject&gt; getSenders() {
+<span class="nc" id="L1495">		return senders;</span>
+	}
+
+	@JsonProperty(&quot;senders&quot;)
+	private void setSenders(List&lt;Subject&gt; senders) {
+<span class="nc" id="L1500">		this.senders = senders;</span>
+<span class="nc" id="L1501">	}</span>
+
+	/**
+	 * @return A filtered list of senders, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonSenders() {
+<span class="nc" id="L1507">		return filterPersons(getSenders());</span>
+	}
+	
+	/**
+	 * @return A filtered list of senders, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntitySenders() {
+<span class="nc" id="L1514">		return filterEntities(getSenders());</span>
+	}
+
+	/**
+	 * Getter for the field value.
+	 * 
+	 * @see Reference#Reference(String, String, List, Entity, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String, String, String, String, String, String, List, List, String, String, Integer, Integer, String, Integer, String, String, String, Integer, Integer, List, String, String, String, String, String, String, String, Integer, String, String, String, Integer, String, Integer, Integer, List, Entity, List, List, Entity, Entity, Entity, List, List, List)
+	 */
+	@JsonProperty(&quot;translators&quot;)
+	public List&lt;Subject&gt; getTranslators() {
+<span class="nc" id="L1524">		return translators;</span>
+	}
+
+	@JsonProperty(&quot;translators&quot;)
+	private void setTranslators(List&lt;Subject&gt; translators) {
+<span class="nc" id="L1529">		this.translators = translators;</span>
+<span class="nc" id="L1530">	}</span>
+
+	/**
+	 * @return A filtered list of translators, containing only those of type {@link Person}.
+	 */
+	public List&lt;Person&gt; getPersonTranslators() {
+<span class="nc" id="L1536">		return filterPersons(getTranslators());</span>
+	}
+	
+	/**
+	 * @return A filtered list of translators, containing only those of type {@link Entity}.
+	 */
+	public List&lt;Entity&gt; getEntityTranslators() {
+<span class="nc" id="L1543">		return filterEntities(getTranslators());</span>
+	}
+
+	/*
+	 * HELPER METHODS
+	 */
+
+	private List&lt;Person&gt; filterPersons(List&lt;Subject&gt; subjects) {
+<span class="nc" id="L1551">		List&lt;Person&gt; personList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1552" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
+<span class="nc bnc" id="L1553" title="All 2 branches missed.">			if (subject instanceof Person) {</span>
+<span class="nc" id="L1554">				personList.add((Person) subject);</span>
+			}
+<span class="nc" id="L1556">		}</span>
+<span class="nc" id="L1557">		return personList;</span>
+	}
+
+	private List&lt;Entity&gt; filterEntities(List&lt;Subject&gt; subjects) {
+<span class="nc" id="L1561">		List&lt;Entity&gt; entityList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1562" title="All 2 branches missed.">		for (Subject subject : subjects) {</span>
+<span class="nc bnc" id="L1563" title="All 2 branches missed.">			if (subject instanceof Entity) {</span>
+<span class="nc" id="L1564">				entityList.add((Entity) subject);</span>
+			}
+<span class="nc" id="L1566">		}</span>
+<span class="nc" id="L1567">		return entityList;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

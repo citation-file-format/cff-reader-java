@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Person.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.model.objects</a> &gt; <span class="el_source">Person.java</span></div><h1>Person.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (c) 2018ff. Stephan Druskat
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ */
+package org.research_software.citation.cff.model.objects;
+
+import org.research_software.citation.cff.exceptions.InvalidDataException;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * Model element representing a person.
+ * 
+ * @see &lt;a href=&quot;https://citation-file-format.github.io/1.0.3/specifications/#/person-objects&quot;&gt;https://citation-file-format.github.io/1.0.3/specifications/#/person-objects&lt;/a&gt;
+ * 
+ * @version Citation File Format Version 1.0.3
+ *
+ * @author Stephan Druskat &lt;[mail@sdruskat.net](mailto:mail@sdruskat.net)&gt;
+ * 
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public final class Person extends Subject {
+
+	private String familyNames;
+	private String givenNames;
+	private String nameParticle;
+	private String nameSuffix;
+	private String affiliation;
+
+	/**
+	 * Constructor for databinding.
+	 * 
+	 * @param nameSuffix The suffix of the person's name
+	 * @param familyNames The person's family names
+	 * @param nameParticle The particle of the person's name
+	 * @param givenNames The person's given names
+	 * @param affiliation The person's affiliation 
+	 * @param address The person's address  
+	 * @param city The person's address city
+	 * @param region The person's address region
+	 * @param postCode The person's address post code (&quot;zip code&quot;)
+	 * @param country The person's address country
+	 * @param orcid The person's ORCID iD
+	 * @param email The person's email address
+	 * @param tel The person's telephone number
+	 * @param fax The person's telefax number
+	 * @param website The person's website
+	 * 
+	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses
+	 */
+	public Person(
+			@JsonProperty(&quot;family-names&quot;) String familyNames,
+			@JsonProperty(&quot;given-names&quot;) String givenNames,
+			@JsonProperty(&quot;name-particle&quot;) String nameParticle,
+			@JsonProperty(&quot;name-suffix&quot;) String nameSuffix,
+			@JsonProperty(&quot;affiliation&quot;) String affiliation,
+			@JsonProperty(&quot;address&quot;) String address,
+			@JsonProperty(&quot;city&quot;) String city,
+			@JsonProperty(&quot;region&quot;) String region,
+			@JsonProperty(&quot;post-code&quot;) String postCode,
+			@JsonProperty(&quot;country&quot;) String country,
+			@JsonProperty(&quot;orcid&quot;) String orcid,
+			@JsonProperty(&quot;email&quot;) String email,
+			@JsonProperty(&quot;tel&quot;) String tel,
+			@JsonProperty(&quot;fax&quot;) String fax,
+			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {
+<span class="fc" id="L81">		super(address, city, region, postCode, country, orcid, email, tel, fax, website);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (familyNames == null) {</span>
+<span class="nc" id="L83">			throw new InvalidDataException(&quot;'family-names' is a required key in persons and must be present and not null!&quot;);</span>
+		}
+<span class="fc" id="L85">		this.familyNames = familyNames;</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">		if (givenNames == null) {</span>
+<span class="nc" id="L87">			throw new InvalidDataException(&quot;'given-names' is a required key in persons and must be present and not null!&quot;);</span>
+		}
+<span class="fc" id="L89">		this.givenNames = givenNames;</span>
+<span class="fc" id="L90">		this.nameParticle = nameParticle;</span>
+<span class="fc" id="L91">		this.nameSuffix = nameSuffix;</span>
+<span class="fc" id="L92">		this.affiliation = affiliation;</span>
+<span class="fc" id="L93">	}</span>
+
+	/**
+	 * @return The person's family names
+	 */
+	@JsonProperty(&quot;family-names&quot;)
+	public String getFamilyNames() {
+<span class="fc" id="L100">		return familyNames;</span>
+	}
+
+	@JsonProperty(&quot;family-names&quot;)
+	private void setFamilyNames(String familyNames) {
+<span class="nc" id="L105">		this.familyNames = familyNames;</span>
+<span class="nc" id="L106">	}</span>
+
+	/**
+	 * @return The person's given names
+	 */
+	@JsonProperty(&quot;given-names&quot;)
+	public String getGivenNames() {
+<span class="fc" id="L113">		return givenNames;</span>
+	}
+
+	@JsonProperty(&quot;given-names&quot;)
+	private void setGivenNames(String givenNames) {
+<span class="nc" id="L118">		this.givenNames = givenNames;</span>
+<span class="nc" id="L119">	}</span>
+
+	/**
+	 * @return The particle of the person's name
+	 */
+	@JsonProperty(&quot;name-particle&quot;)
+	public String getNameParticle() {
+<span class="fc" id="L126">		return nameParticle;</span>
+	}
+
+	@JsonProperty(&quot;name-particle&quot;)
+	private void setNameParticle(String nameParticle) {
+<span class="nc" id="L131">		this.nameParticle = nameParticle;</span>
+<span class="nc" id="L132">	}</span>
+
+	/**
+	 * @return The person's name suffix
+	 */
+	@JsonProperty(&quot;name-suffix&quot;)
+	public String getNameSuffix() {
+<span class="fc" id="L139">		return nameSuffix;</span>
+	}
+
+	@JsonProperty(&quot;name-suffix&quot;)
+	private void setNameSuffix(String nameSuffix) {
+<span class="nc" id="L144">		this.nameSuffix = nameSuffix;</span>
+<span class="nc" id="L145">	}</span>
+
+	/**
+	 * @return The person's affiliation
+	 */
+	@JsonProperty(&quot;affiliation&quot;)
+	public String getAffiliation() {
+<span class="fc" id="L152">		return affiliation;</span>
+	}
+
+	@JsonProperty(&quot;affiliation&quot;)
+	private void setAffiliation(String affiliation) {
+<span class="nc" id="L157">		this.affiliation = affiliation;</span>
+<span class="nc" id="L158">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

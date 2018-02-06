@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SoftwareCitationMetadataPojoReader.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Citation File Format Java Reader</a> &gt; <a href="index.source.html" class="el_package">org.research_software.citation.cff.reader</a> &gt; <span class="el_source">SoftwareCitationMetadataPojoReader.java</span></div><h1>SoftwareCitationMetadataPojoReader.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package org.research_software.citation.cff.reader;
+
+import java.io.File;
+import java.io.InputStream;
+import org.research_software.citation.cff.exceptions.InvalidCFFFileNameException;
+import org.research_software.citation.cff.exceptions.InvalidDataException;
+import org.research_software.citation.cff.exceptions.ReadException;
+import org.research_software.citation.cff.model.SoftwareCitationMetadata;
+import org.research_software.citation.cff.model.objects.Subject;
+
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
+/**
+ * An POJO-basd implementation of {@link SoftwareCitationMetadataReader}.
+ *
+ * @author Stephan Druskat &lt;[mail@sdruskat.net](mailto:mail@sdruskat.net)&gt;
+ * 
+ */
+<span class="fc" id="L25">public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetadataReader {</span>
+
+	private static final String CFF_FILE_NAME = &quot;CITATION.cff&quot;;
+
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
+	 */
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">		if (!cffFile.getName().equals(CFF_FILE_NAME)) {</span>
+<span class="fc" id="L34">			throw new InvalidCFFFileNameException(&quot;File name of CFF file must be '&quot; + CFF_FILE_NAME + &quot;' (is '&quot; + cffFile.getName() + &quot;')!&quot;);</span>
+		}
+<span class="fc" id="L36">		SoftwareCitationMetadata citation = null;</span>
+		try {
+<span class="fc" id="L38">			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);</span>
+		}
+<span class="nc" id="L40">		catch (JsonMappingException e) {</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
+				try {
+<span class="nc" id="L43">					throw e.getCause();</span>
+				}
+<span class="nc" id="L45">				catch (Throwable e1) {</span>
+					// Should not happen really. 
+<span class="nc" id="L47">					e1.printStackTrace();</span>
+				}
+			}
+		}
+<span class="fc" id="L51">		catch (Exception e) {</span>
+<span class="fc" id="L52">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+<span class="pc" id="L53">		}</span>
+<span class="fc" id="L54">		return citation;</span>
+	}
+
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromStream(java.io.InputStream)
+	 */
+	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException {
+<span class="fc" id="L61">		SoftwareCitationMetadata citation = null;</span>
+		try {
+<span class="fc" id="L63">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
+		}
+<span class="nc" id="L65">		catch (JsonMappingException e) {</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
+				try {
+<span class="nc" id="L68">					throw ((InvalidDataException) e.getCause());</span>
+				}
+<span class="nc" id="L70">				catch (Throwable e1) {</span>
+					// Should not happen really.
+<span class="nc" id="L72">					e1.printStackTrace();</span>
+				}
+			}
+		}
+<span class="fc" id="L76">		catch (Exception e) {</span>
+<span class="fc" id="L77">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+<span class="pc" id="L78">		}</span>
+<span class="fc" id="L79">		return citation;</span>
+	}
+
+	/**
+	 * Construct the mapper to use for reading the file or stream.
+	 * 
+	 * Attaches a custom deserializer of type {@link SubjectDeserializer} to
+	 * the mapper.
+	 * 
+	 * @return The constructed mapper
+	 */
+	private ObjectMapper getMapper() {
+<span class="fc" id="L91">		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
+
+<span class="fc" id="L93">		final SimpleModule module = new SimpleModule();</span>
+		// Add custom deserializer for Subject
+<span class="fc" id="L95">		module.addDeserializer(Subject.class, new SubjectDeserializer());</span>
+<span class="fc" id="L96">		mapper.registerModule(module);</span>
+<span class="fc" id="L97">		return mapper;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
