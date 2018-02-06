@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.research-software.citation</groupId>
 	<artifactId>cff-reader-java</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>Citation File Format Java Reader</name>
 	<packaging>jar</packaging>
 	<description>A Java API for reading software citation metadata files in the Citation File Format.</description>
@@ -57,6 +57,7 @@
 		<connection>scm:git:git://github.com/citation-file-format/cff-reader-java.git</connection>
 		<developerConnection>scm:git:git@github.com:citation-file-format/cff-reader-java.git</developerConnection>
 		<url>https://github.com/citation-file-format/cff-reader-java</url>
+		<tag>HEAD</tag>
 	</scm>
 
 
@@ -183,6 +184,28 @@
 						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Automatically add license headers (license:format) -->
+			<!-- start: for generating license headers in source files. Run mvn license:format -->
+			<plugin>
+				<groupId>com.google.code.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<header>${basedir}/src/etc/header.txt</header>
+					<includes>
+						<include>src/main/java/**</include>
+						<include>src/test/java/**</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>format</goal>
 						</goals>
 					</execution>
 				</executions>
