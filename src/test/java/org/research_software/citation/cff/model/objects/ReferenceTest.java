@@ -9,13 +9,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.research_software.citation.cff.exceptions.InvalidDataException;
 
 /**
- * // TODO Add description
+ * Unit tests for {@link Reference}.
  *
  * @author Stephan Druskat <[mail@sdruskat.net](mailto:mail@sdruskat.net)>
  * 
@@ -23,25 +21,10 @@ import org.research_software.citation.cff.exceptions.InvalidDataException;
 public class ReferenceTest {
 
 	/**
-	 * // TODO Add description
+	 * Creates a new {@link Reference} object, passing an undefined reference type into the constructor.
 	 * 
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * // TODO Add description
+	 * Expects an {@link InvalidDataException}.
 	 * 
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
 	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidDataException.class)
@@ -50,7 +33,10 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing an undefined reference type into the constructor.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
+	 * 
 	 */
 	@Test
 	public final void testReferenceBadTypeMessage() {
@@ -66,7 +52,9 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing an undefined reference language into the constructor.
+	 * 
+	 * Expects an {@link InvalidDataException}.
 	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidDataException.class)
@@ -75,7 +63,9 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing an undefined reference language into the constructor.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testReferenceBadLanguageMessage() {
@@ -91,7 +81,9 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing a too short (and undefined) reference language into the constructor.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testReferenceBadNonAlphabeticalLanguageMessage() {
@@ -107,7 +99,9 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing an undefined reference status into the constructor.
+	 * 
+	 * Expects an {@link InvalidDataException}.
 	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidDataException.class)
@@ -116,7 +110,9 @@ public class ReferenceTest {
 	}
 
 	/**
-	 * Test method for {@link org.research_software.citation.cff.model.objects.Reference#Reference(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.util.List, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, org.research_software.citation.cff.model.objects.Entity, java.util.List, java.util.List, java.util.List)}.
+	 * Creates a new {@link Reference} object, passing an undefined reference status into the constructor.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
 	 */
 	@Test
 	public final void testReferenceBadStatusMessage() {
@@ -132,9 +128,11 @@ public class ReferenceTest {
 	}
 	
 	/**
-	 * // TODO Add description
-	 * @throws InvalidDataException 
+	 * Creates a new {@link Reference} object, passing only the required fields into the constructor.
 	 * 
+	 * In this scenario, no exceptions should be thrown.
+	 * 
+	 * @throws InvalidDataException 
 	 */
 	@Test
 	public final void testOnlyRequiredValues() throws InvalidDataException {
