@@ -89,6 +89,11 @@ Central.
 
 ```
 
+## Documentation
+
+General documentation is maintained at <https://citation-file-format.github.io/cff-reader-java>,
+including [API JavaDocs](<https://citation-file-format.github.io/cff-reader-java>).
+
 ## Build
 
 Build the project locally with `mvn {clean} install`.
