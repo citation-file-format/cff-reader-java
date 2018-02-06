@@ -35,12 +35,12 @@ class SubjectDeserializer extends StdDeserializer&lt;Subject&gt; {
 	private static final long serialVersionUID = 1L;
 
 	protected SubjectDeserializer() {
-<span class="fc" id="L38">		this(null);</span>
-<span class="fc" id="L39">	}</span>
+<span class="nc" id="L38">		this(null);</span>
+<span class="nc" id="L39">	}</span>
 
 	protected SubjectDeserializer(final Class&lt;?&gt; vc) {
-<span class="fc" id="L42">		super(vc);</span>
-<span class="fc" id="L43">	}</span>
+<span class="nc" id="L42">		super(vc);</span>
+<span class="nc" id="L43">	}</span>
 
 	/* (non-Javadoc)
 	 * @see com.fasterxml.jackson.databind.JsonDeserializer#deserialize(com.fasterxml.jackson.core.JsonParser, com.fasterxml.jackson.databind.DeserializationContext)
@@ -48,13 +48,13 @@ class SubjectDeserializer extends StdDeserializer&lt;Subject&gt; {
 	@Override
 	public Subject deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
-<span class="fc" id="L51">		final JsonNode node = parser.getCodec().readTree(parser);</span>
-<span class="fc" id="L52">		final ObjectMapper mapper = (ObjectMapper) parser.getCodec();</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">		if (node.has(&quot;name&quot;)) {</span>
-<span class="fc" id="L54">			return mapper.treeToValue(node, Entity.class);</span>
+<span class="nc" id="L51">		final JsonNode node = parser.getCodec().readTree(parser);</span>
+<span class="nc" id="L52">		final ObjectMapper mapper = (ObjectMapper) parser.getCodec();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (node.has(&quot;name&quot;)) {</span>
+<span class="nc" id="L54">			return mapper.treeToValue(node, Entity.class);</span>
 		}
 		else {
-<span class="fc" id="L57">			return mapper.treeToValue(node, Person.class);</span>
+<span class="nc" id="L57">			return mapper.treeToValue(node, Person.class);</span>
 		}
 	}
 

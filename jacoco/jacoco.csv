@@ -1,12 +1,12 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Citation File Format Java Reader,org.research_software.citation.cff.exceptions,InvalidCFFFileNameException,0,4,0,0,0,2,0,1,0,1
-Citation File Format Java Reader,org.research_software.citation.cff.exceptions,ReadException,0,5,0,0,0,2,0,1,0,1
-Citation File Format Java Reader,org.research_software.citation.cff.exceptions,InvalidDataException,5,4,0,0,2,2,1,1,1,1
-Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Entity,27,55,1,5,9,19,3,9,2,7
-Citation File Format Java Reader,org.research_software.citation.cff.model.objects,DefinedValues,9,33572,1,1,5,35,2,2,1,2
-Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Person,30,47,2,2,12,14,7,6,5,6
-Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Reference,570,571,13,37,181,185,95,85,86,69
-Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Subject,61,125,0,10,18,37,7,19,7,14
-Citation File Format Java Reader,org.research_software.citation.cff.model,SoftwareCitationMetadataPojo,176,290,6,26,44,90,18,42,12,32
-Citation File Format Java Reader,org.research_software.citation.cff.reader,SoftwareCitationMetadataPojoReader,25,85,4,2,10,20,2,5,0,4
-Citation File Format Java Reader,org.research_software.citation.cff.reader,SubjectDeserializer,0,34,0,2,0,9,0,4,0,3
+Citation File Format Java Reader,org.research_software.citation.cff.exceptions,InvalidCFFFileNameException,4,0,0,0,2,0,1,0,1,0
+Citation File Format Java Reader,org.research_software.citation.cff.exceptions,ReadException,5,0,0,0,2,0,1,0,1,0
+Citation File Format Java Reader,org.research_software.citation.cff.exceptions,InvalidDataException,9,0,0,0,4,0,2,0,2,0
+Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Entity,82,0,6,0,28,0,12,0,9,0
+Citation File Format Java Reader,org.research_software.citation.cff.model.objects,DefinedValues,33579,0,2,0,598,0,4,0,3,0
+Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Person,77,0,4,0,26,0,13,0,11,0
+Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Reference,1132,0,50,0,365,0,180,0,155,0
+Citation File Format Java Reader,org.research_software.citation.cff.model.objects,Subject,182,0,10,0,56,0,26,0,21,0
+Citation File Format Java Reader,org.research_software.citation.cff.model,SoftwareCitationMetadataPojo,460,0,32,0,137,0,60,0,44,0
+Citation File Format Java Reader,org.research_software.citation.cff.reader,SoftwareCitationMetadataPojoReader,109,0,6,0,30,0,7,0,4,0
+Citation File Format Java Reader,org.research_software.citation.cff.reader,SubjectDeserializer,34,0,2,0,9,0,4,0,3,0

@@ -54,8 +54,8 @@ public final class Reference {
 	private String issueDate;
 	private String issueTitle;
 	private String journal;
-<span class="fc" id="L57">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L58">	private List&lt;String&gt; languages = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L57">	private List&lt;String&gt; keywords = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L58">	private List&lt;String&gt; languages = new ArrayList&lt;String&gt;();</span>
 	private String license;
 	private URL licenseUrl;
 	private Integer locStart;
@@ -67,7 +67,7 @@ public final class Reference {
 	private String number;
 	private Integer numberVolumes;
 	private Integer pages;
-<span class="fc" id="L70">	private List&lt;String&gt; patentStates = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L70">	private List&lt;String&gt; patentStates = new ArrayList&lt;String&gt;();</span>
 	private String pmcid;
 	private URL repository;
 	private URL repositoryCode;
@@ -241,90 +241,90 @@ public final class Reference {
 			@JsonProperty(&quot;senders&quot;) List&lt;Subject&gt; senders,
 			@JsonProperty(&quot;translators&quot;) List&lt;Subject&gt; translators)
 			throws InvalidDataException {
-<span class="fc" id="L244">		super();</span>
-<span class="pc bpc" id="L245" title="1 of 2 branches missed.">		if (type == null) {</span>
+<span class="nc" id="L244">		super();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">		if (type == null) {</span>
 <span class="nc" id="L246">			throw new InvalidDataException(&quot;'type' is a required key in references and must be present and not null!&quot;);</span>
 		}
-<span class="fc bfc" id="L248" title="All 2 branches covered.">		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {</span>
-<span class="fc" id="L249">			throw new InvalidDataException(&quot;The reference type '&quot; + type + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">		else if (!DefinedValues.REFERENCE_TYPES.contains(type)) {</span>
+<span class="nc" id="L249">			throw new InvalidDataException(&quot;The reference type '&quot; + type + &quot;' is not defined in the CFF format specifications.&quot;);</span>
 		}
-<span class="fc" id="L251">		this.type = type;</span>
-<span class="pc bpc" id="L252" title="1 of 2 branches missed.">		if (title == null) {</span>
+<span class="nc" id="L251">		this.type = type;</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">		if (title == null) {</span>
 <span class="nc" id="L253">			throw new InvalidDataException(&quot;'title' is a required key in references and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L255">		this.title = title;</span>
-<span class="pc bpc" id="L256" title="2 of 4 branches missed.">		if (authors == null || authors.isEmpty()) {</span>
+<span class="nc" id="L255">		this.title = title;</span>
+<span class="nc bnc" id="L256" title="All 4 branches missed.">		if (authors == null || authors.isEmpty()) {</span>
 <span class="nc" id="L257">			throw new InvalidDataException(</span>
-					&quot;'authors' is a required key in references and must be present and not null!&quot;);
+<span class="nc" id="L258">					&quot;'authors' is a required key in references and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L260">		this.abbreviation = abbreviation;</span>
-<span class="fc" id="L261">		this.abstractString = abstractString;</span>
-<span class="fc" id="L262">		this.collectionDoi = collectionDoi;</span>
-<span class="fc" id="L263">		this.collectionTitle = collectionTitle;</span>
-<span class="fc" id="L264">		this.collectionType = collectionType;</span>
-<span class="fc" id="L265">		this.commit = commit;</span>
-<span class="fc" id="L266">		this.copyright = copyright;</span>
-<span class="fc" id="L267">		this.dataType = dataType;</span>
-<span class="fc" id="L268">		this.database = database;</span>
-<span class="fc" id="L269">		setDateAccessed(dateAccessed);</span>
-<span class="fc" id="L270">		setDateDownloaded(dateDownloaded);</span>
-<span class="fc" id="L271">		setDateReleased(dateReleased);</span>
-<span class="fc" id="L272">		setDatePublished(datePublished);</span>
-<span class="fc" id="L273">		this.department = department;</span>
-<span class="fc" id="L274">		this.doi = doi;</span>
-<span class="fc" id="L275">		this.edition = edition;</span>
-<span class="fc" id="L276">		this.end = end;</span>
-<span class="fc" id="L277">		this.entry = entry;</span>
-<span class="fc" id="L278">		this.filename = filename;</span>
-<span class="fc" id="L279">		this.format = format;</span>
-<span class="fc" id="L280">		this.isbn = isbn;</span>
-<span class="fc" id="L281">		this.issn = issn;</span>
-<span class="fc" id="L282">		this.issue = issue;</span>
-<span class="fc" id="L283">		this.issueDate = issueDate;</span>
-<span class="fc" id="L284">		this.issueTitle = issueTitle;</span>
-<span class="fc" id="L285">		this.journal = journal;</span>
-<span class="fc" id="L286">		this.keywords = keywords;</span>
-<span class="fc" id="L287">		setLanguages(languages);</span>
-<span class="fc" id="L288">		this.license = license;</span>
-<span class="fc" id="L289">		setLicenseUrl(licenseUrl);</span>
-<span class="fc" id="L290">		this.locStart = locStart;</span>
-<span class="fc" id="L291">		this.locEnd = locEnd;</span>
-<span class="fc" id="L292">		this.medium = medium;</span>
-<span class="fc" id="L293">		this.month = month;</span>
-<span class="fc" id="L294">		this.nihmsid = nihmsid;</span>
-<span class="fc" id="L295">		this.notes = notes;</span>
-<span class="fc" id="L296">		this.number = number;</span>
-<span class="fc" id="L297">		this.numberVolumes = numberVolumes;</span>
-<span class="fc" id="L298">		this.pages = pages;</span>
-<span class="fc" id="L299">		this.patentStates = patentStates;</span>
-<span class="fc" id="L300">		this.pmcid = pmcid;</span>
-<span class="fc" id="L301">		setRepository(repository);</span>
-<span class="fc" id="L302">		setRepositoryCode(repositoryCode);</span>
-<span class="fc" id="L303">		setRepositoryArtifact(repositoryArtifact);</span>
-<span class="fc" id="L304">		this.scope = scope;</span>
-<span class="fc" id="L305">		this.section = section;</span>
-<span class="fc" id="L306">		setStatus(status);</span>
-<span class="fc" id="L307">		this.start = start;</span>
-<span class="fc" id="L308">		this.thesisType = thesisType;</span>
-<span class="fc" id="L309">		setUrl(url);</span>
-<span class="fc" id="L310">		this.version = version;</span>
-<span class="fc" id="L311">		this.volume = volume;</span>
-<span class="fc" id="L312">		this.volumeTitle = volumeTitle;</span>
-<span class="fc" id="L313">		this.year = year;</span>
-<span class="fc" id="L314">		this.yearOriginal = yearOriginal;</span>
-<span class="fc" id="L315">		this.conference = conference;</span>
-<span class="fc" id="L316">		this.authors = authors;</span>
-<span class="fc" id="L317">		this.contact = contact;</span>
-<span class="fc" id="L318">		this.databaseProvider = databaseProvider;</span>
-<span class="fc" id="L319">		this.editors = editors;</span>
-<span class="fc" id="L320">		this.editorsSeries = editorsSeries;</span>
-<span class="fc" id="L321">		this.institution = institution;</span>
-<span class="fc" id="L322">		this.location = location;</span>
-<span class="fc" id="L323">		this.publisher = publisher;</span>
-<span class="fc" id="L324">		this.recipients = recipients;</span>
-<span class="fc" id="L325">		this.senders = senders;</span>
-<span class="fc" id="L326">		this.translators = translators;</span>
-<span class="fc" id="L327">	}</span>
+<span class="nc" id="L260">		this.abbreviation = abbreviation;</span>
+<span class="nc" id="L261">		this.abstractString = abstractString;</span>
+<span class="nc" id="L262">		this.collectionDoi = collectionDoi;</span>
+<span class="nc" id="L263">		this.collectionTitle = collectionTitle;</span>
+<span class="nc" id="L264">		this.collectionType = collectionType;</span>
+<span class="nc" id="L265">		this.commit = commit;</span>
+<span class="nc" id="L266">		this.copyright = copyright;</span>
+<span class="nc" id="L267">		this.dataType = dataType;</span>
+<span class="nc" id="L268">		this.database = database;</span>
+<span class="nc" id="L269">		setDateAccessed(dateAccessed);</span>
+<span class="nc" id="L270">		setDateDownloaded(dateDownloaded);</span>
+<span class="nc" id="L271">		setDateReleased(dateReleased);</span>
+<span class="nc" id="L272">		setDatePublished(datePublished);</span>
+<span class="nc" id="L273">		this.department = department;</span>
+<span class="nc" id="L274">		this.doi = doi;</span>
+<span class="nc" id="L275">		this.edition = edition;</span>
+<span class="nc" id="L276">		this.end = end;</span>
+<span class="nc" id="L277">		this.entry = entry;</span>
+<span class="nc" id="L278">		this.filename = filename;</span>
+<span class="nc" id="L279">		this.format = format;</span>
+<span class="nc" id="L280">		this.isbn = isbn;</span>
+<span class="nc" id="L281">		this.issn = issn;</span>
+<span class="nc" id="L282">		this.issue = issue;</span>
+<span class="nc" id="L283">		this.issueDate = issueDate;</span>
+<span class="nc" id="L284">		this.issueTitle = issueTitle;</span>
+<span class="nc" id="L285">		this.journal = journal;</span>
+<span class="nc" id="L286">		this.keywords = keywords;</span>
+<span class="nc" id="L287">		setLanguages(languages);</span>
+<span class="nc" id="L288">		this.license = license;</span>
+<span class="nc" id="L289">		setLicenseUrl(licenseUrl);</span>
+<span class="nc" id="L290">		this.locStart = locStart;</span>
+<span class="nc" id="L291">		this.locEnd = locEnd;</span>
+<span class="nc" id="L292">		this.medium = medium;</span>
+<span class="nc" id="L293">		this.month = month;</span>
+<span class="nc" id="L294">		this.nihmsid = nihmsid;</span>
+<span class="nc" id="L295">		this.notes = notes;</span>
+<span class="nc" id="L296">		this.number = number;</span>
+<span class="nc" id="L297">		this.numberVolumes = numberVolumes;</span>
+<span class="nc" id="L298">		this.pages = pages;</span>
+<span class="nc" id="L299">		this.patentStates = patentStates;</span>
+<span class="nc" id="L300">		this.pmcid = pmcid;</span>
+<span class="nc" id="L301">		setRepository(repository);</span>
+<span class="nc" id="L302">		setRepositoryCode(repositoryCode);</span>
+<span class="nc" id="L303">		setRepositoryArtifact(repositoryArtifact);</span>
+<span class="nc" id="L304">		this.scope = scope;</span>
+<span class="nc" id="L305">		this.section = section;</span>
+<span class="nc" id="L306">		setStatus(status);</span>
+<span class="nc" id="L307">		this.start = start;</span>
+<span class="nc" id="L308">		this.thesisType = thesisType;</span>
+<span class="nc" id="L309">		setUrl(url);</span>
+<span class="nc" id="L310">		this.version = version;</span>
+<span class="nc" id="L311">		this.volume = volume;</span>
+<span class="nc" id="L312">		this.volumeTitle = volumeTitle;</span>
+<span class="nc" id="L313">		this.year = year;</span>
+<span class="nc" id="L314">		this.yearOriginal = yearOriginal;</span>
+<span class="nc" id="L315">		this.conference = conference;</span>
+<span class="nc" id="L316">		this.authors = authors;</span>
+<span class="nc" id="L317">		this.contact = contact;</span>
+<span class="nc" id="L318">		this.databaseProvider = databaseProvider;</span>
+<span class="nc" id="L319">		this.editors = editors;</span>
+<span class="nc" id="L320">		this.editorsSeries = editorsSeries;</span>
+<span class="nc" id="L321">		this.institution = institution;</span>
+<span class="nc" id="L322">		this.location = location;</span>
+<span class="nc" id="L323">		this.publisher = publisher;</span>
+<span class="nc" id="L324">		this.recipients = recipients;</span>
+<span class="nc" id="L325">		this.senders = senders;</span>
+<span class="nc" id="L326">		this.translators = translators;</span>
+<span class="nc" id="L327">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -333,7 +333,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;type&quot;)
 	public String getType() {
-<span class="fc" id="L336">		return type;</span>
+<span class="nc" id="L336">		return type;</span>
 	}
 
 	@JsonProperty(&quot;type&quot;)
@@ -348,7 +348,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;title&quot;)
 	public String getTitle() {
-<span class="fc" id="L351">		return title;</span>
+<span class="nc" id="L351">		return title;</span>
 	}
 
 	@JsonProperty(&quot;title&quot;)
@@ -363,7 +363,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;abbreviation&quot;)
 	public String getAbbreviation() {
-<span class="fc" id="L366">		return abbreviation;</span>
+<span class="nc" id="L366">		return abbreviation;</span>
 	}
 
 	@JsonProperty(&quot;abbreviation&quot;)
@@ -378,7 +378,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;abstract&quot;)
 	public String getAbstract() {
-<span class="fc" id="L381">		return abstractString;</span>
+<span class="nc" id="L381">		return abstractString;</span>
 	}
 
 	@JsonProperty(&quot;abstract&quot;)
@@ -393,7 +393,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-doi&quot;)
 	public String getCollectionDoi() {
-<span class="fc" id="L396">		return collectionDoi;</span>
+<span class="nc" id="L396">		return collectionDoi;</span>
 	}
 
 	@JsonProperty(&quot;collection-doi&quot;)
@@ -408,7 +408,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-title&quot;)
 	public String getCollectionTitle() {
-<span class="fc" id="L411">		return collectionTitle;</span>
+<span class="nc" id="L411">		return collectionTitle;</span>
 	}
 
 	@JsonProperty(&quot;collection-title&quot;)
@@ -423,7 +423,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;collection-type&quot;)
 	public String getCollectionType() {
-<span class="fc" id="L426">		return collectionType;</span>
+<span class="nc" id="L426">		return collectionType;</span>
 	}
 
 	@JsonProperty(&quot;collection-type&quot;)
@@ -438,7 +438,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;commit&quot;)
 	public String getCommit() {
-<span class="fc" id="L441">		return commit;</span>
+<span class="nc" id="L441">		return commit;</span>
 	}
 
 	@JsonProperty(&quot;commit&quot;)
@@ -453,7 +453,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;copyright&quot;)
 	public String getCopyright() {
-<span class="fc" id="L456">		return copyright;</span>
+<span class="nc" id="L456">		return copyright;</span>
 	}
 
 	@JsonProperty(&quot;copyright&quot;)
@@ -468,7 +468,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;data-type&quot;)
 	public String getDataType() {
-<span class="fc" id="L471">		return dataType;</span>
+<span class="nc" id="L471">		return dataType;</span>
 	}
 
 	@JsonProperty(&quot;data-type&quot;)
@@ -483,7 +483,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;database&quot;)
 	public String getDatabase() {
-<span class="fc" id="L486">		return database;</span>
+<span class="nc" id="L486">		return database;</span>
 	}
 
 	@JsonProperty(&quot;database&quot;)
@@ -498,20 +498,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-accessed&quot;)
 	public LocalDate getDateAccessed() {
-<span class="fc" id="L501">		return dateAccessed;</span>
+<span class="nc" id="L501">		return dateAccessed;</span>
 	}
 
 	@JsonProperty(&quot;date-accessed&quot;)
 	private void setDateAccessed(String dateAccessed) throws InvalidDataException {
-<span class="fc bfc" id="L506" title="All 2 branches covered.">		if (dateAccessed != null) {</span>
+<span class="nc bnc" id="L506" title="All 2 branches missed.">		if (dateAccessed != null) {</span>
 			try {
-<span class="fc" id="L508">				this.dateAccessed = LocalDate.parse(dateAccessed);</span>
-			}
+<span class="nc" id="L508">				this.dateAccessed = LocalDate.parse(dateAccessed);</span>
+<span class="nc" id="L509">			}</span>
 <span class="nc" id="L510">			catch (DateTimeException e) {</span>
 <span class="nc" id="L511">				throw new InvalidDataException(&quot;DateTimeException in field 'date-accessed'!&quot;, e);</span>
-<span class="fc" id="L512">			}</span>
+			}
 		}
-<span class="fc" id="L514">	}</span>
+<span class="nc" id="L514">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -520,20 +520,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-downloaded&quot;)
 	public LocalDate getDateDownloaded() {
-<span class="fc" id="L523">		return dateDownloaded;</span>
+<span class="nc" id="L523">		return dateDownloaded;</span>
 	}
 
 	@JsonProperty(&quot;date-downloaded&quot;)
 	private void setDateDownloaded(String dateDownloaded) throws InvalidDataException {
-<span class="fc bfc" id="L528" title="All 2 branches covered.">		if (dateDownloaded != null) {</span>
+<span class="nc bnc" id="L528" title="All 2 branches missed.">		if (dateDownloaded != null) {</span>
 			try {
-<span class="fc" id="L530">				this.dateDownloaded = LocalDate.parse(dateDownloaded);</span>
-			}
+<span class="nc" id="L530">				this.dateDownloaded = LocalDate.parse(dateDownloaded);</span>
+<span class="nc" id="L531">			}</span>
 <span class="nc" id="L532">			catch (DateTimeException e) {</span>
 <span class="nc" id="L533">				throw new InvalidDataException(&quot;DateTimeException in field 'date-downloaded'!&quot;, e);</span>
-<span class="fc" id="L534">			}</span>
+			}
 		}
-<span class="fc" id="L536">	}</span>
+<span class="nc" id="L536">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -542,20 +542,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-released&quot;)
 	public LocalDate getDateReleased() {
-<span class="fc" id="L545">		return dateReleased;</span>
+<span class="nc" id="L545">		return dateReleased;</span>
 	}
 
 	@JsonProperty(&quot;date-released&quot;)
 	private void setDateReleased(String dateReleased) throws InvalidDataException {
-<span class="fc bfc" id="L550" title="All 2 branches covered.">		if (dateReleased != null) {</span>
+<span class="nc bnc" id="L550" title="All 2 branches missed.">		if (dateReleased != null) {</span>
 			try {
-<span class="fc" id="L552">				this.dateReleased = LocalDate.parse(dateReleased);</span>
-			}
+<span class="nc" id="L552">				this.dateReleased = LocalDate.parse(dateReleased);</span>
+<span class="nc" id="L553">			}</span>
 <span class="nc" id="L554">			catch (DateTimeException e) {</span>
 <span class="nc" id="L555">				throw new InvalidDataException(&quot;DateTimeException in field 'date-released'!&quot;, e);</span>
-<span class="fc" id="L556">			}</span>
+			}
 		}
-<span class="fc" id="L558">	}</span>
+<span class="nc" id="L558">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -564,20 +564,20 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;date-published&quot;)
 	public LocalDate getDatePublished() {
-<span class="fc" id="L567">		return datePublished;</span>
+<span class="nc" id="L567">		return datePublished;</span>
 	}
 
 	@JsonProperty(&quot;date-published&quot;)
 	private void setDatePublished(String datePublished) throws InvalidDataException {
-<span class="fc bfc" id="L572" title="All 2 branches covered.">		if (datePublished != null) {</span>
+<span class="nc bnc" id="L572" title="All 2 branches missed.">		if (datePublished != null) {</span>
 			try {
-<span class="fc" id="L574">				this.datePublished = LocalDate.parse(datePublished);</span>
-			}
+<span class="nc" id="L574">				this.datePublished = LocalDate.parse(datePublished);</span>
+<span class="nc" id="L575">			}</span>
 <span class="nc" id="L576">			catch (DateTimeException e) {</span>
 <span class="nc" id="L577">				throw new InvalidDataException(&quot;DateTimeException in field 'date-published'!&quot;, e);</span>
-<span class="fc" id="L578">			}</span>
+			}
 		}
-<span class="fc" id="L580">	}</span>
+<span class="nc" id="L580">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -586,7 +586,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;department&quot;)
 	public String getDepartment() {
-<span class="fc" id="L589">		return department;</span>
+<span class="nc" id="L589">		return department;</span>
 	}
 
 	@JsonProperty(&quot;department&quot;)
@@ -601,7 +601,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;doi&quot;)
 	public String getDoi() {
-<span class="fc" id="L604">		return doi;</span>
+<span class="nc" id="L604">		return doi;</span>
 	}
 
 	@JsonProperty(&quot;doi&quot;)
@@ -616,7 +616,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;edition&quot;)
 	public String getEdition() {
-<span class="fc" id="L619">		return edition;</span>
+<span class="nc" id="L619">		return edition;</span>
 	}
 
 	@JsonProperty(&quot;edition&quot;)
@@ -631,7 +631,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;end&quot;)
 	public Integer getEnd() {
-<span class="fc" id="L634">		return end;</span>
+<span class="nc" id="L634">		return end;</span>
 	}
 
 	@JsonProperty(&quot;end&quot;)
@@ -646,7 +646,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;entry&quot;)
 	public String getEntry() {
-<span class="fc" id="L649">		return entry;</span>
+<span class="nc" id="L649">		return entry;</span>
 	}
 
 	@JsonProperty(&quot;entry&quot;)
@@ -661,7 +661,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;filename&quot;)
 	public String getFilename() {
-<span class="fc" id="L664">		return filename;</span>
+<span class="nc" id="L664">		return filename;</span>
 	}
 
 	@JsonProperty(&quot;filename&quot;)
@@ -676,7 +676,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;format&quot;)
 	public String getFormat() {
-<span class="fc" id="L679">		return format;</span>
+<span class="nc" id="L679">		return format;</span>
 	}
 
 	@JsonProperty(&quot;format&quot;)
@@ -691,7 +691,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;isbn&quot;)
 	public String getIsbn() {
-<span class="fc" id="L694">		return isbn;</span>
+<span class="nc" id="L694">		return isbn;</span>
 	}
 
 	@JsonProperty(&quot;isbn&quot;)
@@ -706,7 +706,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issn&quot;)
 	public String getIssn() {
-<span class="fc" id="L709">		return issn;</span>
+<span class="nc" id="L709">		return issn;</span>
 	}
 
 	@JsonProperty(&quot;issn&quot;)
@@ -721,7 +721,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue&quot;)
 	public String getIssue() {
-<span class="fc" id="L724">		return issue;</span>
+<span class="nc" id="L724">		return issue;</span>
 	}
 
 	@JsonProperty(&quot;issue&quot;)
@@ -736,7 +736,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue-date&quot;)
 	public String getIssueDate() {
-<span class="fc" id="L739">		return issueDate;</span>
+<span class="nc" id="L739">		return issueDate;</span>
 	}
 
 	@JsonProperty(&quot;issue-date&quot;)
@@ -751,7 +751,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;issue-title&quot;)
 	public String getIssueTitle() {
-<span class="fc" id="L754">		return issueTitle;</span>
+<span class="nc" id="L754">		return issueTitle;</span>
 	}
 
 	@JsonProperty(&quot;issue-title&quot;)
@@ -766,7 +766,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;journal&quot;)
 	public String getJournal() {
-<span class="fc" id="L769">		return journal;</span>
+<span class="nc" id="L769">		return journal;</span>
 	}
 
 	@JsonProperty(&quot;journal&quot;)
@@ -781,7 +781,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;keywords&quot;)
 	public List&lt;String&gt; getKeywords() {
-<span class="fc" id="L784">		return keywords;</span>
+<span class="nc" id="L784">		return keywords;</span>
 	}
 
 	@JsonProperty(&quot;keywords&quot;)
@@ -796,24 +796,24 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;languages&quot;)
 	public List&lt;String&gt; getLanguages() {
-<span class="fc" id="L799">		return languages;</span>
+<span class="nc" id="L799">		return languages;</span>
 	}
 
 	@JsonProperty(&quot;languages&quot;)
 	private void setLanguages(List&lt;String&gt; languages) throws InvalidDataException {
-<span class="fc bfc" id="L804" title="All 2 branches covered.">		if (languages != null) {</span>
-<span class="fc bfc" id="L805" title="All 2 branches covered.">			for (String language : languages) {</span>
-<span class="fc bfc" id="L806" title="All 4 branches covered.">				if (language.length() &gt; 3 || language.length() &lt;= 1) {</span>
-<span class="fc" id="L807">					throw new InvalidDataException(&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
+<span class="nc bnc" id="L804" title="All 2 branches missed.">		if (languages != null) {</span>
+<span class="nc bnc" id="L805" title="All 2 branches missed.">			for (String language : languages) {</span>
+<span class="nc bnc" id="L806" title="All 4 branches missed.">				if (language.length() &gt; 3 || language.length() &lt;= 1) {</span>
+<span class="nc" id="L807">					throw new InvalidDataException(&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
 				}
-<span class="pc bpc" id="L809" title="1 of 2 branches missed.">				if (!DefinedValues.isLanguageValid(language)) {</span>
+<span class="nc bnc" id="L809" title="All 2 branches missed.">				if (!DefinedValues.isLanguageValid(language)) {</span>
 <span class="nc" id="L810">					throw new InvalidDataException(</span>
-							&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);
+<span class="nc" id="L811">							&quot;The language '&quot; + language + &quot;' is not a valid ISO 639-1 or 639-3 code.&quot;);</span>
 				}
-<span class="fc" id="L813">			}</span>
+			}
 		}
-<span class="fc" id="L815">		this.languages = languages;</span>
-<span class="fc" id="L816">	}</span>
+<span class="nc" id="L815">		this.languages = languages;</span>
+<span class="nc" id="L816">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -822,7 +822,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;license&quot;)
 	public String getLicense() {
-<span class="fc" id="L825">		return license;</span>
+<span class="nc" id="L825">		return license;</span>
 	}
 
 	@JsonProperty(&quot;license&quot;)
@@ -837,21 +837,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;license-url&quot;)
 	public URL getLicenseUrl() {
-<span class="fc" id="L840">		return licenseUrl;</span>
+<span class="nc" id="L840">		return licenseUrl;</span>
 	}
 
 	@JsonProperty(&quot;license-url&quot;)
 	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
-<span class="fc bfc" id="L845" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
+<span class="nc bnc" id="L845" title="All 2 branches missed.">		if (licenseUrl != null) {</span>
 			try {
-<span class="fc" id="L847">				this.licenseUrl = new URL(licenseUrl);</span>
-			}
+<span class="nc" id="L847">				this.licenseUrl = new URL(licenseUrl);</span>
+<span class="nc" id="L848">			}</span>
 <span class="nc" id="L849">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L850">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
 <span class="nc" id="L851">						+ &quot;' contains an invalid URL in field 'license-url': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L852">			}</span>
+			}
 		}
-<span class="fc" id="L854">	}</span>
+<span class="nc" id="L854">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -860,7 +860,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;loc-start&quot;)
 	public Integer getLocStart() {
-<span class="fc" id="L863">		return locStart;</span>
+<span class="nc" id="L863">		return locStart;</span>
 	}
 
 	@JsonProperty(&quot;loc-start&quot;)
@@ -875,7 +875,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;loc-end&quot;)
 	public Integer getLocEnd() {
-<span class="fc" id="L878">		return locEnd;</span>
+<span class="nc" id="L878">		return locEnd;</span>
 	}
 
 	@JsonProperty(&quot;loc-end&quot;)
@@ -890,7 +890,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;medium&quot;)
 	public String getMedium() {
-<span class="fc" id="L893">		return medium;</span>
+<span class="nc" id="L893">		return medium;</span>
 	}
 
 	@JsonProperty(&quot;medium&quot;)
@@ -905,7 +905,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;month&quot;)
 	public Integer getMonth() {
-<span class="fc" id="L908">		return month;</span>
+<span class="nc" id="L908">		return month;</span>
 	}
 
 	@JsonProperty(&quot;month&quot;)
@@ -920,7 +920,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;nihmsid&quot;)
 	public String getNihmsid() {
-<span class="fc" id="L923">		return nihmsid;</span>
+<span class="nc" id="L923">		return nihmsid;</span>
 	}
 
 	@JsonProperty(&quot;nihmsid&quot;)
@@ -935,7 +935,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;notes&quot;)
 	public String getNotes() {
-<span class="fc" id="L938">		return notes;</span>
+<span class="nc" id="L938">		return notes;</span>
 	}
 
 	@JsonProperty(&quot;notes&quot;)
@@ -950,7 +950,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;number&quot;)
 	public String getNumber() {
-<span class="fc" id="L953">		return number;</span>
+<span class="nc" id="L953">		return number;</span>
 	}
 
 	@JsonProperty(&quot;number&quot;)
@@ -965,7 +965,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;number-volumes&quot;)
 	public Integer getNumberVolumes() {
-<span class="fc" id="L968">		return numberVolumes;</span>
+<span class="nc" id="L968">		return numberVolumes;</span>
 	}
 
 	@JsonProperty(&quot;number-volumes&quot;)
@@ -980,7 +980,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;pages&quot;)
 	public Integer getPages() {
-<span class="fc" id="L983">		return pages;</span>
+<span class="nc" id="L983">		return pages;</span>
 	}
 
 	@JsonProperty(&quot;pages&quot;)
@@ -995,7 +995,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;patent-states&quot;)
 	public List&lt;String&gt; getPatentStates() {
-<span class="fc" id="L998">		return patentStates;</span>
+<span class="nc" id="L998">		return patentStates;</span>
 	}
 
 	@JsonProperty(&quot;patent-states&quot;)
@@ -1010,7 +1010,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;pmcid&quot;)
 	public String getPmcid() {
-<span class="fc" id="L1013">		return pmcid;</span>
+<span class="nc" id="L1013">		return pmcid;</span>
 	}
 
 	@JsonProperty(&quot;pmcid&quot;)
@@ -1025,21 +1025,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository&quot;)
 	public URL getRepository() {
-<span class="fc" id="L1028">		return repository;</span>
+<span class="nc" id="L1028">		return repository;</span>
 	}
 
 	@JsonProperty(&quot;repository&quot;)
 	private void setRepository(String repository) throws InvalidDataException {
-<span class="fc bfc" id="L1033" title="All 2 branches covered.">		if (repository != null) {</span>
+<span class="nc bnc" id="L1033" title="All 2 branches missed.">		if (repository != null) {</span>
 			try {
-<span class="fc" id="L1035">				this.repository = new URL(repository);</span>
-			}
+<span class="nc" id="L1035">				this.repository = new URL(repository);</span>
+<span class="nc" id="L1036">			}</span>
 <span class="nc" id="L1037">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L1038">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
 <span class="nc" id="L1039">						+ &quot;' contains an invalid URL in field 'repository': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1040">			}</span>
+			}
 		}
-<span class="fc" id="L1042">	}</span>
+<span class="nc" id="L1042">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1048,21 +1048,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository-code&quot;)
 	public URL getRepositoryCode() {
-<span class="fc" id="L1051">		return repositoryCode;</span>
+<span class="nc" id="L1051">		return repositoryCode;</span>
 	}
 
 	@JsonProperty(&quot;repository-code&quot;)
 	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
-<span class="fc bfc" id="L1056" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
+<span class="nc bnc" id="L1056" title="All 2 branches missed.">		if (repositoryCode != null) {</span>
 			try {
-<span class="fc" id="L1058">				this.repositoryCode = new URL(repositoryCode);</span>
-			}
+<span class="nc" id="L1058">				this.repositoryCode = new URL(repositoryCode);</span>
+<span class="nc" id="L1059">			}</span>
 <span class="nc" id="L1060">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L1061">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
 <span class="nc" id="L1062">						+ &quot;' contains an invalid URL in field 'repository-code': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1063">			}</span>
+			}
 		}
-<span class="fc" id="L1065">	}</span>
+<span class="nc" id="L1065">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1071,21 +1071,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;repository-artifact&quot;)
 	public URL getRepositoryArtifact() {
-<span class="fc" id="L1074">		return repositoryArtifact;</span>
+<span class="nc" id="L1074">		return repositoryArtifact;</span>
 	}
 
 	@JsonProperty(&quot;repository-artifact&quot;)
 	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
-<span class="fc bfc" id="L1079" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
+<span class="nc bnc" id="L1079" title="All 2 branches missed.">		if (repositoryArtifact != null) {</span>
 			try {
-<span class="fc" id="L1081">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
-			}
+<span class="nc" id="L1081">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
+<span class="nc" id="L1082">			}</span>
 <span class="nc" id="L1083">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L1084">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
 <span class="nc" id="L1085">						+ &quot;' contains an invalid URL in field 'repository-artifact': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1086">			}</span>
+			}
 		}
-<span class="fc" id="L1088">	}</span>
+<span class="nc" id="L1088">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1094,7 +1094,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;scope&quot;)
 	public String getScope() {
-<span class="fc" id="L1097">		return scope;</span>
+<span class="nc" id="L1097">		return scope;</span>
 	}
 
 	@JsonProperty(&quot;scope&quot;)
@@ -1109,7 +1109,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;section&quot;)
 	public String getSection() {
-<span class="fc" id="L1112">		return section;</span>
+<span class="nc" id="L1112">		return section;</span>
 	}
 
 	@JsonProperty(&quot;section&quot;)
@@ -1124,18 +1124,18 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;status&quot;)
 	public String getStatus() {
-<span class="fc" id="L1127">		return status;</span>
+<span class="nc" id="L1127">		return status;</span>
 	}
 
 	@JsonProperty(&quot;status&quot;)
 	private void setStatus(String status) throws InvalidDataException {
-<span class="fc bfc" id="L1132" title="All 2 branches covered.">		if (status != null) {</span>
-<span class="fc bfc" id="L1133" title="All 2 branches covered.">			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {</span>
-<span class="fc" id="L1134">				throw new InvalidDataException(&quot;The status '&quot; + status + &quot;' is not defined in the CFF format specifications.&quot;);</span>
+<span class="nc bnc" id="L1132" title="All 2 branches missed.">		if (status != null) {</span>
+<span class="nc bnc" id="L1133" title="All 2 branches missed.">			if (!DefinedValues.REFERENCE_STATUS.contains(status)) {</span>
+<span class="nc" id="L1134">				throw new InvalidDataException(&quot;The status '&quot; + status + &quot;' is not defined in the CFF format specifications.&quot;);</span>
 			}
 		}
-<span class="fc" id="L1137">		this.status = status;</span>
-<span class="fc" id="L1138">	}</span>
+<span class="nc" id="L1137">		this.status = status;</span>
+<span class="nc" id="L1138">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1144,7 +1144,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;start&quot;)
 	public Integer getStart() {
-<span class="fc" id="L1147">		return start;</span>
+<span class="nc" id="L1147">		return start;</span>
 	}
 
 	@JsonProperty(&quot;start&quot;)
@@ -1159,7 +1159,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;thesis-type&quot;)
 	public String getThesisType() {
-<span class="fc" id="L1162">		return thesisType;</span>
+<span class="nc" id="L1162">		return thesisType;</span>
 	}
 
 	@JsonProperty(&quot;thesis-type&quot;)
@@ -1174,21 +1174,21 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;url&quot;)
 	public URL getUrl() {
-<span class="fc" id="L1177">		return url;</span>
+<span class="nc" id="L1177">		return url;</span>
 	}
 
 	@JsonProperty(&quot;url&quot;)
 	private void setUrl(String url) throws InvalidDataException {
-<span class="fc bfc" id="L1182" title="All 2 branches covered.">		if (url != null) {</span>
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">		if (url != null) {</span>
 			try {
-<span class="fc" id="L1184">				this.url = new URL(url);</span>
-			}
+<span class="nc" id="L1184">				this.url = new URL(url);</span>
+<span class="nc" id="L1185">			}</span>
 <span class="nc" id="L1186">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L1187">				throw new InvalidDataException(&quot;The reference '&quot; + getTitle() + &quot;' of type '&quot; + getType()</span>
 <span class="nc" id="L1188">						+ &quot;' contains an invalid URL in field 'url': &quot; + e.getMessage(), e);</span>
-<span class="fc" id="L1189">			}</span>
+			}
 		}
-<span class="fc" id="L1191">	}</span>
+<span class="nc" id="L1191">	}</span>
 
 	/**
 	 * Getter for the field value.
@@ -1197,7 +1197,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;version&quot;)
 	public String getVersion() {
-<span class="fc" id="L1200">		return version;</span>
+<span class="nc" id="L1200">		return version;</span>
 	}
 
 	@JsonProperty(&quot;version&quot;)
@@ -1212,7 +1212,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;volume&quot;)
 	public Integer getVolume() {
-<span class="fc" id="L1215">		return volume;</span>
+<span class="nc" id="L1215">		return volume;</span>
 	}
 
 	@JsonProperty(&quot;volume&quot;)
@@ -1227,7 +1227,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;volume-title&quot;)
 	public String getVolumeTitle() {
-<span class="fc" id="L1230">		return volumeTitle;</span>
+<span class="nc" id="L1230">		return volumeTitle;</span>
 	}
 
 	@JsonProperty(&quot;volume-title&quot;)
@@ -1242,7 +1242,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;year&quot;)
 	public Integer getYear() {
-<span class="fc" id="L1245">		return year;</span>
+<span class="nc" id="L1245">		return year;</span>
 	}
 
 	@JsonProperty(&quot;year&quot;)
@@ -1257,7 +1257,7 @@ public final class Reference {
 	 */
 	@JsonProperty(&quot;year-original&quot;)
 	public Integer getYearOriginal() {
-<span class="fc" id="L1260">		return yearOriginal;</span>
+<span class="nc" id="L1260">		return yearOriginal;</span>
 	}
 
 	@JsonProperty(&quot;year-original&quot;)
@@ -1553,7 +1553,7 @@ public final class Reference {
 <span class="nc bnc" id="L1553" title="All 2 branches missed.">			if (subject instanceof Person) {</span>
 <span class="nc" id="L1554">				personList.add((Person) subject);</span>
 			}
-<span class="nc" id="L1556">		}</span>
+		}
 <span class="nc" id="L1557">		return personList;</span>
 	}
 
@@ -1563,7 +1563,7 @@ public final class Reference {
 <span class="nc bnc" id="L1563" title="All 2 branches missed.">			if (subject instanceof Entity) {</span>
 <span class="nc" id="L1564">				entityList.add((Entity) subject);</span>
 			}
-<span class="nc" id="L1566">		}</span>
+		}
 <span class="nc" id="L1567">		return entityList;</span>
 	}
 

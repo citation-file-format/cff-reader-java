@@ -71,22 +71,22 @@ public final class Entity extends Subject {
 			@JsonProperty(&quot;country&quot;) String country, @JsonProperty(&quot;orcid&quot;) String orcid,
 			@JsonProperty(&quot;email&quot;) String email, @JsonProperty(&quot;tel&quot;) String tel, @JsonProperty(&quot;fax&quot;) String fax,
 			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {
-<span class="fc" id="L74">		super(address, city, region, postCode, country, orcid, email, tel, fax, website);</span>
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">		if (name == null) {</span>
+<span class="nc" id="L74">		super(address, city, region, postCode, country, orcid, email, tel, fax, website);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		if (name == null) {</span>
 <span class="nc" id="L76">			throw new InvalidDataException(&quot;'name' is a required key in entities and must be present and not null!&quot;);</span>
 		}
-<span class="fc" id="L78">		this.name = name;</span>
-<span class="fc" id="L79">		setDateStart(dateStart);</span>
-<span class="fc" id="L80">		setDateEnd(dateEnd);</span>
-<span class="fc" id="L81">		this.location = location;</span>
-<span class="fc" id="L82">	}</span>
+<span class="nc" id="L78">		this.name = name;</span>
+<span class="nc" id="L79">		setDateStart(dateStart);</span>
+<span class="nc" id="L80">		setDateEnd(dateEnd);</span>
+<span class="nc" id="L81">		this.location = location;</span>
+<span class="nc" id="L82">	}</span>
 
 	/**
 	 * @return The name of the entity
 	 */
 	@JsonProperty(&quot;name&quot;)
 	public String getName() {
-<span class="fc" id="L89">		return name;</span>
+<span class="nc" id="L89">		return name;</span>
 	}
 
 	@JsonProperty(&quot;name&quot;)
@@ -99,47 +99,47 @@ public final class Entity extends Subject {
 	 */
 	@JsonProperty(&quot;date-start&quot;)
 	public LocalDate getDateStart() {
-<span class="fc" id="L102">		return dateStart;</span>
+<span class="nc" id="L102">		return dateStart;</span>
 	}
 
 	@JsonProperty(&quot;date-start&quot;)
 	private void setDateStart(String dateStart) throws InvalidDataException {
-<span class="fc bfc" id="L107" title="All 2 branches covered.">		if (dateStart != null) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if (dateStart != null) {</span>
 			try {
-<span class="fc" id="L109">				this.dateStart = LocalDate.parse(dateStart);</span>
-			}
+<span class="nc" id="L109">				this.dateStart = LocalDate.parse(dateStart);</span>
+<span class="nc" id="L110">			}</span>
 <span class="nc" id="L111">			catch (DateTimeException e) {</span>
 <span class="nc" id="L112">				throw new InvalidDataException(&quot;DateTimeException in field 'date-start'!&quot;, e);</span>
-<span class="fc" id="L113">			}</span>
+			}
 		}
-<span class="fc" id="L115">	}</span>
+<span class="nc" id="L115">	}</span>
 
 	/**
 	 * @return The end date of the entity
 	 */
 	@JsonProperty(&quot;date-end&quot;)
 	public LocalDate getDateEnd() {
-<span class="fc" id="L122">		return dateEnd;</span>
+<span class="nc" id="L122">		return dateEnd;</span>
 	}
 
 	@JsonProperty(&quot;date-end&quot;)
 	private void setDateEnd(String dateEnd) throws InvalidDataException {
-<span class="fc bfc" id="L127" title="All 2 branches covered.">		if (dateEnd != null) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">		if (dateEnd != null) {</span>
 			try {
-<span class="fc" id="L129">				this.dateEnd = LocalDate.parse(dateEnd);</span>
-			}
+<span class="nc" id="L129">				this.dateEnd = LocalDate.parse(dateEnd);</span>
+<span class="nc" id="L130">			}</span>
 <span class="nc" id="L131">			catch (DateTimeException e) {</span>
 <span class="nc" id="L132">				throw new InvalidDataException(&quot;DateTimeException in field 'date-end'!&quot;, e);</span>
-<span class="fc" id="L133">			}</span>
+			}
 		}
-<span class="fc" id="L135">	}</span>
+<span class="nc" id="L135">	}</span>
 
 	/**
 	 * @return The location of the entity
 	 */
 	@JsonProperty(&quot;location&quot;)
 	public String getLocation() {
-<span class="fc" id="L142">		return location;</span>
+<span class="nc" id="L142">		return location;</span>
 	}
 
 	@JsonProperty(&quot;location&quot;)
