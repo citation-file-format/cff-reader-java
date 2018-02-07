@@ -123,22 +123,19 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		this.authors = authors;
 		this.commit = commit;
 		this.contact = contact;
-		if (dateReleased == null) {
-			throw new InvalidDataException("'date-released' is a required key and must be present and not null!");
-		}
-		setDateReleased(dateReleased);
+		convertAndSetDateReleased(dateReleased);
 		this.doi = doi;
 		this.keywords = keywords;
 		this.license = license;
-		setLicenseUrl(licenseUrl);
-		setRepository(repository);
-		setRepositoryCode(repositoryCode);
-		setRepositoryArtifact(repositoryArtifact);
+		convertAndSetLicenseUrl(licenseUrl);
+		convertAndSetRepository(repository);
+		convertAndSetRepositoryCode(repositoryCode);
+		convertAndSetRepositoryArtifact(repositoryArtifact);
 		if (title == null) {
 			throw new InvalidDataException("'title' is a required key and must be present and not null!");
 		}
 		this.title = title;
-		setUrl(url);
+		convertAndSetUrl(url);
 		if (version == null) {
 			throw new InvalidDataException("'version' is a required key and must be present and not null!");
 		}
@@ -277,7 +274,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	}
 
 	@JsonProperty("date-released")
-	private void setDateReleased(String dateReleased) throws InvalidDataException {
+	public void convertAndSetDateReleased(String dateReleased) throws InvalidDataException {
 		try {
 			this.dateReleased = LocalDate.parse(dateReleased);
 		}
@@ -336,8 +333,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return licenseUrl;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#convertAndSetLicenseUrl(java.lang.String)
+	 */
 	@JsonProperty("license-url")
-	private void setLicenseUrl(String licenseUrl) throws InvalidDataException {
+	public void convertAndSetLicenseUrl(String licenseUrl) throws InvalidDataException {
 		if (licenseUrl != null) {
 			try {
 				this.licenseUrl = new URL(licenseUrl);
@@ -357,8 +357,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return repository;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#convertAndSetRepository(java.lang.String)
+	 */
 	@JsonProperty("repository")
-	private void setRepository(String repository) throws InvalidDataException {
+	public void convertAndSetRepository(String repository) throws InvalidDataException {
 		if (repository != null) {
 			try {
 				this.repository = new URL(repository);
@@ -378,8 +381,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return repositoryCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#convertAndSetRepositoryCode(java.lang.String)
+	 */
 	@JsonProperty("repository-code")
-	private void setRepositoryCode(String repositoryCode) throws InvalidDataException {
+	public void convertAndSetRepositoryCode(String repositoryCode) throws InvalidDataException {
 		if (repositoryCode != null) {
 			try {
 				this.repositoryCode = new URL(repositoryCode);
@@ -399,8 +405,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return repositoryArtifact;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.research_software.citation.cff.model.SoftwareCitationMetadata#convertAndSetRepositoryArtifact(java.lang.String)
+	 */
 	@JsonProperty("repository-artifact")
-	private void setRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
+	public void convertAndSetRepositoryArtifact(String repositoryArtifact) throws InvalidDataException {
 		if (repositoryArtifact != null) {
 			try {
 				this.repositoryArtifact = new URL(repositoryArtifact);
@@ -434,8 +443,14 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 		return url;
 	}
 
+	/**
+	 * // TODO Add description
+	 * 
+	 * @param url
+	 * @throws InvalidDataException
+	 */
 	@JsonProperty("url")
-	private void setUrl(String url) throws InvalidDataException {
+	public void convertAndSetUrl(String url) throws InvalidDataException {
 		if (url != null) {
 			try {
 				this.url = new URL(url);

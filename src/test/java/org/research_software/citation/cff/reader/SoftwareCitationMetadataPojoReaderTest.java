@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import org.junit.Before;
@@ -66,9 +67,10 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
 	 * @throws MalformedURLException
+	 * @throws InvalidDataException 
 	 */
 	@Test
-	public final void testReadFromFile() throws InvalidCFFFileNameException, ReadException, MalformedURLException {
+	public final void testReadFromFile() throws InvalidCFFFileNameException, ReadException, MalformedURLException, InvalidDataException {
 		File cffFile = new File(getClass().getClassLoader().getResource(CITATION_FILE_PATH).getFile());
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromFile(cffFile);
@@ -80,9 +82,10 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * 
 	 * @throws ReadException
 	 * @throws MalformedURLException
+	 * @throws InvalidDataException 
 	 */
 	@Test
-	public final void testReadFromStream() throws ReadException, MalformedURLException {
+	public final void testReadFromStream() throws ReadException, MalformedURLException, InvalidDataException {
 		InputStream stream = this.getClass().getResourceAsStream(CITATION_FILE_PATH_WITH_PRECEDING_SLASH);
 		SoftwareCitationMetadata citation = null;
 		citation = getFixture().readFromStream(stream);
@@ -96,9 +99,10 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * 
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
+	 * @throws InvalidDataException 
 	 */
 	@Test(expected = InvalidCFFFileNameException.class)
-	public final void testBadCFFFileName() throws InvalidCFFFileNameException, ReadException {
+	public final void testBadCFFFileName() throws InvalidCFFFileNameException, ReadException, InvalidDataException {
 		File file = new File("CITATION.xff");
 		getFixture().readFromFile(file);
 	}
@@ -110,10 +114,12 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * 
 	 * @throws ReadException
 	 * @throws InvalidCFFFileNameException
+	 * @throws InvalidDataException 
 	 */
 	@Test(expected = ReadException.class)
-	public final void testInvalidFile() throws ReadException, InvalidCFFFileNameException {
-		File file = new File(INVALID_CITATION_FILE_PATH);
+	public final void testInvalidFile() throws ReadException, InvalidCFFFileNameException, InvalidDataException {
+		File file = new File(this.getClass().getClassLoader().getResource(INVALID_CITATION_FILE_PATH).getFile());
+		assertTrue(file.exists());
 		getFixture().readFromFile(file);
 	}
 	
@@ -124,9 +130,10 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	 * 
 	 * @throws InvalidCFFFileNameException
 	 * @throws ReadException
+	 * @throws InvalidDataException 
 	 */
 	@Test(expected = ReadException.class)
-	public final void testInvalidStream() throws InvalidCFFFileNameException, ReadException {
+	public final void testInvalidStream() throws InvalidCFFFileNameException, ReadException, InvalidDataException {
 		InputStream stream = this.getClass().getResourceAsStream(INVALID_CITATION_FILE_PATH_WITH_PRECEDING_SLASH);
 		getFixture().readFromStream(stream);
 	}
@@ -319,5 +326,99 @@ public class SoftwareCitationMetadataPojoReaderTest {
 	private final void setFixture(SoftwareCitationMetadataPojoReader fixture) {
 		this.fixture = fixture;
 	}
+
+	/*
+	 * ██████╗ ██╗   ██╗ ██████╗ ███████╗██╗██╗  ██╗███████╗███████╗
+	 * ██╔══██╗██║   ██║██╔════╝ ██╔════╝██║╚██╗██╔╝██╔════╝██╔════╝
+	 * ██████╔╝██║   ██║██║  ███╗█████╗  ██║ ╚███╔╝ █████╗  ███████╗
+	 * ██╔══██╗██║   ██║██║   ██║██╔══╝  ██║ ██╔██╗ ██╔══╝  ╚════██║
+	 * ██████╔╝╚██████╔╝╚██████╔╝██║     ██║██╔╝ ██╗███████╗███████║
+	 * ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝
+	 */
+	
+	/**
+	 * Unit test for [#1](http://github.com/citation-file-format/cff-reader-java/).
+	 * 
+	 * @throws InvalidCFFFileNameException
+	 * @throws InvalidDataException
+	 * @throws ReadException
+	 */
+	@Test(expected = InvalidDataException.class)
+	public final void test1() throws InvalidCFFFileNameException, InvalidDataException, ReadException {
+		SoftwareCitationMetadataReader reader = new SoftwareCitationMetadataPojoReader();
+		File cffFile = new File(getClass().getClassLoader().getResource("bugs/1/CITATION.cff").getFile());
+		assertTrue(cffFile.exists());
+		reader.readFromFile(cffFile);
+	}
+
+	/**
+	 * Unit test for [#1](http://github.com/citation-file-format/cff-reader-java/).
+	 */
+	@Test
+	public final void test1Exception() {
+		SoftwareCitationMetadataReader reader = new SoftwareCitationMetadataPojoReader();
+		File cffFile = new File(getClass().getClassLoader().getResource("bugs/1/CITATION.cff").getFile());
+		assertTrue(cffFile.exists());
+		try {
+			reader.readFromFile(cffFile);
+		}
+		catch (InvalidCFFFileNameException e) {
+			fail();
+		}
+		catch (InvalidDataException e) {
+			assertThat(e, instanceOf(InvalidDataException.class));
+			assertThat(e.getMessage(), is("DateTimeParseException in field 'date-released'!"));
+			assertThat(e.getCause(), instanceOf(DateTimeParseException.class));
+			assertThat(e.getCause().getMessage(), is("Text 'December 2018' could not be parsed at index 0"));
+			return;
+		}
+		catch (ReadException e) {
+			fail();
+		}
+		fail();
+	}
+	
+	/**
+	 * Unit test for [#1](http://github.com/citation-file-format/cff-reader-java/).
+	 * 
+	 * @throws InvalidCFFFileNameException
+	 * @throws InvalidDataException
+	 * @throws ReadException
+	 */
+	@Test(expected = InvalidDataException.class)
+	public final void test1URL() throws InvalidCFFFileNameException, InvalidDataException, ReadException {
+		SoftwareCitationMetadataReader reader = new SoftwareCitationMetadataPojoReader();
+		File cffFile = new File(getClass().getClassLoader().getResource("bugs/1/url/CITATION.cff").getFile());
+		assertTrue(cffFile.exists());
+		reader.readFromFile(cffFile);
+	}
+
+	/**
+	 * Unit test for [#1](http://github.com/citation-file-format/cff-reader-java/).
+	 */
+	@Test
+	public final void test1URLException() {
+		SoftwareCitationMetadataReader reader = new SoftwareCitationMetadataPojoReader();
+		File cffFile = new File(getClass().getClassLoader().getResource("bugs/1/url/CITATION.cff").getFile());
+		assertTrue(cffFile.exists());
+		try {
+			reader.readFromFile(cffFile);
+		}
+		catch (InvalidCFFFileNameException e) {
+			fail();
+		}
+		catch (InvalidDataException e) {
+			assertThat(e, instanceOf(InvalidDataException.class));
+			assertThat(e.getMessage(), is("The citation metadata for 'Title' contains an invalid URL in field 'url'!"));
+			assertThat(e.getCause(), instanceOf(MalformedURLException.class));
+			assertThat(e.getCause().getMessage(), is("no protocol: Invalid website URL"));
+			return;
+		}
+		catch (ReadException e) {
+			fail();
+		}
+		fail();
+	}
+
 
 }

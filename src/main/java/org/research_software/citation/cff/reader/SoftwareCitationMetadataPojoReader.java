@@ -41,7 +41,7 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
 	 */
-	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException {
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException, InvalidDataException {
 		if (!cffFile.getName().equals(CFF_FILE_NAME)) {
 			throw new InvalidCFFFileNameException("File name of CFF file must be '" + CFF_FILE_NAME + "' (is '" + cffFile.getName() + "')!");
 		}
@@ -51,13 +51,7 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 		}
 		catch (JsonMappingException e) {
 			if (e.getCause() instanceof InvalidDataException) {
-				try {
-					throw e.getCause();
-				}
-				catch (Throwable e1) {
-					// Should not happen really. 
-					e1.printStackTrace();
-				}
+				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());
 			}
 		}
 		catch (Exception e) {
@@ -69,20 +63,14 @@ public class SoftwareCitationMetadataPojoReader implements SoftwareCitationMetad
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromStream(java.io.InputStream)
 	 */
-	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException {
+	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException, InvalidDataException {
 		SoftwareCitationMetadata citation = null;
 		try {
 			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);
 		}
 		catch (JsonMappingException e) {
 			if (e.getCause() instanceof InvalidDataException) {
-				try {
-					throw ((InvalidDataException) e.getCause());
-				}
-				catch (Throwable e1) {
-					// Should not happen really.
-					e1.printStackTrace();
-				}
+				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());
 			}
 		}
 		catch (Exception e) {

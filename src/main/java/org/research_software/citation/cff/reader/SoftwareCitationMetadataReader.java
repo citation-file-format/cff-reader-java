@@ -49,6 +49,9 @@ public interface SoftwareCitationMetadataReader {
 	 * Reads the software citation metadata from an {@link InputStream} object,
 	 * which streams a valid `CITATION.cff` file.
 	 * 
+	 * **Note** that this method does not close the stream. This must be done
+	 * by the client.
+	 * 
 	 * @param cffInputStream The {@link InputStream} providing the contents of a valid `CITATION.cff` file
 	 * @return The software citation metadata as a Java object of type {@link SoftwareCitationMetadata}
 	 * @throws InvalidDataException on invalid data, resulting parse errors (e.g., for date/time parses), or malformed URLs
