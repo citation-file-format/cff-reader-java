@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.research-software.citation</groupId>
 	<artifactId>cff-reader-java</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Citation File Format Java Reader</name>
 	<packaging>jar</packaging>
 	<description>A Java API for reading software citation metadata files in the Citation File Format.</description>
@@ -56,7 +56,7 @@
 		<connection>scm:git:git://github.com/citation-file-format/cff-reader-java.git</connection>
 		<developerConnection>scm:git:git@github.com:citation-file-format/cff-reader-java.git</developerConnection>
 		<url>https://github.com/citation-file-format/cff-reader-java</url>
-		<tag>1.0.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 
