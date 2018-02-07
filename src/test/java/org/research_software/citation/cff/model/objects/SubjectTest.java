@@ -92,6 +92,36 @@ public class SubjectTest {
 	}
 	
 	/**
+	 * Creates a new {@link Reference} object, passing an invalid website URL into the constructor.
+	 * 
+	 * Expects an {@link InvalidDataException}.
+	 * 
+	 * @throws InvalidDataException 
+	 */
+	@Test(expected = InvalidDataException.class)
+	public final void testBadWebsite() throws InvalidDataException {
+		new Person(null, null, null, null, null, null, null, null, null, null, null, null, null, null, "NOTAWEBSITEURL");
+	}
+	
+	/**
+	 * Creates a new {@link Person} object, passing an an invalid country into the constructor.
+	 * 
+	 * Catches the expected {@link InvalidDataException} and asserts the exception message.
+	 */
+	@Test
+	public final void testBadWebsiteMessage() {
+		try {
+			new Person(null, null, null, null, null, null, null, null, null, null, null, null, null, null, "NOTAWEBSITEURL");
+		}
+		catch (InvalidDataException e) {
+			assertThat(e, instanceOf(InvalidDataException.class));
+			assertThat(e.getMessage(), is("The 'website' URL 'NOTAWEBSITEURL' is not valid."));
+			return;
+		}
+		fail();
+	}
+	
+	/**
 	 * Creates new {@link Person} and {@link Entity} objects, passing only the required fields into the constructor.
 	 * 
 	 * In this scenario, no exceptions should be thrown.

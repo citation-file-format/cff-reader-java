@@ -230,7 +230,7 @@ public abstract class Subject {
 				this.website = new URL(website);
 			}
 			catch (MalformedURLException e) {
-				throw new InvalidDataException("The website URL '" + orcid + "' is not valid!", e);
+				throw new InvalidDataException("The 'website' URL '" + website + "' is not valid.", e);
 			}
 		}
 	}
