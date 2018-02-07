@@ -15,10 +15,13 @@
  */
 package org.research_software.citation.cff.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import org.research_software.citation.cff.exceptions.InvalidDataException;
 import org.research_software.citation.cff.model.objects.Entity;
 import org.research_software.citation.cff.model.objects.Person;
 import org.research_software.citation.cff.model.objects.Reference;
@@ -75,6 +78,18 @@ public interface SoftwareCitationMetadata {
 	public LocalDate getDateReleased();
 	
 	/**
+	 * Converts the passed date string into a {@link LocalDate} object
+	 * via {@link LocalDate#parse(CharSequence)}.
+	 * 
+	 * If an exception is caught, it is wrapped into an
+	 * {@link InvalidDataException}, which is then thrown instead.
+	 * 
+	 * @param dateReleasedString The value string for the field `date-released`
+	 * @throws InvalidDataException on catching a {@link DateTimeParseException}
+	 */
+	public void convertAndSetDateReleased(String dateReleasedString) throws InvalidDataException;
+	
+	/**
 	 * @return An abstract or description of the software version
 	 */
 	public String getAbstract();
@@ -100,20 +115,65 @@ public interface SoftwareCitationMetadata {
 	public URL getLicenseUrl();
 	
 	/**
+	 * Converts the passed URL string into a {@link URL} object.
+	 * 
+	 * If an exception is caught, it is wrapped into an
+	 * {@link InvalidDataException}, which is then thrown instead.
+	 * 
+	 * @param licenseUrlString The value string for the field `license-url`
+	 * @throws InvalidDataException on catching a {@link MalformedURLException}
+	 */
+	public void convertAndSetLicenseUrl(String licenseUrlString) throws InvalidDataException;
+
+	
+	/**
 	 * @return The URL of the repository for the software version
 	 */
 	public URL getRepository();
 	
 	/**
+	 * Converts the passed URL string into a {@link URL} object.
+	 * 
+	 * If an exception is caught, it is wrapped into an
+	 * {@link InvalidDataException}, which is then thrown instead.
+	 * 
+	 * @param repositoryString The value string for the field `repository`
+	 * @throws InvalidDataException on catching a {@link MalformedURLException}
+	 */
+	public void convertAndSetRepository(String repositoryString) throws InvalidDataException;
+
+	/**
 	 * @return The URL of the source code repository for the software version
 	 */
 	public URL getRepositoryCode();
+	
+	/**
+	 * Converts the passed URL string into a {@link URL} object.
+	 * 
+	 * If an exception is caught, it is wrapped into an
+	 * {@link InvalidDataException}, which is then thrown instead.
+	 * 
+	 * @param repositoryCodeString The value string for the field `repository-code`
+	 * @throws InvalidDataException on catching a {@link MalformedURLException}
+	 */
+	public void convertAndSetRepositoryCode(String repositoryCodeString) throws InvalidDataException;
 
 	/**
 	 * @return The URL of the artifact repository for the software version
 	 */
 	public URL getRepositoryArtifact();
 	
+	/**
+	 * Converts the passed URL string into a {@link URL} object.
+	 * 
+	 * If an exception is caught, it is wrapped into an
+	 * {@link InvalidDataException}, which is then thrown instead.
+	 * 
+	 * @param repositoryArtifactString The value string for the field `repository-artifact`
+	 * @throws InvalidDataException on catching a {@link MalformedURLException}
+	 */
+	public void convertAndSetRepositoryArtifact(String repositoryArtifactString) throws InvalidDataException;
+
 	/**
 	 * @return The URL of the software version landing page or website
 	 */
