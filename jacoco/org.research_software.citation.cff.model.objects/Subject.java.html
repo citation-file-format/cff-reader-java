@@ -65,11 +65,11 @@ public abstract class Subject {
 	 * 
 	 * @throws InvalidDataException on invalid data and resulting parse errors, e.g., for date/time parses 
 	 */
-	public Subject(@JsonProperty(&quot;address&quot;) String address, @JsonProperty(&quot;city&quot;) String city,
+<span class="fc" id="L68">	public Subject(@JsonProperty(&quot;address&quot;) String address, @JsonProperty(&quot;city&quot;) String city,</span>
 			@JsonProperty(&quot;region&quot;) String region, @JsonProperty(&quot;post-code&quot;) String postCode,
 			@JsonProperty(&quot;country&quot;) String country, @JsonProperty(&quot;orcid&quot;) String orcid,
 			@JsonProperty(&quot;email&quot;) String email, @JsonProperty(&quot;tel&quot;) String tel, @JsonProperty(&quot;fax&quot;) String fax,
-<span class="fc" id="L72">			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {</span>
+			@JsonProperty(&quot;website&quot;) String website) throws InvalidDataException {
 <span class="fc" id="L73">		this.address = address;</span>
 <span class="fc" id="L74">		this.city = city;</span>
 <span class="fc" id="L75">		this.region = region;</span>
@@ -165,14 +165,14 @@ public abstract class Subject {
 <span class="fc bfc" id="L165" title="All 2 branches covered.">		if (orcid != null) {</span>
 <span class="fc bfc" id="L166" title="All 2 branches covered.">			if (!orcid.matches(DefinedValues.ORCID_URL_PATTERN)) {</span>
 <span class="fc" id="L167">				throw new InvalidDataException(&quot;ORCID id &quot; + orcid</span>
-						+ &quot; is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!&quot;);
+<span class="fc" id="L168">						+ &quot; is not a valid ORCID URL with pattern 'https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}'!&quot;);</span>
 			}
 			try {
 <span class="fc" id="L171">				this.orcid = new URL(orcid);</span>
-			}
+<span class="fc" id="L172">			}</span>
 <span class="nc" id="L173">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L174">				throw new InvalidDataException(&quot;The ORCID URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
-<span class="fc" id="L175">			}</span>
+			}
 		}
 <span class="fc" id="L177">	}</span>
 
@@ -228,10 +228,10 @@ public abstract class Subject {
 <span class="fc bfc" id="L228" title="All 2 branches covered.">		if (website != null) {</span>
 			try {
 <span class="fc" id="L230">				this.website = new URL(website);</span>
+<span class="fc" id="L231">			}</span>
+<span class="fc" id="L232">			catch (MalformedURLException e) {</span>
+<span class="fc" id="L233">				throw new InvalidDataException(&quot;The 'website' URL '&quot; + website + &quot;' is not valid.&quot;, e);</span>
 			}
-<span class="nc" id="L232">			catch (MalformedURLException e) {</span>
-<span class="nc" id="L233">				throw new InvalidDataException(&quot;The website URL '&quot; + orcid + &quot;' is not valid!&quot;, e);</span>
-<span class="fc" id="L234">			}</span>
 		}
 <span class="fc" id="L236">	}</span>
 

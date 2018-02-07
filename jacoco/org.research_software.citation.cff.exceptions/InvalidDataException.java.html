@@ -38,12 +38,12 @@ public class InvalidDataException extends Exception {
 	/**
 	 * Constructor accepting a message and a cause for the exception.
 	 * 
-	 * @param message The message accompanying a throw of the exception.
-	 * @param cause The cause of the exception (another {@link Exception}).
+	 * @param message The message accompanying a throw of the exception
+	 * @param cause The cause of the exception
 	 */
-	public InvalidDataException(String message, Exception cause) {
-<span class="nc" id="L45">		super(message, cause);</span>
-<span class="nc" id="L46">	}</span>
+	public InvalidDataException(String message, Throwable cause) {
+<span class="fc" id="L45">		super(message, cause);</span>
+<span class="fc" id="L46">	}</span>
 
 	/**
 	 * The default serial version UID.

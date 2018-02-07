@@ -41,54 +41,42 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromFile(java.io.File)
 	 */
-	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException {
+	public SoftwareCitationMetadata readFromFile(File cffFile) throws InvalidCFFFileNameException, ReadException, InvalidDataException {
 <span class="fc bfc" id="L45" title="All 2 branches covered.">		if (!cffFile.getName().equals(CFF_FILE_NAME)) {</span>
 <span class="fc" id="L46">			throw new InvalidCFFFileNameException(&quot;File name of CFF file must be '&quot; + CFF_FILE_NAME + &quot;' (is '&quot; + cffFile.getName() + &quot;')!&quot;);</span>
 		}
 <span class="fc" id="L48">		SoftwareCitationMetadata citation = null;</span>
 		try {
 <span class="fc" id="L50">			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);</span>
-		}
-<span class="nc" id="L52">		catch (JsonMappingException e) {</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
-				try {
-<span class="nc" id="L55">					throw e.getCause();</span>
-				}
-<span class="nc" id="L57">				catch (Throwable e1) {</span>
-					// Should not happen really. 
-<span class="nc" id="L59">					e1.printStackTrace();</span>
-				}
+<span class="fc" id="L51">		}</span>
+<span class="fc" id="L52">		catch (JsonMappingException e) {</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
+<span class="fc" id="L54">				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());</span>
 			}
 		}
-<span class="fc" id="L63">		catch (Exception e) {</span>
-<span class="fc" id="L64">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-<span class="pc" id="L65">		}</span>
-<span class="fc" id="L66">		return citation;</span>
+<span class="fc" id="L57">		catch (Exception e) {</span>
+<span class="fc" id="L58">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+		}
+<span class="fc" id="L60">		return citation;</span>
 	}
 
 	/* (non-Javadoc)
 	 * @see org.research_software.citation.cff.reader.SoftwareCitationMetadataReader#readFromStream(java.io.InputStream)
 	 */
-	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException {
-<span class="fc" id="L73">		SoftwareCitationMetadata citation = null;</span>
+	public SoftwareCitationMetadata readFromStream(InputStream cffInputStream) throws ReadException, InvalidDataException {
+<span class="fc" id="L67">		SoftwareCitationMetadata citation = null;</span>
 		try {
-<span class="fc" id="L75">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
-		}
-<span class="nc" id="L77">		catch (JsonMappingException e) {</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
-				try {
-<span class="nc" id="L80">					throw ((InvalidDataException) e.getCause());</span>
-				}
-<span class="nc" id="L82">				catch (Throwable e1) {</span>
-					// Should not happen really.
-<span class="nc" id="L84">					e1.printStackTrace();</span>
-				}
+<span class="fc" id="L69">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
+<span class="fc" id="L70">		}</span>
+<span class="nc" id="L71">		catch (JsonMappingException e) {</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
+<span class="nc" id="L73">				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());</span>
 			}
 		}
-<span class="fc" id="L88">		catch (Exception e) {</span>
-<span class="fc" id="L89">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-<span class="pc" id="L90">		}</span>
-<span class="fc" id="L91">		return citation;</span>
+<span class="fc" id="L76">		catch (Exception e) {</span>
+<span class="fc" id="L77">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
+		}
+<span class="fc" id="L79">		return citation;</span>
 	}
 
 	/**
@@ -100,13 +88,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 	 * @return The constructed mapper
 	 */
 	private ObjectMapper getMapper() {
-<span class="fc" id="L103">		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
+<span class="fc" id="L91">		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
 
-<span class="fc" id="L105">		final SimpleModule module = new SimpleModule();</span>
+<span class="fc" id="L93">		final SimpleModule module = new SimpleModule();</span>
 		// Add custom deserializer for Subject
-<span class="fc" id="L107">		module.addDeserializer(Subject.class, new SubjectDeserializer());</span>
-<span class="fc" id="L108">		mapper.registerModule(module);</span>
-<span class="fc" id="L109">		return mapper;</span>
+<span class="fc" id="L95">		module.addDeserializer(Subject.class, new SubjectDeserializer());</span>
+<span class="fc" id="L96">		mapper.registerModule(module);</span>
+<span class="fc" id="L97">		return mapper;</span>
 	}
 
 }
