@@ -38,10 +38,10 @@ public class InvalidDataException extends Exception {
 	/**
 	 * Constructor accepting a message and a cause for the exception.
 	 * 
-	 * @param message The message accompanying a throw of the exception.
-	 * @param cause The cause of the exception (another {@link Exception}).
+	 * @param message The message accompanying a throw of the exception
+	 * @param cause The cause of the exception
 	 */
-	public InvalidDataException(String message, Exception cause) {
+	public InvalidDataException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
