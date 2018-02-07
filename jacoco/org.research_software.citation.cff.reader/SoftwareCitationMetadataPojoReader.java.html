@@ -48,7 +48,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 <span class="fc" id="L48">		SoftwareCitationMetadata citation = null;</span>
 		try {
 <span class="fc" id="L50">			citation = getMapper().readValue(cffFile, SoftwareCitationMetadata.class);</span>
-<span class="fc" id="L51">		}</span>
+		}
 <span class="fc" id="L52">		catch (JsonMappingException e) {</span>
 <span class="pc bpc" id="L53" title="1 of 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
 <span class="fc" id="L54">				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());</span>
@@ -56,7 +56,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 		}
 <span class="fc" id="L57">		catch (Exception e) {</span>
 <span class="fc" id="L58">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-		}
+<span class="pc" id="L59">		}</span>
 <span class="fc" id="L60">		return citation;</span>
 	}
 
@@ -67,7 +67,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 <span class="fc" id="L67">		SoftwareCitationMetadata citation = null;</span>
 		try {
 <span class="fc" id="L69">			citation = getMapper().readValue(cffInputStream, SoftwareCitationMetadata.class);</span>
-<span class="fc" id="L70">		}</span>
+		}
 <span class="nc" id="L71">		catch (JsonMappingException e) {</span>
 <span class="nc bnc" id="L72" title="All 2 branches missed.">			if (e.getCause() instanceof InvalidDataException) {</span>
 <span class="nc" id="L73">				throw new InvalidDataException(e.getCause().getMessage(), e.getCause().getCause());</span>
@@ -75,7 +75,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 		}
 <span class="fc" id="L76">		catch (Exception e) {</span>
 <span class="fc" id="L77">			throw new ReadException(&quot;The read process failed due to an exception.&quot;, e);</span>
-		}
+<span class="pc" id="L78">		}</span>
 <span class="fc" id="L79">		return citation;</span>
 	}
 

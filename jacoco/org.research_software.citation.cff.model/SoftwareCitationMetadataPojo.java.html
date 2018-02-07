@@ -277,13 +277,13 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 	public void convertAndSetDateReleased(String dateReleased) throws InvalidDataException {
 		try {
 <span class="fc" id="L279">			this.dateReleased = LocalDate.parse(dateReleased);</span>
-<span class="fc" id="L280">		}</span>
+		}
 <span class="fc" id="L281">		catch (DateTimeParseException e) {</span>
 <span class="fc" id="L282">			throw new InvalidDataException(&quot;DateTimeParseException in field 'date-released'!&quot;, e);</span>
 		}
 <span class="nc" id="L284">		catch (NullPointerException e) {</span>
 <span class="nc" id="L285">			throw new InvalidDataException(&quot;'date-released' is a required value and must not be empty or null!&quot;);</span>
-		}
+<span class="fc" id="L286">		}</span>
 <span class="fc" id="L287">	}</span>
 
 	/* (non-Javadoc)
@@ -341,11 +341,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L341" title="All 2 branches covered.">		if (licenseUrl != null) {</span>
 			try {
 <span class="fc" id="L343">				this.licenseUrl = new URL(licenseUrl);</span>
-<span class="fc" id="L344">			}</span>
+			}
 <span class="nc" id="L345">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L346">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
-<span class="nc" id="L347">						+ &quot;' contains an invalid URL in field 'license-url'!&quot;, e);</span>
-			}
+						+ &quot;' contains an invalid URL in field 'license-url'!&quot;, e);
+<span class="fc" id="L348">			}</span>
 		}
 <span class="fc" id="L350">	}</span>
 
@@ -365,11 +365,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L365" title="All 2 branches covered.">		if (repository != null) {</span>
 			try {
 <span class="fc" id="L367">				this.repository = new URL(repository);</span>
-<span class="fc" id="L368">			}</span>
+			}
 <span class="nc" id="L369">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L370">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
-<span class="nc" id="L371">						+ &quot;' contains an invalid URL in field 'repository'!&quot;, e);</span>
-			}
+						+ &quot;' contains an invalid URL in field 'repository'!&quot;, e);
+<span class="fc" id="L372">			}</span>
 		}
 <span class="fc" id="L374">	}</span>
 
@@ -389,11 +389,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L389" title="All 2 branches covered.">		if (repositoryCode != null) {</span>
 			try {
 <span class="fc" id="L391">				this.repositoryCode = new URL(repositoryCode);</span>
-<span class="fc" id="L392">			}</span>
+			}
 <span class="nc" id="L393">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L394">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
-<span class="nc" id="L395">						+ &quot;' contains an invalid URL in field 'repository-code'!&quot;, e);</span>
-			}
+						+ &quot;' contains an invalid URL in field 'repository-code'!&quot;, e);
+<span class="fc" id="L396">			}</span>
 		}
 <span class="fc" id="L398">	}</span>
 
@@ -413,12 +413,12 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L413" title="All 2 branches covered.">		if (repositoryArtifact != null) {</span>
 			try {
 <span class="fc" id="L415">				this.repositoryArtifact = new URL(repositoryArtifact);</span>
-<span class="fc" id="L416">			}</span>
+			}
 <span class="nc" id="L417">			catch (MalformedURLException e) {</span>
 <span class="nc" id="L418">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
-<span class="nc" id="L419">						+ &quot;' contains an invalid URL in field 'repository-artifact'!&quot;, e);</span>
+						+ &quot;' contains an invalid URL in field 'repository-artifact'!&quot;, e);
 
-			}
+<span class="fc" id="L421">			}</span>
 		}
 <span class="fc" id="L423">	}</span>
 
@@ -454,11 +454,11 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L454" title="All 2 branches covered.">		if (url != null) {</span>
 			try {
 <span class="fc" id="L456">				this.url = new URL(url);</span>
-<span class="fc" id="L457">			}</span>
+			}
 <span class="fc" id="L458">			catch (MalformedURLException e) {</span>
 <span class="fc" id="L459">				throw new InvalidDataException(&quot;The citation metadata for '&quot; + getTitle()</span>
-<span class="fc" id="L460">						+ &quot;' contains an invalid URL in field 'url'!&quot;, e);</span>
-			}
+						+ &quot;' contains an invalid URL in field 'url'!&quot;, e);
+<span class="fc" id="L461">			}</span>
 		}
 <span class="fc" id="L463">	}</span>
 
@@ -498,7 +498,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L498" title="All 2 branches covered.">			if (subject instanceof Person) {</span>
 <span class="fc" id="L499">				personList.add((Person) subject);</span>
 			}
-		}
+<span class="fc" id="L501">		}</span>
 <span class="fc" id="L502">		return personList;</span>
 	}
 
@@ -508,7 +508,7 @@ final class SoftwareCitationMetadataPojo implements SoftwareCitationMetadata {
 <span class="fc bfc" id="L508" title="All 2 branches covered.">			if (subject instanceof Entity) {</span>
 <span class="fc" id="L509">				entityList.add((Entity) subject);</span>
 			}
-		}
+<span class="fc" id="L511">		}</span>
 <span class="fc" id="L512">		return entityList;</span>
 	}
 
