@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/citation-file-format/cff-reader-java.svg?branch=master)](https://travis-ci.org/citation-file-format/cff-reader-java) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.research-software.citation/cff-reader-java)
 [![Coverage Status](https://coveralls.io/repos/github/citation-file-format/cff-reader-java/badge.svg?branch=master)](https://coveralls.io/github/citation-file-format/cff-reader-java?branch=master)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1171249.svg)](https://doi.org/10.5281/zenodo.1171249)
 
 # cff-reader-java
 
