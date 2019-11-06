@@ -65,7 +65,7 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<citation.file>${basedir}/CITATION.cff</citation.file>
-		<jackson.version>2.9.0</jackson.version>
+		<jackson.version>2.9.10.1</jackson.version>
 	</properties>
 
 	<dependencies>
